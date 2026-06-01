@@ -94,6 +94,7 @@ export async function getProductById(id: string) {
 export interface SkuOrderItem {
   sku: string;
   position: number;
+  link?: string;
 }
 
 export async function getSkuOrder() {
@@ -102,8 +103,11 @@ export async function getSkuOrder() {
     throw new Error("Thiếu SKU_ORDER_API_URL");
   }
 
-  const url = rawUrl.endsWith("/sku-order") ? rawUrl : `${rawUrl.replace(/\/+$/, "")}/sku-order`;
+  const baseUrl = rawUrl.endsWith("/sku-order") ? rawUrl : `${rawUrl.replace(/\/+$/, "")}/sku-order`;
+  const url = `${baseUrl}${baseUrl.includes("?") ? "&" : "?"}t=${Date.now()}`;
   const res = await fetch(url, { cache: "no-store" });
+  console.log("[getSkuOrder] url=", url);
+  console.log("[getSkuOrder] status=", res.status);
   if (!res.ok) {
     throw new Error(`SKU order API error ${res.status}`);
   }

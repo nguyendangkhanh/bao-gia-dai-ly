@@ -15,6 +15,7 @@ export interface ProductVariant {
   agentPrice2: number | null;
   active: boolean;
   imageId: number | null;
+  link?: string | null;
 }
 
 export interface Product {

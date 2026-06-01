@@ -37,14 +37,22 @@ function imageUrl(url?: string | null) {
   return resolved;
 }
 
-export default function ProductsSectionList({ products, priceTier, watermarkText }: { products: Product[]; priceTier: "agent1" | "agent2"; watermarkText: string }) {
+export default function ProductsSectionList({ products, priceTier }: { products: Product[]; priceTier: "agent1" | "agent2" }) {
   const [expandedProductId, setExpandedProductId] = useState<number | null>(null);
+  const [popupProductId, setPopupProductId] = useState<number | null>(null);
 
   const onToggleProduct = async (productId: number, productName: string) => {
-    const isOpening = expandedProductId !== productId;
-    setExpandedProductId((prev) => (prev === productId ? null : productId));
+    const isDesktop = typeof window !== "undefined" && window.innerWidth >= 1024;
+    const isOpeningInline = expandedProductId !== productId;
+    const isOpeningPopup = popupProductId !== productId;
 
-    if (isOpening) {
+    if (isDesktop) {
+      setPopupProductId((prev) => (prev === productId ? null : productId));
+    } else {
+      setExpandedProductId((prev) => (prev === productId ? null : productId));
+    }
+
+    if ((isDesktop && isOpeningPopup) || (!isDesktop && isOpeningInline)) {
       await fetch("/api/telemetry/product-view", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -53,8 +61,11 @@ export default function ProductsSectionList({ products, priceTier, watermarkText
     }
   };
 
+  const popupProduct = products.find((p) => p.id === popupProductId) || null;
+  const closePopup = () => setPopupProductId(null);
+
   return (
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 2xl:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 2xl:grid-cols-3">
       {products.map((p) => {
         const isExpanded = expandedProductId === p.id;
 
@@ -64,9 +75,6 @@ export default function ProductsSectionList({ products, priceTier, watermarkText
             className="relative overflow-hidden rounded-2xl border border-orange-100 bg-white p-4 shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl cursor-pointer"
             onClick={() => onToggleProduct(p.id, p.name)}
           >
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.08]">
-              <span className="-rotate-[22deg] text-[11px] font-semibold tracking-wide text-slate-700">{watermarkText}</span>
-            </div>
             <div className="relative z-10">
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="h-20 w-20 sm:h-24 sm:w-24 shrink-0 overflow-hidden rounded-xl border border-orange-100 bg-orange-50">
@@ -91,13 +99,29 @@ export default function ProductsSectionList({ products, priceTier, watermarkText
                 images={p.images || []}
                 priceTier={priceTier}
                 isExpanded={isExpanded}
-                watermarkText={watermarkText}
               />
             )}
             </div>
           </section>
         );
       })}
+      {popupProduct && (
+        <div className="fixed inset-0 z-50 hidden items-center justify-center bg-black/45 p-4 lg:flex" onClick={closePopup}>
+          <div className="max-h-[88vh] w-full max-w-4xl overflow-y-auto rounded-2xl bg-white p-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="mb-3 flex items-start justify-between gap-3">
+              <h3 className="text-lg font-bold text-slate-900">{popupProduct.name}</h3>
+              <button type="button" onClick={closePopup} className="rounded-md border border-slate-200 px-2 py-1 text-sm font-semibold text-slate-700 hover:bg-slate-50">Đóng</button>
+            </div>
+            <ProductVariantsCardList
+              productName={popupProduct.name}
+              variants={popupProduct.variants}
+              images={popupProduct.images || []}
+              priceTier={priceTier}
+              isExpanded
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

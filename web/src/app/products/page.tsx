@@ -31,7 +31,21 @@ function filterIgnoredProducts<T extends { name?: string; variants?: { sku?: str
 }
 
 function normalizeSku(sku?: string | null) {
-  return String(sku || "").trim().toLowerCase();
+  return String(sku || "")
+    .normalize("NFKC")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "")
+    .replace(/[–—_]/g, "-");
+}
+
+function normalizeKey(value?: string | null) {
+  return String(value || "")
+    .normalize("NFKC")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "")
+    .replace(/[–—_]/g, "-");
 }
 
 function sortVariantsByDealerPrice<T extends { sku?: string | null; agentPrice1?: number | null; agentPrice2?: number | null }>(
@@ -102,8 +116,21 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
   const skuOrderMap = new Map(
     skuOrderItems.map((item, index) => [item.sku.trim().toLowerCase(), Number.isFinite(item.position) ? item.position : index + 1]),
   );
+  const skuLinkMap = new Map(
+    skuOrderItems.map((item) => [normalizeKey(String(item.sku || "")), String(item.link || "").trim()]),
+  );
 
-  const detailedProducts = await Promise.all(res.data.map((p) => getProductById(String(p.id))));
+  const detailedProductsRaw = await Promise.all(res.data.map((p) => getProductById(String(p.id))));
+  const detailedProducts = detailedProductsRaw.map((product) => ({
+    ...product,
+    variants: (product.variants || []).map((variant: any) => {
+      const skuKey = normalizeKey(String(variant.sku || ""));
+      const barcodeKey = normalizeKey(String(variant.barcode || ""));
+      const displayNameKey = normalizeKey(String(variant.displayName || ""));
+      const mappedLink = skuLinkMap.get(skuKey) || skuLinkMap.get(barcodeKey) || skuLinkMap.get(displayNameKey) || "";
+      return { ...variant, link: mappedLink || variant.link || "" };
+    }),
+  }));
   const tierKey = session.priceTier === "agent2" ? "agentPrice2" : "agentPrice1";
   const filteredSorted = filterAndSortProducts(detailedProducts, tierKey, skuOrderMap);
   const filteredByTags = activeTags.length
@@ -116,8 +143,22 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
       })
     : filteredSorted;
 
+  const variantsWithLinkCount = filteredByTags.reduce(
+    (acc, p) => acc + (p.variants || []).filter((v: any) => String(v.link || "").trim()).length,
+    0,
+  );
+  const debugSkuOrderKeys = skuOrderItems.slice(0, 10).map((i) => normalizeKey(String(i.sku || "")));
+  const debugVariantKeys = filteredByTags
+    .flatMap((p) => (p.variants || []).map((v: any) => normalizeKey(String(v.sku || v.barcode || v.displayName || ""))))
+    .filter(Boolean)
+    .slice(0, 10);
+  const debugMatchedVariantKeys = debugVariantKeys.filter((k) => !!skuLinkMap.get(k));
+  const debugMissingVariantKeys = debugVariantKeys.filter((k) => !skuLinkMap.get(k));
+  const debugSkuOrderSize = skuOrderItems.length;
+  const debugSkuOrderWithLink = skuOrderItems.filter((i) => String(i.link || "").trim()).length;
+
   return (
-    <main className="mx-auto w-full max-w-7xl space-y-5 p-4 md:p-6 fade-in">
+    <main className="mx-auto w-full max-w-7xl space-y-5 overflow-x-hidden p-4 md:p-6 fade-in">
       <section className="rounded-2xl bg-gradient-to-r from-[#ff6b35] via-[#f97316] to-[#e63946] p-5 text-white shadow-xl">
         <div className="flex items-start justify-between gap-3">
           <div>
@@ -132,11 +173,20 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
 
       <ProductsSearchForm activeTags={activeTags} productNames={[...new Set(filteredSorted.map((p) => String(p.name || "").trim()).filter(Boolean))]} />
 
+      {/* <div className="rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 text-sm text-blue-700 space-y-1">
+        <div>Debug: tổng variant có link = <b>{variantsWithLinkCount}</b></div>
+        <div>SKU order tổng: {debugSkuOrderSize}, có link: {debugSkuOrderWithLink}</div>
+        <div>SKU order item[0]: {JSON.stringify(skuOrderItems[0] || null)}</div>
+        <div>SKU order (10): {debugSkuOrderKeys.join(" | ")}</div>
+        <div>Variant keys (10): {debugVariantKeys.join(" | ")}</div>
+        <div>Matched keys: {debugMatchedVariantKeys.join(" | ") || "(none)"}</div>
+        <div>Missing keys: {debugMissingVariantKeys.join(" | ") || "(none)"}</div>
+      </div> */}
+
       <div id="product-list">
         <ProductsSectionList
           products={filteredByTags}
           priceTier={session.priceTier}
-          watermarkText={`${session.shortName || session.groupName} • ${new Date().toLocaleString("vi-VN")}`}
         />
       </div>
 

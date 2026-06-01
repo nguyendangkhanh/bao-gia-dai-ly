@@ -4,22 +4,28 @@ import { useState } from "react";
 
 export default function HotQuickTags({ tags }: { tags: string[] }) {
   const [open, setOpen] = useState(false);
+  const [loadingTag, setLoadingTag] = useState<string | null>(null);
 
   return (
-    <div className="fixed right-3 top-1/2 z-40 -translate-y-1/2">
+    <div className="fixed bottom-4 right-3 z-40 md:bottom-5 md:right-5">
       <div className="flex flex-col items-end gap-2">
         {open && (
           <div className="rounded-xl border border-orange-200 bg-white/95 p-2 shadow-lg backdrop-blur">
             <div className="grid gap-2">
-              {tags.map((tag) => (
-                <a
-                  key={tag}
-                  href={`/products?search=${encodeURIComponent(tag)}#product-list`}
-                  className="rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-700 hover:bg-orange-100 text-center"
-                >
-                  {tag}
-                </a>
-              ))}
+              {tags.map((tag) => {
+                const isLoading = loadingTag === tag;
+                return (
+                  <a
+                    key={tag}
+                    href={`/products?search=${encodeURIComponent(tag)}#product-list`}
+                    onClick={() => setLoadingTag(tag)}
+                    className="rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-700 hover:bg-orange-100 text-center"
+                    aria-disabled={!!loadingTag}
+                  >
+                    {isLoading ? "Đang tải..." : tag}
+                  </a>
+                );
+              })}
             </div>
           </div>
         )}

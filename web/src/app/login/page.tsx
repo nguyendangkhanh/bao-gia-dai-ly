@@ -1,4 +1,5 @@
 import { loginAction } from "./actions";
+import LoginSubmitButton from "./LoginSubmitButton";
 
 const ERROR_MESSAGE: Record<string, string> = {
   missing_pass: "Vui lòng nhập mật khẩu.",
@@ -40,7 +41,7 @@ export default async function LoginPage({
             <input name="pass" type="password" className="tm-input" placeholder="Nhập mật khẩu đại lý" />
           </div>
 
-          <button type="submit" className="tm-cta w-full">Đăng nhập</button>
+          <LoginSubmitButton />
         </form>
       </div>
     </main>
