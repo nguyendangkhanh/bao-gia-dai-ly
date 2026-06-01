@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f2f5f9;
+  --foreground: #1b2430;
+  --primary: #1f4e78;
+  --accent: #ff6b00;
+  --grid: #d9d9d9;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: linear-gradient(180deg, #f2f5f9 0%, #eef3f8 45%, #f8fafc 100%);
+  color: var(--foreground);
+  font-family: "Segoe UI", Inter, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+}
+
+@layer components {
+  .tm-card {
+    @apply rounded-2xl border bg-white shadow-sm;
+    border-color: #dce4ee;
+  }
+
+  .tm-cta {
+    @apply rounded-lg px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:scale-[1.02] active:scale-[0.98];
+    background: linear-gradient(135deg, var(--accent) 0%, #ff8a33 100%);
+    box-shadow: 0 8px 20px rgba(255, 107, 0, 0.28);
+  }
+
+  .tm-input {
+    @apply w-full rounded-lg border bg-white px-3 py-2 text-sm outline-none transition-all duration-200;
+    border-color: #cfd9e6;
+  }
+
+  .tm-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(31, 78, 120, 0.16);
+  }
+
+  .tm-section-title {
+    @apply text-base font-bold tracking-wide;
+    color: var(--primary);
+  }
+
+  .tm-table {
+    @apply w-full text-[12px];
+    border-collapse: collapse;
+  }
+
+  .tm-table th,
+  .tm-table td {
+    border: 1px solid var(--grid);
+  }
+
+  .tm-table th {
+    @apply px-2 py-2 text-[11px] font-bold uppercase tracking-wide;
+    background-color: var(--primary);
+    color: #fff;
+  }
+
+  .tm-table td {
+    @apply px-2 py-2 align-top;
+  }
+}
+
+@layer utilities {
+  .fade-in {
+    animation: fadeIn 0.22s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.tm-zebra > tr:nth-child(even) {
+  background: #f7f9fc;
+}
+
+.tm-zebra > tr:nth-child(odd) {
+  background: #ffffff;
+}
+
+.tm-pill {
+  background: rgba(31, 78, 120, 0.1);
+  color: var(--primary);
+}
+
+.tm-accent-strip {
+  background: linear-gradient(90deg, var(--primary) 0%, #2d6a9f 65%, var(--accent) 100%);
+}

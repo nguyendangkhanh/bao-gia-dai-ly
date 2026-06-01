@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/dealer-report",
+      "schedule": "0 0 * * *"
+    }
+  ]
+}
