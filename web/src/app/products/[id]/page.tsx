@@ -12,7 +12,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const tierKey = session.priceTier === "agent2" ? "agentPrice2" : "agentPrice1";
 
   const variants = (product.variants || []).filter((v) => {
-    const val = tierKey === "agent2" ? v.agentPrice2 : v.agentPrice1;
+    const val = tierKey === "agentPrice2" ? v.agentPrice2 : v.agentPrice1;
     return typeof val === "number" && val > 0;
   });
 
