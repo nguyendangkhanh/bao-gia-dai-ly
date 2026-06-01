@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Báo giá đại lý",
-  description: "Xem và tạo báo giá đại lý trực tuyến",
+  title: "Đại Lý The Manson",
+  description: "Chi tiết các sản phẩm được cung cấp chính hãng từ The Manson",
 };
 
 export default function RootLayout({

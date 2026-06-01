@@ -1,12 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
 export default function ProductsSearchForm({ activeTags, productNames }: { activeTags: string[]; productNames: string[] }) {
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState(activeTags);
   const [openSuggest, setOpenSuggest] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
   const suggestions = useMemo(() => {
@@ -16,8 +17,13 @@ export default function ProductsSearchForm({ activeTags, productNames }: { activ
   }, [search, productNames]);
 
   const pushTags = (nextTags: string[]) => {
+    const normalizedNext = nextTags.map((t) => t.trim().toLowerCase()).filter(Boolean);
+    const normalizedCurrent = tags.map((t) => t.trim().toLowerCase()).filter(Boolean);
+    if (normalizedNext.join("||") === normalizedCurrent.join("||")) return;
     const q = nextTags.length ? `?tags=${encodeURIComponent(nextTags.join("||"))}` : "";
-    router.push(`/products${q}#product-list`);
+    startTransition(() => {
+      router.replace(`/products${q}#product-list`);
+    });
   };
 
   const addTag = (raw: string) => {
@@ -54,8 +60,10 @@ export default function ProductsSearchForm({ activeTags, productNames }: { activ
 
       <div className="relative">
         <input
+          disabled={isPending}
           value={search}
           onChange={(e) => {
+            if (isPending) return;
             setSearch(e.target.value);
             setOpenSuggest(true);
           }}

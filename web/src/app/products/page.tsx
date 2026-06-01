@@ -110,8 +110,16 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
   const tagsFromParam = String(params.tags || "").split("||").map((t) => t.trim()).filter(Boolean);
   const legacySearch = String(params.search || "").trim();
   const activeTags = tagsFromParam.length ? tagsFromParam : legacySearch ? [legacySearch] : [];
-  const res = await getProducts(1, 1000, "");
-  const skuOrderItems = await getSkuOrder();
+  const searchTerm = activeTags.join(" ").trim();
+  const productLimit = searchTerm ? 120 : 300;
+  const [res, skuOrderItems] = await Promise.all([
+    getProducts(1, productLimit, searchTerm),
+    getSkuOrder(),
+  ]);
+  const needsDetailFetch = !Array.isArray((res.data as any[])?.[0]?.variants);
+  const productsBase = needsDetailFetch
+    ? await Promise.all(res.data.map((p) => getProductById(String(p.id))))
+    : res.data;
 
   const skuOrderMap = new Map(
     skuOrderItems.map((item, index) => [item.sku.trim().toLowerCase(), Number.isFinite(item.position) ? item.position : index + 1]),
@@ -120,8 +128,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
     skuOrderItems.map((item) => [normalizeKey(String(item.sku || "")), String(item.link || "").trim()]),
   );
 
-  const detailedProductsRaw = await Promise.all(res.data.map((p) => getProductById(String(p.id))));
-  const detailedProducts = detailedProductsRaw.map((product) => ({
+  const enrichedProducts = productsBase.map((product) => ({
     ...product,
     variants: (product.variants || []).map((variant: any) => {
       const skuKey = normalizeKey(String(variant.sku || ""));
@@ -132,7 +139,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
     }),
   }));
   const tierKey = session.priceTier === "agent2" ? "agentPrice2" : "agentPrice1";
-  const filteredSorted = filterAndSortProducts(detailedProducts, tierKey, skuOrderMap);
+  const filteredSorted = filterAndSortProducts(enrichedProducts, tierKey, skuOrderMap);
   const filteredByTags = activeTags.length
     ? filteredSorted.filter((p) => {
         const haystack = [

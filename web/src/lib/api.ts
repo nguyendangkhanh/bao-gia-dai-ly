@@ -104,10 +104,8 @@ export async function getSkuOrder() {
   }
 
   const baseUrl = rawUrl.endsWith("/sku-order") ? rawUrl : `${rawUrl.replace(/\/+$/, "")}/sku-order`;
-  const url = `${baseUrl}${baseUrl.includes("?") ? "&" : "?"}t=${Date.now()}`;
-  const res = await fetch(url, { cache: "no-store" });
-  console.log("[getSkuOrder] url=", url);
-  console.log("[getSkuOrder] status=", res.status);
+  const url = baseUrl;
+  const res = await fetch(url, { next: { revalidate: 300 } });
   if (!res.ok) {
     throw new Error(`SKU order API error ${res.status}`);
   }
