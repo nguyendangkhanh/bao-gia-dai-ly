@@ -41,3 +41,6 @@ yarn-error.log*
 next-env.d.ts
 
 client_secret.json
+# Google service account key
+web/du-lieu-sapo-fa545e25eaf0.json
+web/client_secret.json
