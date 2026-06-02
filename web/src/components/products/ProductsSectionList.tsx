@@ -41,7 +41,7 @@ export default function ProductsSectionList({ products, priceTier }: { products:
   const [expandedProductId, setExpandedProductId] = useState<number | null>(null);
   const [popupProductId, setPopupProductId] = useState<number | null>(null);
 
-  const onToggleProduct = async (productId: number, productName: string) => {
+  const onToggleProduct = (productId: number, productName: string) => {
     const isDesktop = typeof window !== "undefined" && window.innerWidth >= 1024;
     const isOpeningInline = expandedProductId !== productId;
     const isOpeningPopup = popupProductId !== productId;
@@ -53,16 +53,48 @@ export default function ProductsSectionList({ products, priceTier }: { products:
     }
 
     if ((isDesktop && isOpeningPopup) || (!isDesktop && isOpeningInline)) {
-      await fetch("/api/telemetry/product-view", {
+      void fetch("/api/telemetry/product-view", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ productName }),
-      });
+      }).catch(() => undefined);
     }
   };
 
-  const popupProduct = products.find((p) => p.id === popupProductId) || null;
+  const handleProductTouchEnd = (productId: number, productName: string) => {
+    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+      onToggleProduct(productId, productName);
+    }
+  };
+
+  const handleProductClick = (productId: number, productName: string) => {
+    onToggleProduct(productId, productName);
+  };
+
+  const handleProductKeyDown = (event: React.KeyboardEvent<HTMLElement>, productId: number, productName: string) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      onToggleProduct(productId, productName);
+    }
+  };
+
   const closePopup = () => setPopupProductId(null);
+
+  const popupProduct = products.find((p) => p.id === popupProductId) || null;
+  const shouldIgnoreClickAfterTouch = typeof window !== "undefined" && window.innerWidth < 1024;
+
+  const onSectionClick = (productId: number, productName: string) => {
+    if (shouldIgnoreClickAfterTouch) return;
+    handleProductClick(productId, productName);
+  };
+
+  const onSectionTouchEnd = (productId: number, productName: string) => {
+    handleProductTouchEnd(productId, productName);
+  };
+
+  const onSectionKeyDown = (event: React.KeyboardEvent<HTMLElement>, productId: number, productName: string) => {
+    handleProductKeyDown(event, productId, productName);
+  };
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 2xl:grid-cols-3">
@@ -72,8 +104,12 @@ export default function ProductsSectionList({ products, priceTier }: { products:
         return (
           <section
             key={p.id}
-            className="relative overflow-hidden rounded-2xl border border-orange-100 bg-white p-4 shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl cursor-pointer"
-            onClick={() => onToggleProduct(p.id, p.name)}
+            className="relative cursor-pointer overflow-hidden rounded-2xl border border-orange-100 bg-white p-4 shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl"
+            onClick={() => onSectionClick(p.id, p.name)}
+            onTouchEnd={() => onSectionTouchEnd(p.id, p.name)}
+            onKeyDown={(event) => onSectionKeyDown(event, p.id, p.name)}
+            role="button"
+            tabIndex={0}
           >
             <div className="relative z-10">
             <div className="flex items-start gap-3 sm:gap-4">
