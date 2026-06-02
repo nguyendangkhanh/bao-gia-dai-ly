@@ -1,0 +1,2072 @@
+{
+  "version": "2026-06-02T06:22:35.715Z",
+  "createdAt": "2026-06-02T06:22:35.715Z",
+  "products": [
+    {
+      "productId": 2,
+      "productName": "Herman Miller Cosm",
+      "variants": [
+        {
+          "variantId": 3,
+          "sku": "COSMGRAPHITE",
+          "barcode": "Herman Cosm Graphite Xám Chì",
+          "displayName": "Graphite (Xám Chì)",
+          "price": 30000000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 4,
+          "sku": "COSMMINERAL",
+          "barcode": "Herman Cosm Mineral Trắng",
+          "displayName": "Mineral (Trắng)",
+          "price": 30000000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 5,
+          "sku": "COSMCANYON",
+          "barcode": "Herman Cosm Canyon Đỏ",
+          "displayName": "Canyon (Đỏ)",
+          "price": 30000000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        }
+      ]
+    },
+    {
+      "productId": 3,
+      "productName": "Ergohuman Elite 2",
+      "variants": [
+        {
+          "variantId": 6,
+          "sku": "EGELT2DENGC",
+          "barcode": "Elite 2 Đen Gác Chân ",
+          "displayName": "Đen / Có Gác Chân",
+          "price": 14100000,
+          "agentPrice1": 12100000,
+          "agentPrice2": 12100000
+        },
+        {
+          "variantId": 7,
+          "sku": "EGELT2DEN",
+          "barcode": "Elite 2 Đen",
+          "displayName": "Đen / Không Gác Chân",
+          "price": 13100000,
+          "agentPrice1": 11100000,
+          "agentPrice2": 11100000
+        },
+        {
+          "variantId": 8,
+          "sku": "EGELT2XAMGC",
+          "barcode": "Elite 2 Xám Gác Chân",
+          "displayName": "Xám / Có Gác Chân",
+          "price": 14100000,
+          "agentPrice1": 12100000,
+          "agentPrice2": 12100000
+        },
+        {
+          "variantId": 9,
+          "sku": "EGELT2XAM",
+          "barcode": "Elite 2 Xám",
+          "displayName": "Xám / Không Gác Chân",
+          "price": 13100000,
+          "agentPrice1": 11100000,
+          "agentPrice2": 11100000
+        }
+      ]
+    },
+    {
+      "productId": 4,
+      "productName": "Manson E3 Lite",
+      "variants": [
+        {
+          "variantId": 10,
+          "sku": "PVN185",
+          "barcode": "E3 Lite Đệm Đen",
+          "displayName": "Đen",
+          "price": 2550000,
+          "agentPrice1": 2050000,
+          "agentPrice2": 2000000
+        },
+        {
+          "variantId": 11,
+          "sku": "PVN184",
+          "barcode": "E3 Lite Đệm Hồng",
+          "displayName": "Hồng",
+          "price": 2550000,
+          "agentPrice1": 2050000,
+          "agentPrice2": 2000000
+        },
+        {
+          "variantId": 12,
+          "sku": "PVN183",
+          "barcode": "E3 Lite Đệm Xanh",
+          "displayName": "Xanh Lá",
+          "price": 2550000,
+          "agentPrice1": 2050000,
+          "agentPrice2": 2000000
+        },
+        {
+          "variantId": 13,
+          "sku": "PVN182",
+          "barcode": "E3 Lite Đệm Xám",
+          "displayName": "Xám",
+          "price": 2550000,
+          "agentPrice1": 2050000,
+          "agentPrice2": 2000000
+        }
+      ]
+    },
+    {
+      "productId": 5,
+      "productName": "Mặt Bàn Dùng Cho SmartDesk Và Space Desk",
+      "variants": [
+        {
+          "variantId": 808,
+          "sku": "1206-MB-DEN",
+          "barcode": "Mặt Bàn 1.2m Đen",
+          "displayName": "mặt bàn 1.2m x 0.6m / Đen",
+          "price": 500000,
+          "agentPrice1": 375000,
+          "agentPrice2": 375000
+        },
+        {
+          "variantId": 809,
+          "sku": "1206-MB-TRANG",
+          "barcode": "Mặt Bàn 1.2m Trắng",
+          "displayName": "mặt bàn 1.2m x 0.6m / Trắng",
+          "price": 500000,
+          "agentPrice1": 375000,
+          "agentPrice2": 375000
+        },
+        {
+          "variantId": 810,
+          "sku": "1206-MB-VANGO",
+          "barcode": "Mặt Bàn 1.2m Vân Gỗ",
+          "displayName": "mặt bàn 1.2m x 0.6m / Vân Gỗ",
+          "price": 500000,
+          "agentPrice1": 375000,
+          "agentPrice2": 375000
+        },
+        {
+          "variantId": 811,
+          "sku": "1406-MB-DEN",
+          "barcode": "Mặt Bàn 1.4m Đen",
+          "displayName": "mặt bàn 1.4m x 0.6m / Đen",
+          "price": 650000,
+          "agentPrice1": 475000,
+          "agentPrice2": 475000
+        },
+        {
+          "variantId": 812,
+          "sku": "1406-MB-TRANG",
+          "barcode": "Mặt Bàn 1.4m Trắng",
+          "displayName": "mặt bàn 1.4m x 0.6m / Trắng",
+          "price": 650000,
+          "agentPrice1": 475000,
+          "agentPrice2": 475000
+        },
+        {
+          "variantId": 813,
+          "sku": "1406-MB-VANGO",
+          "barcode": "Mặt Bàn 1.4m Vân Gỗ",
+          "displayName": "mặt bàn 1.4m x 0.6m / Vân Gỗ",
+          "price": 650000,
+          "agentPrice1": 475000,
+          "agentPrice2": 475000
+        },
+        {
+          "variantId": 814,
+          "sku": "1606-MB-DEN",
+          "barcode": "Mặt Bàn 1.6m Đen",
+          "displayName": "mặt bàn 1.6m x 0.6m / Đen",
+          "price": 700000,
+          "agentPrice1": 525000,
+          "agentPrice2": 525000
+        },
+        {
+          "variantId": 815,
+          "sku": "1606-MB-TRANG",
+          "barcode": "Mặt Bàn 1.6m Trắng",
+          "displayName": "mặt bàn 1.6m x 0.6m / Trắng",
+          "price": 700000,
+          "agentPrice1": 525000,
+          "agentPrice2": 525000
+        },
+        {
+          "variantId": 816,
+          "sku": "1606-MB-VANGO",
+          "barcode": "Mặt Bàn 1.6m Vân Gỗ",
+          "displayName": "mặt bàn 1.6m x 0.6m / Vân Gỗ",
+          "price": 700000,
+          "agentPrice1": 525000,
+          "agentPrice2": 525000
+        },
+        {
+          "variantId": 1365,
+          "sku": "1206-MB-SOI-OAK",
+          "barcode": "Mặt Bàn 1.2m Sồi Oak",
+          "displayName": null,
+          "price": 500000,
+          "agentPrice1": 375000,
+          "agentPrice2": 375000
+        },
+        {
+          "variantId": 1366,
+          "sku": "1406-MB-SOI-OAK",
+          "barcode": "Mặt Bàn 1.4m Sồi Oak",
+          "displayName": null,
+          "price": 650000,
+          "agentPrice1": 475000,
+          "agentPrice2": 475000
+        },
+        {
+          "variantId": 1367,
+          "sku": "1606-MB-SOI-OAK",
+          "barcode": "Mặt Bàn 1.6m Sồi Oak",
+          "displayName": null,
+          "price": 700000,
+          "agentPrice1": 525000,
+          "agentPrice2": 525000
+        }
+      ]
+    },
+    {
+      "productId": 6,
+      "productName": "Kê Chân Công Thái Học",
+      "variants": [
+        {
+          "variantId": 23,
+          "sku": "FR08",
+          "barcode": "Kê Chân FR08 Đen",
+          "displayName": "Fr08 Đen",
+          "price": 255000,
+          "agentPrice1": 180000,
+          "agentPrice2": 170000
+        },
+        {
+          "variantId": 24,
+          "sku": "FR09",
+          "barcode": "Kê Chân FR09 Đen",
+          "displayName": "Fr09 Đen",
+          "price": 395000,
+          "agentPrice1": 255000,
+          "agentPrice2": 245000
+        },
+        {
+          "variantId": 25,
+          "sku": "FR09GREY",
+          "barcode": "Kê Chân FR09 Xám",
+          "displayName": "Fr09 Xám",
+          "price": 395000,
+          "agentPrice1": 260000,
+          "agentPrice2": 260000
+        },
+        {
+          "variantId": 957,
+          "sku": "LUMI-BLACK",
+          "barcode": "Kê Chân Lumi Đen",
+          "displayName": null,
+          "price": 350000,
+          "agentPrice1": 299000,
+          "agentPrice2": 299000
+        }
+      ]
+    },
+    {
+      "productId": 7,
+      "productName": "Khung Bàn Cố Định Manson SpaceDesk Dùng Cho Mặt 1.2m đến 1.6m",
+      "variants": [
+        {
+          "variantId": 939,
+          "sku": "CD-DEN-1216",
+          "barcode": "Khung Cố Định Đen 1.2m",
+          "displayName": "Đen",
+          "price": 2200000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 940,
+          "sku": "CD-TRANG-1216",
+          "barcode": "Khung Cố Định Trắng 1.2m",
+          "displayName": "Trắng",
+          "price": 2200000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        }
+      ]
+    },
+    {
+      "productId": 8,
+      "productName": "Khung Bàn Nâng Hạ Manson SmartDesk",
+      "variants": [
+        {
+          "variantId": 28,
+          "sku": "NH-DEN-12",
+          "barcode": "Khung Nâng Hạ Đen 1.2m",
+          "displayName": "1.2m / Đen",
+          "price": 1950000,
+          "agentPrice1": 1475000,
+          "agentPrice2": 1475000
+        },
+        {
+          "variantId": 29,
+          "sku": "NH-TRANG-12",
+          "barcode": "Khung Nâng Hạ Trắng 1.2m",
+          "displayName": "1.2m / Trắng",
+          "price": 1950000,
+          "agentPrice1": 1475000,
+          "agentPrice2": 1475000
+        },
+        {
+          "variantId": 30,
+          "sku": "NH-DEN-1416",
+          "barcode": "Khung Nâng Hạ Đen 1.4m",
+          "displayName": "1.4m-1.6m / Đen",
+          "price": 2000000,
+          "agentPrice1": 1525000,
+          "agentPrice2": 1525000
+        },
+        {
+          "variantId": 31,
+          "sku": "NH-TRANG-1416",
+          "barcode": "Khung Nâng Hạ Trắng 1.4m",
+          "displayName": "1.4m-1.6m / Trắng",
+          "price": 2000000,
+          "agentPrice1": 1525000,
+          "agentPrice2": 1525000
+        }
+      ]
+    },
+    {
+      "productId": 9,
+      "productName": "Herman Miller Mirra 2",
+      "variants": [
+        {
+          "variantId": 32,
+          "sku": "HMAMIRRABLACK",
+          "barcode": "Herman Mirra 2 Đen",
+          "displayName": "Đen",
+          "price": 18000000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 33,
+          "sku": "HMAMIRRAGREY",
+          "barcode": "Herman Mirra 2 Xám",
+          "displayName": "Xám",
+          "price": 18000000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        }
+      ]
+    },
+    {
+      "productId": 10,
+      "productName": "Herman Miller Sayl",
+      "variants": [
+        {
+          "variantId": 34,
+          "sku": "HMASAYLGREY",
+          "barcode": "Herman Sayl Xám",
+          "displayName": "Xám",
+          "price": 14000000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 35,
+          "sku": "HMASAYLBLACK",
+          "barcode": "Herman Sayl Đen",
+          "displayName": "Đen",
+          "price": 14000000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        }
+      ]
+    },
+    {
+      "productId": 11,
+      "productName": "Tựa Đầu Atlas Dùng Trong Ghế Herman Miller",
+      "variants": [
+        {
+          "variantId": 36,
+          "sku": "PVN147",
+          "barcode": "Tựa Đầu Atlas Carbon",
+          "displayName": "Carbon",
+          "price": 3000000,
+          "agentPrice1": 2100000,
+          "agentPrice2": 2000000
+        },
+        {
+          "variantId": 37,
+          "sku": "PVN148",
+          "barcode": "Tựa Đầu Atlas Classic (Đen)",
+          "displayName": "Classic (Đen)",
+          "price": 3000000,
+          "agentPrice1": 2100000,
+          "agentPrice2": 2000000
+        },
+        {
+          "variantId": 38,
+          "sku": "tuadaumineral",
+          "barcode": "Tựa Đầu Atlas Mineral (Trắng)",
+          "displayName": "Mineral (Trắng)",
+          "price": 3000000,
+          "agentPrice1": 2100000,
+          "agentPrice2": 2000000
+        },
+        {
+          "variantId": 39,
+          "sku": "PVN149",
+          "barcode": "Tựa Đầu Atlas Graphite (Xám Chì)",
+          "displayName": "Graphite (Xám Chì)",
+          "price": 3000000,
+          "agentPrice1": 2100000,
+          "agentPrice2": 2000000
+        }
+      ]
+    },
+    {
+      "productId": 12,
+      "productName": "Tựa Đầu Ghế Herman Miller Embody x Logitech",
+      "variants": [
+        {
+          "variantId": 40,
+          "sku": "ATLEBD",
+          "barcode": "Tựa Đầu Embody x Logitech Màu Xanh (Made In USA)",
+          "displayName": "Màu Xanh (Made In USA)",
+          "price": 8000000,
+          "agentPrice1": 5800000,
+          "agentPrice2": 5800000
+        },
+        {
+          "variantId": 41,
+          "sku": "PVN181",
+          "barcode": "Tựa Đầu Embody x Logitech Màu Đen (Made In USA)",
+          "displayName": "Màu Đen (Made In USA)",
+          "price": 8000000,
+          "agentPrice1": 5800000,
+          "agentPrice2": 5800000
+        }
+      ]
+    },
+    {
+      "productId": 13,
+      "productName": "Herman Miller Embody x Logitech",
+      "variants": [
+        {
+          "variantId": 42,
+          "sku": "HMALOGITECHBLACK",
+          "barcode": "Embody x Logitech Màu Đen",
+          "displayName": "Màu Đen",
+          "price": 50000000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 43,
+          "sku": "HMALOGITECHBLUE",
+          "barcode": "Herman Embody x Logitech Màu Xanh",
+          "displayName": "Màu Xanh",
+          "price": 50000000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        }
+      ]
+    },
+    {
+      "productId": 14,
+      "productName": "Herman Miller Aeron Size B",
+      "variants": [
+        {
+          "variantId": 44,
+          "sku": "HMCNGRP",
+          "barcode": "Herman Nylon Graphite Xám Chì",
+          "displayName": "Chân Nhựa, Khung Hợp Kim, Màu Graphite (Xám Chì)",
+          "price": 22500000,
+          "agentPrice1": 22000000,
+          "agentPrice2": 21700000
+        },
+        {
+          "variantId": 45,
+          "sku": "HMCNMW",
+          "barcode": "Herman Nylon Mineral White",
+          "displayName": "Chân Nhựa, Khung Hợp Kim, Màu Mineral White (Trắng)",
+          "price": 27000000,
+          "agentPrice1": 26000000,
+          "agentPrice2": 25000000
+        },
+        {
+          "variantId": 46,
+          "sku": "HMHKGRC",
+          "barcode": "Herman Metal Carbon",
+          "displayName": "Chân Hợp Kim, Khung Hợp Kim, Màu CarBon",
+          "price": 27000000,
+          "agentPrice1": 24500000,
+          "agentPrice2": 23500000
+        },
+        {
+          "variantId": 47,
+          "sku": "HMCOGRP",
+          "barcode": "Herman Aluminium Graphite xám chì",
+          "displayName": "Chân Nhôm, Khung Nhôm, Màu Graphite (Xám Chì)",
+          "price": 31000000,
+          "agentPrice1": 28000000,
+          "agentPrice2": 27000000
+        },
+        {
+          "variantId": 48,
+          "sku": "HMCOC",
+          "barcode": "Herman Aluminium Carbon",
+          "displayName": "Chân Nhôm, Khung Nhôm, Màu Carbon",
+          "price": 31000000,
+          "agentPrice1": 28500000,
+          "agentPrice2": 27500000
+        },
+        {
+          "variantId": 49,
+          "sku": "HMCOBL",
+          "barcode": "Herman Aluminium Onyx",
+          "displayName": "Chân Nhôm, Khung Nhôm, Màu Onyx (Đen)",
+          "price": 31000000,
+          "agentPrice1": 28000000,
+          "agentPrice2": 27000000
+        },
+        {
+          "variantId": 50,
+          "sku": "HMCOMW",
+          "barcode": "Herman Aluminium Mineral White",
+          "displayName": "Chân Nhôm, Khung Nhôm, Màu Mineral White (Trắng)",
+          "price": 33000000,
+          "agentPrice1": 30000000,
+          "agentPrice2": 29000000
+        }
+      ]
+    },
+    {
+      "productId": 15,
+      "productName": "Ergohuman Ultra",
+      "variants": [
+        {
+          "variantId": 51,
+          "sku": "EGULTDEN",
+          "barcode": "Ergohuman Ultra Đen",
+          "displayName": "Đen",
+          "price": 10100000,
+          "agentPrice1": 8600000,
+          "agentPrice2": 8600000
+        },
+        {
+          "variantId": 52,
+          "sku": "EGULTXAM",
+          "barcode": "Ergohuman Ultra Xám",
+          "displayName": "Xám",
+          "price": 10100000,
+          "agentPrice1": 8600000,
+          "agentPrice2": 8600000
+        }
+      ]
+    },
+    {
+      "productId": 16,
+      "productName": "Ergohuman Enjoy Basic 2",
+      "variants": [
+        {
+          "variantId": 53,
+          "sku": "EGENJOYBASIC2BLACK",
+          "barcode": "Ergohuman Enjoy Basic 2 Đen Lưới Đen",
+          "displayName": "Khung Đen Lưới Đen",
+          "price": 7050000,
+          "agentPrice1": 5600000,
+          "agentPrice2": 5400000
+        },
+        {
+          "variantId": 54,
+          "sku": "EGENJOYBASIC2GREY",
+          "barcode": "Ergohuman Enjoy Basic 2 Đen Lưới Xám",
+          "displayName": "Khung Đen Lưới Xám",
+          "price": 7050000,
+          "agentPrice1": 5600000,
+          "agentPrice2": 5400000
+        }
+      ]
+    },
+    {
+      "productId": 17,
+      "productName": "GTChair Dvary Butterfly",
+      "variants": [
+        {
+          "variantId": 55,
+          "sku": "XMS.DBLD",
+          "barcode": "Gtchair Butterfly Đen",
+          "displayName": "Đen",
+          "price": 12000000,
+          "agentPrice1": 11500000,
+          "agentPrice2": 11500000
+        },
+        {
+          "variantId": 56,
+          "sku": "XMS.DBLX",
+          "barcode": "Gtchair Butterfly Xám",
+          "displayName": "Xám",
+          "price": 12500000,
+          "agentPrice1": 12000000,
+          "agentPrice2": 12000000
+        },
+        {
+          "variantId": 57,
+          "sku": "XMS.DBLDPRO",
+          "barcode": "Gtchair Butterfly Pro Đen",
+          "displayName": "Pro Đen",
+          "price": 13950000,
+          "agentPrice1": 12000000,
+          "agentPrice2": 11500000
+        },
+        {
+          "variantId": 58,
+          "sku": "XMS.DBLXPRO",
+          "barcode": "Gtchair Butterfly Pro Xám",
+          "displayName": "Pro Xám",
+          "price": 14250000,
+          "agentPrice1": 12400000,
+          "agentPrice2": 11900000
+        }
+      ]
+    },
+    {
+      "productId": 18,
+      "productName": "GTChair IFit Smile",
+      "variants": [
+        {
+          "variantId": 59,
+          "sku": "XMS.GIFLD",
+          "barcode": "Gtchair Ifit Đen",
+          "displayName": "Khung Đen Lưới Đen",
+          "price": 12900000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 60,
+          "sku": "XMS.GIFLX",
+          "barcode": "Gtchair Ifit Xám",
+          "displayName": "Khung Xám Lưới Xám",
+          "price": 12900000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        }
+      ]
+    },
+    {
+      "productId": 19,
+      "productName": "GTChair Marrit X",
+      "variants": [
+        {
+          "variantId": 61,
+          "sku": "XMS.DMLD",
+          "barcode": "Gtchair Marrit X Đen Lưới Đen",
+          "displayName": "Khung Đen Lưới Đen",
+          "price": 8500000,
+          "agentPrice1": 8000000,
+          "agentPrice2": 7700000
+        },
+        {
+          "variantId": 62,
+          "sku": "XMS.DMLX",
+          "barcode": "Gtchair Marrit X Xám Lưới Xám",
+          "displayName": "Khung Xám Lưới Xám",
+          "price": 9200000,
+          "agentPrice1": 8700000,
+          "agentPrice2": 8300000
+        }
+      ]
+    },
+    {
+      "productId": 20,
+      "productName": "GTChair Ivino Gen II",
+      "variants": [
+        {
+          "variantId": 63,
+          "sku": "XMS.DILD",
+          "barcode": "Gtchair Ivino Đen Lưới Đen",
+          "displayName": "Đen Lưới Đen",
+          "price": 5200000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 64,
+          "sku": "XMS.IVINOLDLX",
+          "barcode": "Gtchair Ivino Đen Lưới Xám",
+          "displayName": "Đen Lưới Xám",
+          "price": 5200000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 65,
+          "sku": "XMS.DILX",
+          "barcode": "Gtchair Ivino Lưới Vằn",
+          "displayName": "Trắng Lưới Vằn",
+          "price": 6500000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        }
+      ]
+    },
+    {
+      "productId": 21,
+      "productName": "GTChair I-See M",
+      "variants": [
+        {
+          "variantId": 66,
+          "sku": "XMS.DISMLD",
+          "barcode": "Gtchair Isee Đen",
+          "displayName": "Đen",
+          "price": 5200000,
+          "agentPrice1": 5200000,
+          "agentPrice2": 5000000
+        },
+        {
+          "variantId": 67,
+          "sku": "XMS.DISMLX",
+          "barcode": "Gtchair Isee Xám",
+          "displayName": "Xám",
+          "price": 5200000,
+          "agentPrice1": 5200000,
+          "agentPrice2": 5000000
+        }
+      ]
+    },
+    {
+      "productId": 22,
+      "productName": "Sihoo S300",
+      "variants": [
+        {
+          "variantId": 68,
+          "sku": "SiHOO.S300LDGC",
+          "barcode": "Sihoo S300 Đen Gác Chân",
+          "displayName": "Đen Gác Chân",
+          "price": 11250000,
+          "agentPrice1": 10200000,
+          "agentPrice2": 9800000
+        },
+        {
+          "variantId": 69,
+          "sku": "SiHOO.S300LXGC",
+          "barcode": "Sihoo S300 Xám Gác Chân",
+          "displayName": "Xám Gác Chân",
+          "price": 11400000,
+          "agentPrice1": 10420000,
+          "agentPrice2": 10000000
+        }
+      ]
+    },
+    {
+      "productId": 23,
+      "productName": "Sihoo A3 (C300)",
+      "variants": [
+        {
+          "variantId": 70,
+          "sku": "A3B101LDLDGC",
+          "barcode": "Sihoo A3 (C300) Đen Gác Chân ",
+          "displayName": "Đen / Có Gác Chân",
+          "price": 7200000,
+          "agentPrice1": 6460000,
+          "agentPrice2": 6200000
+        },
+        {
+          "variantId": 71,
+          "sku": "A3C201LDLD",
+          "barcode": "Sihoo A3 (C300) Đen",
+          "displayName": "Đen / Không Gác Chân",
+          "price": 6800000,
+          "agentPrice1": 6050001,
+          "agentPrice2": 5800000
+        },
+        {
+          "variantId": 72,
+          "sku": "A3B22LTLXGC",
+          "barcode": "Sihoo A3 (C300) Xám Gác Chân ",
+          "displayName": "Xám / Có Gác Chân",
+          "price": 7600000,
+          "agentPrice1": 6875000,
+          "agentPrice2": 6600000
+        },
+        {
+          "variantId": 73,
+          "sku": "A33C202LTLX",
+          "barcode": "Sihoo A3 (C300) Xám ",
+          "displayName": "Xám / Không Gác Chân",
+          "price": 7200000,
+          "agentPrice1": 6460000,
+          "agentPrice2": 6200000
+        }
+      ]
+    },
+    {
+      "productId": 24,
+      "productName": "Sihoo V1",
+      "variants": [
+        {
+          "variantId": 74,
+          "sku": "SiHOO.V1LDGC",
+          "barcode": "Sihoo V1 Đen Gác Chân ",
+          "displayName": "Lưới Đen / Có Gác Chân",
+          "price": 6300000,
+          "agentPrice1": 6050000,
+          "agentPrice2": 5800000
+        },
+        {
+          "variantId": 75,
+          "sku": "SiHOO.V1LD",
+          "barcode": "Sihoo V1 Đen",
+          "displayName": "Lưới Đen / Không Gác Chân",
+          "price": 5700000,
+          "agentPrice1": 5650000,
+          "agentPrice2": 5500000
+        },
+        {
+          "variantId": 76,
+          "sku": "SiHOO.V1DGC",
+          "barcode": "Sihoo V1 Xám Gác Chân ",
+          "displayName": "Lưới Xám / Có Gác Chân",
+          "price": 6300000,
+          "agentPrice1": 6050000,
+          "agentPrice2": 5800000
+        },
+        {
+          "variantId": 77,
+          "sku": "SiHOO.V1D",
+          "barcode": "Sihoo V1 Xám",
+          "displayName": "Lưới Xám / Không Gác Chân",
+          "price": 5700000,
+          "agentPrice1": 5650000,
+          "agentPrice2": 5500000
+        }
+      ]
+    },
+    {
+      "productId": 25,
+      "productName": "Sihoo M93",
+      "variants": [
+        {
+          "variantId": 78,
+          "sku": "SiHOO.M93X",
+          "barcode": "Sihoo M93 Xám",
+          "displayName": "Default Title",
+          "price": 5800000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        }
+      ]
+    },
+    {
+      "productId": 26,
+      "productName": "Sihoo M90C",
+      "variants": [
+        {
+          "variantId": 79,
+          "sku": "SiHOO.M90D",
+          "barcode": "Sihoo M90C Đen",
+          "displayName": "Đen",
+          "price": 4300000,
+          "agentPrice1": 4200000,
+          "agentPrice2": 4150000
+        },
+        {
+          "variantId": 80,
+          "sku": "SiHOO.M90X",
+          "barcode": "Sihoo M90C Xám",
+          "displayName": "Xám",
+          "price": 4600000,
+          "agentPrice1": 4450000,
+          "agentPrice2": 4350000
+        },
+        {
+          "variantId": 81,
+          "sku": "SiHOO.M90BGC",
+          "barcode": "Sihoo M90C Đen Gác Chân ",
+          "displayName": "Đen Gác Chân",
+          "price": 4600000,
+          "agentPrice1": 4550000,
+          "agentPrice2": 4500000
+        },
+        {
+          "variantId": 82,
+          "sku": "SiHOO.M90GGC",
+          "barcode": "Sihoo M90C Xám Gác Chân ",
+          "displayName": "Xám Gác Chân",
+          "price": 4900000,
+          "agentPrice1": 4800000,
+          "agentPrice2": 4700000
+        }
+      ]
+    },
+    {
+      "productId": 27,
+      "productName": "Sihoo M57",
+      "variants": [
+        {
+          "variantId": 83,
+          "sku": "SiHOO.M57LDGC",
+          "barcode": "Sihoo M57 Lưng Đen Lưới Đen Gác Chân",
+          "displayName": "Lưng Đen Lưới Đen / Có Gác Chân",
+          "price": 3850000,
+          "agentPrice1": 3330000,
+          "agentPrice2": 3200000
+        },
+        {
+          "variantId": 84,
+          "sku": "SiHOO.M57LD",
+          "barcode": "Sihoo M57 Lưng Đen Lưới Đen",
+          "displayName": "Lưng Đen Lưới Đen / Không Gác Chân",
+          "price": 3550000,
+          "agentPrice1": 3070000,
+          "agentPrice2": 2950000
+        },
+        {
+          "variantId": 85,
+          "sku": "SiHOO.M57DGC",
+          "barcode": "Sihoo M57 Lưng Đen Lưới Xám Gác Chân",
+          "displayName": "Lưng Đen Lưới Xám / Có Gác Chân",
+          "price": 3850000,
+          "agentPrice1": 3330000,
+          "agentPrice2": 3200000
+        },
+        {
+          "variantId": 86,
+          "sku": "SiHOO.M57D",
+          "barcode": "Sihoo M57 Lưng Đen Lưới Xám",
+          "displayName": "Lưng Đen Lưới Xám / Không Gác Chân",
+          "price": 3550000,
+          "agentPrice1": 3070000,
+          "agentPrice2": 2950000
+        },
+        {
+          "variantId": 87,
+          "sku": "SiHOO.M57XGC",
+          "barcode": "Sihoo M57 Lưng Xám Lưới Xám Gác Chân",
+          "displayName": "Lưng Xám Lưới Xám / Có Gác Chân",
+          "price": 4000000,
+          "agentPrice1": 3490000,
+          "agentPrice2": 3350000
+        },
+        {
+          "variantId": 88,
+          "sku": "SiHOO.M57X",
+          "barcode": "M57 Lưng Xám Lưới Xám",
+          "displayName": "Lưng Xám Lưới Xám / Không Gác Chân",
+          "price": 3700000,
+          "agentPrice1": 3230000,
+          "agentPrice2": 3100000
+        }
+      ]
+    },
+    {
+      "productId": 28,
+      "productName": "Sihoo M18",
+      "variants": [
+        {
+          "variantId": 89,
+          "sku": "SiHOO.M18D",
+          "barcode": "Sihoo M18 Đen",
+          "displayName": "Đen",
+          "price": 2750000,
+          "agentPrice1": 2500000,
+          "agentPrice2": 2400000
+        },
+        {
+          "variantId": 90,
+          "sku": "SiHOO.M18X",
+          "barcode": "Sihoo M18 Xám",
+          "displayName": "Xám",
+          "price": 2750000,
+          "agentPrice1": 2500000,
+          "agentPrice2": 2400000
+        },
+        {
+          "variantId": 91,
+          "sku": "SiHOO.M18DGC",
+          "barcode": "Sihoo M18 Đen Gác Chân ",
+          "displayName": "Đen Gác Chân",
+          "price": 3400000,
+          "agentPrice1": 3070000,
+          "agentPrice2": 2950000
+        }
+      ]
+    },
+    {
+      "productId": 29,
+      "productName": "Sihoo M77",
+      "variants": [
+        {
+          "variantId": 92,
+          "sku": "SiHOO.M77RED",
+          "barcode": "Sihoo M77 Đỏ",
+          "displayName": "Đỏ",
+          "price": 2350000,
+          "agentPrice1": 1950000,
+          "agentPrice2": 1900000
+        },
+        {
+          "variantId": 93,
+          "sku": "SiHOO.M77White",
+          "barcode": "Sihoo M77 Trắng",
+          "displayName": "Trắng",
+          "price": 2350000,
+          "agentPrice1": 1950000,
+          "agentPrice2": 1900000
+        }
+      ]
+    },
+    {
+      "productId": 30,
+      "productName": "Manson E3 Pro",
+      "variants": [
+        {
+          "variantId": 94,
+          "sku": "MansonE3Den",
+          "barcode": "Manson E3 Pro Đen",
+          "displayName": "Đen",
+          "price": 7090000,
+          "agentPrice1": 6400000,
+          "agentPrice2": 6300000
+        },
+        {
+          "variantId": 95,
+          "sku": "MansonE3Xam",
+          "barcode": "Manson E3 Pro Xám",
+          "displayName": "Xám",
+          "price": 7490000,
+          "agentPrice1": 6800000,
+          "agentPrice2": 6700000
+        },
+        {
+          "variantId": 96,
+          "sku": "MansonE3DenGC",
+          "barcode": "Manson E3 Pro Đen Gác Chân",
+          "displayName": "Đen Gác Chân",
+          "price": 7640000,
+          "agentPrice1": 6950000,
+          "agentPrice2": 6850000
+        },
+        {
+          "variantId": 97,
+          "sku": "MansonE3XamGC",
+          "barcode": "Manson E3 Pro Xám + Gác Chân",
+          "displayName": "Xám Gác Chân",
+          "price": 8040000,
+          "agentPrice1": 7350000,
+          "agentPrice2": 7250000
+        },
+        {
+          "variantId": 98,
+          "sku": "X7SmartElectric",
+          "barcode": "Manson X7 Smart Electric",
+          "displayName": "X7 Smart Electric",
+          "price": 18000000,
+          "agentPrice1": 15000000,
+          "agentPrice2": 15000000
+        }
+      ]
+    },
+    {
+      "productId": 31,
+      "productName": "Manson Atum",
+      "variants": [
+        {
+          "variantId": 99,
+          "sku": "ATUMBLACK",
+          "barcode": "Atum Đen",
+          "displayName": "Đen",
+          "price": 5090000,
+          "agentPrice1": 4400000,
+          "agentPrice2": 4350000
+        },
+        {
+          "variantId": 100,
+          "sku": "ATUMGREY",
+          "barcode": "Atum Xám",
+          "displayName": "Xám",
+          "price": 5390000,
+          "agentPrice1": 4700000,
+          "agentPrice2": 4650000
+        },
+        {
+          "variantId": 101,
+          "sku": "ATUMBLACKGC",
+          "barcode": "Atum Đen Gác Chân",
+          "displayName": "Đen Gác Chân",
+          "price": 5590000,
+          "agentPrice1": 4700000,
+          "agentPrice2": 4650000
+        },
+        {
+          "variantId": 102,
+          "sku": "ATUMGREYGC",
+          "barcode": "Atum Xám Gác Chân",
+          "displayName": "Xám Gác Chân",
+          "price": 5890000,
+          "agentPrice1": 5000000,
+          "agentPrice2": 4950000
+        },
+        {
+          "variantId": 103,
+          "sku": "ATUMPROBLACK",
+          "barcode": "Atum Pro 4.0 Đen",
+          "displayName": "Pro 4.0 Đen",
+          "price": 6090000,
+          "agentPrice1": 5000000,
+          "agentPrice2": 4950000
+        },
+        {
+          "variantId": 104,
+          "sku": "ATUMPROGREY",
+          "barcode": "Atum Pro 4.0 Xám",
+          "displayName": "Pro 4.0 Xám",
+          "price": 6390000,
+          "agentPrice1": 5300000,
+          "agentPrice2": 5250000
+        },
+        {
+          "variantId": 105,
+          "sku": "ATUMPROBLACKGC",
+          "barcode": "Atum Pro 4.0 Đen Gác Chân",
+          "displayName": "Pro 4.0 Đen Gác Chân",
+          "price": 6590000,
+          "agentPrice1": 5300000,
+          "agentPrice2": 5250000
+        },
+        {
+          "variantId": 106,
+          "sku": "ATUMPROGREYGC",
+          "barcode": "Atum Pro 4.0 Xám Gác Chân",
+          "displayName": "Pro 4.0 Xám Gác Chân",
+          "price": 6890000,
+          "agentPrice1": 5600000,
+          "agentPrice2": 5550000
+        },
+        {
+          "variantId": 107,
+          "sku": "PKGCATUMBLACK",
+          "barcode": "Gác Chân Atum Đen",
+          "displayName": "Gác Chân Atum Đen",
+          "price": 600000,
+          "agentPrice1": 350000,
+          "agentPrice2": 350000
+        },
+        {
+          "variantId": 108,
+          "sku": "PKGCATUMGREY",
+          "barcode": "Gác Chân Atum Xám",
+          "displayName": "Gác Chân Atum Xám",
+          "price": 600000,
+          "agentPrice1": 350000,
+          "agentPrice2": 350000
+        }
+      ]
+    },
+    {
+      "productId": 32,
+      "productName": "Manson Iris",
+      "variants": [
+        {
+          "variantId": 109,
+          "sku": "IrisMD",
+          "barcode": "Iris Matrex Đen",
+          "displayName": "Matrex Đen",
+          "price": 4600000,
+          "agentPrice1": 3900000,
+          "agentPrice2": 3850000
+        },
+        {
+          "variantId": 110,
+          "sku": "IrisMX",
+          "barcode": "Iris Matrex Xám",
+          "displayName": "Matrex Xám",
+          "price": 4600000,
+          "agentPrice1": 3900000,
+          "agentPrice2": 3850000
+        },
+        {
+          "variantId": 111,
+          "sku": "IrisWD",
+          "barcode": "Iris Wintex Đen",
+          "displayName": "Wintex Đen",
+          "price": 4600000,
+          "agentPrice1": 3900000,
+          "agentPrice2": 3850000
+        },
+        {
+          "variantId": 112,
+          "sku": "IrisWX",
+          "barcode": "Iris Wintex Xám",
+          "displayName": "Wintex Xám",
+          "price": 4600000,
+          "agentPrice1": 3900000,
+          "agentPrice2": 3850000
+        },
+        {
+          "variantId": 113,
+          "sku": "IrisWintexLungXamLuoiXam",
+          "barcode": "Iris Wintex Full Xám",
+          "displayName": "Wintex Full Xám",
+          "price": 4950000,
+          "agentPrice1": 4250000,
+          "agentPrice2": 4200000
+        },
+        {
+          "variantId": 114,
+          "sku": "Iris-CL-D",
+          "barcode": "Iris CloudMesh Đen",
+          "displayName": "CloudMesh Đen",
+          "price": 4600000,
+          "agentPrice1": 3900000,
+          "agentPrice2": 3850000
+        },
+        {
+          "variantId": 115,
+          "sku": "Iris-CL-X",
+          "barcode": "Iris CloudMesh Xám",
+          "displayName": "CloudMesh Xám",
+          "price": 4600000,
+          "agentPrice1": 3900000,
+          "agentPrice2": 3850000
+        },
+        {
+          "variantId": 116,
+          "sku": "Iris-CL-FullXam",
+          "barcode": "Iris CloudMesh Full Xám",
+          "displayName": "CloudMesh Full Xám",
+          "price": 4950000,
+          "agentPrice1": 4250000,
+          "agentPrice2": 4200000
+        },
+        {
+          "variantId": 117,
+          "sku": "Iris-CL-D-GC",
+          "barcode": "Iris CloudMesh Đen Gác Chân",
+          "displayName": "CloudMesh Đen Gác Chân",
+          "price": 5100000,
+          "agentPrice1": 4200000,
+          "agentPrice2": 4150000
+        },
+        {
+          "variantId": 118,
+          "sku": "Iris-CL-X-GC",
+          "barcode": "Iris CloudMesh Xám Gác Chân",
+          "displayName": "CloudMesh Xám Gác Chân",
+          "price": 5100000,
+          "agentPrice1": 4200000,
+          "agentPrice2": 4150000
+        },
+        {
+          "variantId": 119,
+          "sku": "Iris-CL-FullXam-GC",
+          "barcode": "Iris CloudMesh Full Xám Gác Chân",
+          "displayName": "CloudMesh Full Xám Gác Chân",
+          "price": 5450000,
+          "agentPrice1": 4550000,
+          "agentPrice2": 4500000
+        }
+      ]
+    },
+    {
+      "productId": 34,
+      "productName": "Manson Vera",
+      "variants": [
+        {
+          "variantId": 789,
+          "sku": "VeraDB",
+          "barcode": "Vera Rồng Đen",
+          "displayName": "Rồng Đen",
+          "price": 4100000,
+          "agentPrice1": 3700000,
+          "agentPrice2": 3550000
+        },
+        {
+          "variantId": 790,
+          "sku": "VeraDG",
+          "barcode": "Vera Rồng Xám",
+          "displayName": "Rồng Xám",
+          "price": 4100000,
+          "agentPrice1": 3700000,
+          "agentPrice2": 3550000
+        },
+        {
+          "variantId": 791,
+          "sku": "Verawb1",
+          "barcode": "Vera Wintex Đen",
+          "displayName": "Wintex Đen",
+          "price": 4400000,
+          "agentPrice1": 3700000,
+          "agentPrice2": 3650000
+        },
+        {
+          "variantId": 792,
+          "sku": "PVN1461",
+          "barcode": "Vera Wintex Xám",
+          "displayName": "Wintex Xám",
+          "price": 4400000,
+          "agentPrice1": 3700000,
+          "agentPrice2": 3650000
+        },
+        {
+          "variantId": 793,
+          "sku": "Verawbf1",
+          "barcode": "Vera Wintex Đen Gác Chân",
+          "displayName": "Wintex Đen Gác Chân",
+          "price": 4900000,
+          "agentPrice1": 4000000,
+          "agentPrice2": 3950000
+        },
+        {
+          "variantId": 794,
+          "sku": "Verawgf1",
+          "barcode": "Vera Wintex Xám Gác Chân",
+          "displayName": "Wintex Xám Gác Chân",
+          "price": 4900000,
+          "agentPrice1": 4000000,
+          "agentPrice2": 3950000
+        },
+        {
+          "variantId": 795,
+          "sku": "Verawb",
+          "barcode": "Vera CloudMesh Đen",
+          "displayName": "CloudMesh Đen",
+          "price": 4400000,
+          "agentPrice1": 3700000,
+          "agentPrice2": 3650000
+        },
+        {
+          "variantId": 796,
+          "sku": "PVN146",
+          "barcode": "Vera CloudMesh Xám",
+          "displayName": "CloudMesh Xám",
+          "price": 4400000,
+          "agentPrice1": 3700000,
+          "agentPrice2": 3650000
+        },
+        {
+          "variantId": 797,
+          "sku": "Verawgf",
+          "barcode": "Vera CloudMesh Xám Gác Chân",
+          "displayName": "CloudMesh Xám Gác Chân",
+          "price": 4900000,
+          "agentPrice1": 4000000,
+          "agentPrice2": 3950000
+        },
+        {
+          "variantId": 798,
+          "sku": "Verawbf",
+          "barcode": "Vera CloudMesh Đen Gác Chân",
+          "displayName": "CloudMesh Đen Gác Chân",
+          "price": 4900000,
+          "agentPrice1": 4000000,
+          "agentPrice2": 3950000
+        }
+      ]
+    },
+    {
+      "productId": 35,
+      "productName": "Xiaomi Manson Butterfly Wing",
+      "variants": [
+        {
+          "variantId": 129,
+          "sku": "XMS.BWLD",
+          "barcode": "Wing Đen",
+          "displayName": "Đen",
+          "price": 3250000,
+          "agentPrice1": 2800000,
+          "agentPrice2": 2750000
+        },
+        {
+          "variantId": 130,
+          "sku": "XMS.BWLX",
+          "barcode": "Wing Xám",
+          "displayName": "Trắng",
+          "price": 3250000,
+          "agentPrice1": 2800000,
+          "agentPrice2": 2750000
+        }
+      ]
+    },
+    {
+      "productId": 36,
+      "productName": "Xiaomi Manson Regal",
+      "variants": [
+        {
+          "variantId": 131,
+          "sku": "XMS.RGT",
+          "barcode": "Regal Trắng",
+          "displayName": "Trắng",
+          "price": 1680000,
+          "agentPrice1": 1380000,
+          "agentPrice2": 1330000
+        },
+        {
+          "variantId": 132,
+          "sku": "XMS.RGD",
+          "barcode": "Regal Đen",
+          "displayName": "Đen",
+          "price": 1680000,
+          "agentPrice1": 1380000,
+          "agentPrice2": 1330000
+        },
+        {
+          "variantId": 133,
+          "sku": "XMS.RGX",
+          "barcode": "Regal Xanh",
+          "displayName": "Xanh",
+          "price": 1680000,
+          "agentPrice1": 1380000,
+          "agentPrice2": 1330000
+        },
+        {
+          "variantId": 134,
+          "sku": "XMS.RGH",
+          "barcode": "Regal Hồng",
+          "displayName": "Hồng",
+          "price": 1680000,
+          "agentPrice1": 1380000,
+          "agentPrice2": 1330000
+        },
+        {
+          "variantId": 135,
+          "sku": "XMS.RGXAM",
+          "barcode": "Regal Xám",
+          "displayName": "Xám",
+          "price": 1680000,
+          "agentPrice1": 1380000,
+          "agentPrice2": 1330000
+        }
+      ]
+    },
+    {
+      "productId": 37,
+      "productName": "Xiaomi Manson Ergonomic",
+      "variants": [
+        {
+          "variantId": 136,
+          "sku": "XMS.ORT",
+          "barcode": "Ergonomic Trắng",
+          "displayName": "Trắng",
+          "price": 1480000,
+          "agentPrice1": 1160000,
+          "agentPrice2": 1100000
+        },
+        {
+          "variantId": 137,
+          "sku": "XMS.ORD",
+          "barcode": "Ergonomic đen",
+          "displayName": "Đen",
+          "price": 1480000,
+          "agentPrice1": 1160000,
+          "agentPrice2": 1100000
+        },
+        {
+          "variantId": 138,
+          "sku": "XMS.ORX",
+          "barcode": "Ergonomic Xám",
+          "displayName": "Xám",
+          "price": 1480000,
+          "agentPrice1": 1160000,
+          "agentPrice2": 1100000
+        }
+      ]
+    },
+    {
+      "productId": 38,
+      "productName": "Xiaomi Manson Oasis",
+      "variants": [
+        {
+          "variantId": 139,
+          "sku": "XMS.OSD",
+          "barcode": "Oasis Đen",
+          "displayName": "Đen",
+          "price": 930000,
+          "agentPrice1": 780000,
+          "agentPrice2": 750000
+        },
+        {
+          "variantId": 140,
+          "sku": "XMS.OST",
+          "barcode": "Oasis Trắng",
+          "displayName": "Trắng",
+          "price": 980000,
+          "agentPrice1": 830000,
+          "agentPrice2": 800000
+        }
+      ]
+    },
+    {
+      "productId": 39,
+      "productName": "Combo Bàn Nâng Hạ Manson SmartDesk",
+      "variants": [
+        {
+          "variantId": 903,
+          "sku": "NH-DEN-12&1206-MB-DEN",
+          "barcode": "Combo Khung 1.2m Đen, Mặt 1.2m x 0.6m Đen",
+          "displayName": "1.2m Đen,1.2m x 0.6m Đen",
+          "price": 2550000,
+          "agentPrice1": 1850000,
+          "agentPrice2": 1850000
+        },
+        {
+          "variantId": 904,
+          "sku": "NH-DEN-12&1206-MB-VANGO",
+          "barcode": "Combo Khung 1.2m Đen, Mặt 1.2m x 0.6m Walnut",
+          "displayName": "1.2m Đen,1.2m x 0.6m Walnut",
+          "price": 2550000,
+          "agentPrice1": 1850000,
+          "agentPrice2": 1850000
+        },
+        {
+          "variantId": 905,
+          "sku": "NH-DEN-1416&1406-MB-DEN",
+          "barcode": "Combo Khung 1.4m-1.6m Đen, Mặt 1.4m x 0.6m Đen",
+          "displayName": "1.4m-1.6m Đen, 1.4m x 0.6m Đen",
+          "price": 2700000,
+          "agentPrice1": 2000000,
+          "agentPrice2": 2000000
+        },
+        {
+          "variantId": 906,
+          "sku": "NH-DEN-1416&1406-MB-VANGO",
+          "barcode": "Combo Khung 1.4m-1.6m Đen, Mặt 1.4m x 0.6m Walnut",
+          "displayName": "1.4m-1.6m Đen, 1.4m x 0.6m Walnut",
+          "price": 2700000,
+          "agentPrice1": 2000000,
+          "agentPrice2": 2000000
+        },
+        {
+          "variantId": 907,
+          "sku": "NH-DEN-1416&1606-MB-DEN",
+          "barcode": "Combo Khung 1.4m-1.6m Đen, Mặt 1.6m x 0.6m Đen",
+          "displayName": "1.4m-1.6m Đen, 1.6m x 0.6m Đen",
+          "price": 2750000,
+          "agentPrice1": 2050000,
+          "agentPrice2": 2050000
+        },
+        {
+          "variantId": 908,
+          "sku": "NH-DEN-1416&1606-MB-VANGO",
+          "barcode": "Combo Khung 1.4m-1.6m Đen, Mặt 1.6m x 0.6m Walnut",
+          "displayName": "1.4m-1.6m Đen, 1.6m x 0.6m Walnut",
+          "price": 2750000,
+          "agentPrice1": 2050000,
+          "agentPrice2": 2050000
+        },
+        {
+          "variantId": 909,
+          "sku": "NH-TRANG-12&1206-MB-TRANG",
+          "barcode": "Combo Khung 1.2m Trắng, Mặt 1.2m x 0.6m Trắng",
+          "displayName": "1.2m Trắng, 1.2m x 0.6m Trắng",
+          "price": 2550000,
+          "agentPrice1": 1850000,
+          "agentPrice2": 1850000
+        },
+        {
+          "variantId": 910,
+          "sku": "NH-TRANG-12&1206-MB-VANGO",
+          "barcode": "Combo Khung 1.2m Trắng, Mặt 1.2m x 0.6m Walnut",
+          "displayName": "1.2m Trắng, 1.2m x 0.6m Walnut",
+          "price": 2550000,
+          "agentPrice1": 1850000,
+          "agentPrice2": 1850000
+        },
+        {
+          "variantId": 911,
+          "sku": "NH-TRANG-1416&1406-MB-TRANG",
+          "barcode": "Combo Khung 1.4m-1.6m Trắng, Mặt 1.6m x 0.6m Trắng",
+          "displayName": "1.4m-1.6m Trắng, 1.4m x 0.6m Trắng",
+          "price": 2700000,
+          "agentPrice1": 2000000,
+          "agentPrice2": 2000000
+        },
+        {
+          "variantId": 912,
+          "sku": "NH-TRANG-1416&1406-MB-VANGO",
+          "barcode": "Combo Khung 1.4m-1.6m Trắng, Mặt 1.4m x 0.6m Walnut",
+          "displayName": "1.4m-1.6m Trắng, 1.4m x 0.6m Walnut",
+          "price": 2700000,
+          "agentPrice1": 2000000,
+          "agentPrice2": 2000000
+        },
+        {
+          "variantId": 913,
+          "sku": "NH-TRANG-1416&1606-MB-TRANG",
+          "barcode": "Combo Khung 1.4m-1.6m Trắng, Mặt 1.6m x 0.6m Trắng",
+          "displayName": "1.4m-1.6m Trắng, 1.6m x 0.6m Trắng",
+          "price": 2750000,
+          "agentPrice1": 2050000,
+          "agentPrice2": 2050000
+        },
+        {
+          "variantId": 914,
+          "sku": "NH-TRANG-1416&1606-MB-VANGO",
+          "barcode": "Combo Khung 1.4m-1.6m Trắng, Mặt 1.6m x 0.6m Walnut",
+          "displayName": "1.4m-1.6m Trắng, 1.6m x 0.6m Walnut",
+          "price": 2750000,
+          "agentPrice1": 2050000,
+          "agentPrice2": 2050000
+        },
+        {
+          "variantId": 947,
+          "sku": "NH-DEN-12&1206-MB-TRANG",
+          "barcode": "Combo Khung 1.2m Đen, Mặt 1.2m x 0.6m Trắng",
+          "displayName": null,
+          "price": 2550000,
+          "agentPrice1": 1850000,
+          "agentPrice2": 1850000
+        },
+        {
+          "variantId": 948,
+          "sku": "NH-TRANG-12&1206-MB-DEN",
+          "barcode": "Combo Khung 1.2m Trắng, Mặt 1.2m x 0.6m Đen",
+          "displayName": null,
+          "price": 2550000,
+          "agentPrice1": 1850000,
+          "agentPrice2": 1850000
+        },
+        {
+          "variantId": 949,
+          "sku": "NH-DEN-1416&1406-MB-TRANG",
+          "barcode": "Combo Khung 1.4m-1.6m Đen, Mặt 1.4m x 0.6m Trắng",
+          "displayName": null,
+          "price": 2700000,
+          "agentPrice1": 2000000,
+          "agentPrice2": 2000000
+        },
+        {
+          "variantId": 950,
+          "sku": "NH-DEN-1416&1606-MB-TRANG",
+          "barcode": "Combo Khung 1.4m-1.6m Đen, Mặt 1.6m x 0.6m Trắng",
+          "displayName": null,
+          "price": 2750000,
+          "agentPrice1": 2050000,
+          "agentPrice2": 2050000
+        },
+        {
+          "variantId": 951,
+          "sku": "NH-TRANG-1416&1406-MB-DEN",
+          "barcode": "Combo Khung 1.4m-1.6m Trắng, Mặt 1.4m x 0.6m Đen",
+          "displayName": null,
+          "price": 2700000,
+          "agentPrice1": 2000000,
+          "agentPrice2": 2000000
+        },
+        {
+          "variantId": 952,
+          "sku": "NH-TRANG-1416&1606-MB-DEN",
+          "barcode": "Combo Khung 1.4m-1.6m Trắng, Mặt 1.6m x 0.6m Đen",
+          "displayName": null,
+          "price": 2750000,
+          "agentPrice1": 2050000,
+          "agentPrice2": 2050000
+        },
+        {
+          "variantId": 1368,
+          "sku": "NH-DEN-12&1206-MB-SOI-OAK",
+          "barcode": "Combo Khung 1.2m Đen, Mặt 1.2m x 0.6m Sồi Oak",
+          "displayName": null,
+          "price": 2550000,
+          "agentPrice1": 1850000,
+          "agentPrice2": 1850000
+        },
+        {
+          "variantId": 1369,
+          "sku": "NH-TRANG-12&1206-MB-SOI-OAK",
+          "barcode": "Combo Khung 1.2m Trắng, Mặt 1.2m x 0.6m Sồi Oak",
+          "displayName": null,
+          "price": 2550000,
+          "agentPrice1": 1850000,
+          "agentPrice2": 1850000
+        },
+        {
+          "variantId": 1370,
+          "sku": "NH-DEN-1416&1406-MB-SOI-OAK",
+          "barcode": "Combo Khung 1.4m-1.6m Đen, Mặt 1.4m x 0.6m Sồi Oak",
+          "displayName": null,
+          "price": 2700000,
+          "agentPrice1": 2000000,
+          "agentPrice2": 2000000
+        },
+        {
+          "variantId": 1371,
+          "sku": "NH-TRANG-1416&1406-MB-SOI-OAK",
+          "barcode": "Combo Khung 1.4m-1.6m Trắng, Mặt 1.4m x 0.6m Sồi Oak",
+          "displayName": null,
+          "price": 2700000,
+          "agentPrice1": 2000000,
+          "agentPrice2": 2000000
+        },
+        {
+          "variantId": 1372,
+          "sku": "NH-DEN-1416&1606-MB-SOI-OAK",
+          "barcode": "Combo Khung 1.4m-1.6m Đen, Mặt 1.6m x 0.6m Sồi Oak",
+          "displayName": null,
+          "price": 2750000,
+          "agentPrice1": 2050000,
+          "agentPrice2": 2050000
+        },
+        {
+          "variantId": 1373,
+          "sku": "NH-TRANG-1416&1606-MB-SOI-OAK",
+          "barcode": "Combo Khung 1.4m-1.6m Trắng, Mặt 1.6m x 0.6m Sồi Oak",
+          "displayName": null,
+          "price": 2750000,
+          "agentPrice1": 2050000,
+          "agentPrice2": 2050000
+        }
+      ]
+    },
+    {
+      "productId": 40,
+      "productName": "Manson E3 Lite - Phiên Bản Lưới",
+      "variants": [
+        {
+          "variantId": 923,
+          "sku": "E3LITE-LUOI-DEN",
+          "barcode": "E3 Lite Lưới Đen",
+          "displayName": "Đen",
+          "price": 2800000,
+          "agentPrice1": 2300000,
+          "agentPrice2": 2250000
+        },
+        {
+          "variantId": 924,
+          "sku": "E3LITE-LUOI-HONG",
+          "barcode": "E3 Lite Lưới Hồng",
+          "displayName": "Hồng",
+          "price": 2800000,
+          "agentPrice1": 2300000,
+          "agentPrice2": 2250000
+        },
+        {
+          "variantId": 925,
+          "sku": "E3LITE-LUOI-XANHLA",
+          "barcode": "E3 Lite Lưới Xanh Lá",
+          "displayName": "Xanh Lá",
+          "price": 2800000,
+          "agentPrice1": 2300000,
+          "agentPrice2": 2250000
+        },
+        {
+          "variantId": 926,
+          "sku": "E3LITE-LUOI-XAM",
+          "barcode": "E3 Lite Lưới Xám",
+          "displayName": "Xám",
+          "price": 2800000,
+          "agentPrice1": 2300000,
+          "agentPrice2": 2250000
+        }
+      ]
+    },
+    {
+      "productId": 41,
+      "productName": "Tựa lưng công thái học Manson FlexBack",
+      "variants": [
+        {
+          "variantId": 930,
+          "sku": "FLEXBACK-GREY",
+          "barcode": "Flexback Xám",
+          "displayName": "Flexback Xám",
+          "price": 399000,
+          "agentPrice1": 250000,
+          "agentPrice2": 250000
+        },
+        {
+          "variantId": 958,
+          "sku": "FLEXBACK-BLACK",
+          "barcode": "Flexback Đen",
+          "displayName": null,
+          "price": 399000,
+          "agentPrice1": 250000,
+          "agentPrice2": 250000
+        }
+      ]
+    },
+    {
+      "productId": 42,
+      "productName": "T21",
+      "variants": [
+        {
+          "variantId": 953,
+          "sku": "XMS.T21D",
+          "barcode": null,
+          "displayName": null,
+          "price": 2200000,
+          "agentPrice1": 2200000,
+          "agentPrice2": 2200000
+        },
+        {
+          "variantId": 954,
+          "sku": "XMS.T21X",
+          "barcode": null,
+          "displayName": null,
+          "price": 2200000,
+          "agentPrice1": 2200000,
+          "agentPrice2": 2200000
+        }
+      ]
+    },
+    {
+      "productId": 47,
+      "productName": "Ghế Gaming Công Thái Học Manson x AutoFull G7",
+      "variants": [
+        {
+          "variantId": 974,
+          "sku": "Black-Shadow-Knight",
+          "barcode": "Autofull G7 Black (Shadow Knight)",
+          "displayName": null,
+          "price": 11000000,
+          "agentPrice1": 9000000,
+          "agentPrice2": 9000000
+        },
+        {
+          "variantId": 975,
+          "sku": "Purple-Phantom-Purple-Guardian",
+          "barcode": "Autofull G7 Phantom Purple Guardian",
+          "displayName": null,
+          "price": 12000000,
+          "agentPrice1": 10000000,
+          "agentPrice2": 10000000
+        },
+        {
+          "variantId": 976,
+          "sku": "White-Snow-Knight",
+          "barcode": "Autofull G7 White (Snow Knight)",
+          "displayName": null,
+          "price": 11000000,
+          "agentPrice1": 9000000,
+          "agentPrice2": 9000000
+        },
+        {
+          "variantId": 977,
+          "sku": "Pink-Sakura-Guardian",
+          "barcode": "Autofull G7 Pink (Sakura Guardian)",
+          "displayName": null,
+          "price": 11500000,
+          "agentPrice1": 9500000,
+          "agentPrice2": 9500000
+        }
+      ]
+    },
+    {
+      "productId": 50,
+      "productName": "Ghế Gaming Công Thái Học Manson x AutoFull G7",
+      "variants": []
+    },
+    {
+      "productId": 52,
+      "productName": "Khung Bàn Nâng Hạ 2 Động Cơ",
+      "variants": [
+        {
+          "variantId": 1335,
+          "sku": "NH-2DC-DEN",
+          "barcode": "Khung Nâng Hạ 2 Động Cơ Đen",
+          "displayName": "Đen",
+          "price": 5490000,
+          "agentPrice1": 3990000,
+          "agentPrice2": 3990000
+        },
+        {
+          "variantId": 1336,
+          "sku": "NH-2DC-TRANG",
+          "barcode": "Khung Nâng Hạ 2 Động Cơ Trắng",
+          "displayName": "Trắng",
+          "price": 5490000,
+          "agentPrice1": 3990000,
+          "agentPrice2": 3990000
+        }
+      ]
+    },
+    {
+      "productId": 53,
+      "productName": "Sihoo B300 Pro",
+      "variants": [
+        {
+          "variantId": 1349,
+          "sku": "Sihoo-B300-Pro-Den",
+          "barcode": "Sihoo B300 Pro Đen",
+          "displayName": "B300 Pro Đen",
+          "price": 4400000,
+          "agentPrice1": 3700000,
+          "agentPrice2": 3700000
+        },
+        {
+          "variantId": 1350,
+          "sku": "Sihoo-B300-Pro-Xam",
+          "barcode": "Sihoo B300 Pro Xám",
+          "displayName": "B300 Pro Xám",
+          "price": 4550000,
+          "agentPrice1": 3850000,
+          "agentPrice2": 3850000
+        },
+        {
+          "variantId": 1351,
+          "sku": "Sihoo-B300-Pro-Den-GC",
+          "barcode": "Sihoo B300 Pro Đen Gác Chân",
+          "displayName": "B300 Pro Đen Gác Chân",
+          "price": 4900000,
+          "agentPrice1": 4050000,
+          "agentPrice2": 4050000
+        },
+        {
+          "variantId": 1352,
+          "sku": "Sihoo-B300-Pro-3-Xam-GC",
+          "barcode": "Sihoo B300 Pro Xám Gác Chân",
+          "displayName": "B300 Pro Xám Gác Chân",
+          "price": 5050000,
+          "agentPrice1": 4200000,
+          "agentPrice2": 4200000
+        }
+      ]
+    },
+    {
+      "productId": 54,
+      "productName": "Bộ Bánh Xe DeskCasters",
+      "variants": [
+        {
+          "variantId": 1359,
+          "sku": "DeskCasters-Black",
+          "barcode": "Bộ Bánh Xe DeskCasters Black",
+          "displayName": "Đen",
+          "price": 250000,
+          "agentPrice1": 140000,
+          "agentPrice2": 140000
+        },
+        {
+          "variantId": 1360,
+          "sku": "DeskCasters-White",
+          "barcode": "Bộ Bánh Xe DeskCasters White",
+          "displayName": "Trắng",
+          "price": 250000,
+          "agentPrice1": 140000,
+          "agentPrice2": 140000
+        }
+      ]
+    },
+    {
+      "productId": 55,
+      "productName": "Bàn Nâng Hạ Di Động Manson StandGo",
+      "variants": [
+        {
+          "variantId": 1363,
+          "sku": "StandGo-NH-Black",
+          "barcode": "Bàn StandGo Đen",
+          "displayName": "Đen",
+          "price": 2190000,
+          "agentPrice1": 2190000,
+          "agentPrice2": 2190000
+        },
+        {
+          "variantId": 1364,
+          "sku": "StandGo-NH-White",
+          "barcode": "Bàn StandGo Trắng",
+          "displayName": "Trắng",
+          "price": 2190000,
+          "agentPrice1": 2190000,
+          "agentPrice2": 2190000
+        }
+      ]
+    },
+    {
+      "productId": 57,
+      "productName": "Manson Foris",
+      "variants": [
+        {
+          "variantId": 1456,
+          "sku": "FORIS-BLACK",
+          "barcode": "Foris Đen",
+          "displayName": null,
+          "price": 4000000,
+          "agentPrice1": 2900000,
+          "agentPrice2": 2900000
+        },
+        {
+          "variantId": 1457,
+          "sku": "FORIS-WHITE",
+          "barcode": "Foris Xám",
+          "displayName": null,
+          "price": 4000000,
+          "agentPrice1": 2900000,
+          "agentPrice2": 2900000
+        },
+        {
+          "variantId": 1458,
+          "sku": "FORIS-BLACK-FR",
+          "barcode": "Foris Đen Gác Chân",
+          "displayName": null,
+          "price": 4300000,
+          "agentPrice1": 3100000,
+          "agentPrice2": 3100000
+        },
+        {
+          "variantId": 1459,
+          "sku": "FORIS-WHITE-FR",
+          "barcode": "Foris Xám Gác Chân",
+          "displayName": null,
+          "price": 4300000,
+          "agentPrice1": 3100000,
+          "agentPrice2": 3100000
+        }
+      ]
+    },
+    {
+      "productId": 58,
+      "productName": "Libernovo Omni Dynamic",
+      "variants": [
+        {
+          "variantId": 1467,
+          "sku": "LOD-BLACK",
+          "barcode": null,
+          "displayName": "Midnight Black",
+          "price": 15900000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1468,
+          "sku": "LOD-GREY",
+          "barcode": null,
+          "displayName": "Space Grey",
+          "price": 15900000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        }
+      ]
+    },
+    {
+      "productId": 59,
+      "productName": "Libernovo StepSync Footrest (Gác Chân)",
+      "variants": [
+        {
+          "variantId": 1471,
+          "sku": "libernovo-stepsync-footrest-black",
+          "barcode": null,
+          "displayName": "Midnigh Black",
+          "price": 1500000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1472,
+          "sku": "libernovo-stepsync-footrest-white",
+          "barcode": null,
+          "displayName": "Space Grey",
+          "price": 1500000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        }
+      ]
+    }
+  ]
+}

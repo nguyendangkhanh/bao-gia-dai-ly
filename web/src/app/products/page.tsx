@@ -3,8 +3,10 @@ import { clearSession, getSession } from "@/lib/auth";
 import ProductsSectionList from "@/components/products/ProductsSectionList";
 import HotQuickTags from "@/components/products/HotQuickTags";
 import ProductsSearchForm from "@/components/products/ProductsSearchForm";
+import PriceChangeNotificationPopup from "@/components/products/PriceChangeNotificationPopup";
+import { getPendingPriceNotificationForDealer } from "@/lib/price-notifications";
+import { Product, ProductVariant } from "@/types/product";
 import { redirect } from "next/navigation";
-
 
 const ignoreByNameInclude = [
   "Khung Bàn Nâng Hạ Manson SmartDesk",
@@ -72,18 +74,18 @@ function getProductOrderByVariants(variants: { sku?: string | null }[], skuOrder
   return best;
 }
 
-function filterAndSortProducts(products: any[], tierKey: "agentPrice1" | "agentPrice2", skuOrderMap: Map<string, number>) {
+function filterAndSortProducts(products: Product[], tierKey: "agentPrice1" | "agentPrice2", skuOrderMap: Map<string, number>) {
   return filterIgnoredProducts(products)
     .map((p) => {
       const variants = sortVariantsByDealerPrice(
-        (p.variants || []).filter((v: any) => {
+        (p.variants || []).filter((v: ProductVariant) => {
           const val = tierKey === "agentPrice2" ? v.agentPrice2 : v.agentPrice1;
           return typeof val === "number" && val > 0;
         }),
         tierKey,
         skuOrderMap,
       );
-      const retailPrices = variants.map((v: any) => v.price || 0).filter((price: number) => price > 0);
+      const retailPrices = variants.map((v) => v.price || 0).filter((price) => price > 0);
       const retailMin = retailPrices.length ? Math.min(...retailPrices) : 0;
       const retailMax = retailPrices.length ? Math.max(...retailPrices) : 0;
       const cover = p.images?.[0]?.url || "";
@@ -116,7 +118,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
     getProducts(1, productLimit, searchTerm),
     getSkuOrder(),
   ]);
-  const needsDetailFetch = !Array.isArray((res.data as any[])?.[0]?.variants);
+  const needsDetailFetch = !Array.isArray(res.data[0]?.variants);
   const productsBase = needsDetailFetch
     ? await Promise.all(res.data.map((p) => getProductById(String(p.id))))
     : res.data;
@@ -130,7 +132,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
 
   const enrichedProducts = productsBase.map((product) => ({
     ...product,
-    variants: (product.variants || []).map((variant: any) => {
+    variants: (product.variants || []).map((variant) => {
       const skuKey = normalizeKey(String(variant.sku || ""));
       const barcodeKey = normalizeKey(String(variant.barcode || ""));
       const displayNameKey = normalizeKey(String(variant.displayName || ""));
@@ -138,66 +140,54 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
       return { ...variant, link: mappedLink || variant.link || "" };
     }),
   }));
+
   const tierKey = session.priceTier === "agent2" ? "agentPrice2" : "agentPrice1";
   const filteredSorted = filterAndSortProducts(enrichedProducts, tierKey, skuOrderMap);
+  const searchableProducts = filteredSorted as Array<Product & { variants: ProductVariant[] }>;
   const filteredByTags = activeTags.length
-    ? filteredSorted.filter((p) => {
+    ? searchableProducts.filter((p) => {
         const haystack = [
           String(p.name || ""),
-          ...((p.variants || []).map((v: any) => String(v.barcode || v.displayName || ""))),
+          ...((p.variants || []).map((v) => String(v.barcode || v.displayName || ""))),
         ].join(" ").toLowerCase();
         return activeTags.some((tag) => haystack.includes(tag.toLowerCase()));
       })
-    : filteredSorted;
+    : searchableProducts;
 
-  const variantsWithLinkCount = filteredByTags.reduce(
-    (acc, p) => acc + (p.variants || []).filter((v: any) => String(v.link || "").trim()).length,
-    0,
-  );
-  const debugSkuOrderKeys = skuOrderItems.slice(0, 10).map((i) => normalizeKey(String(i.sku || "")));
-  const debugVariantKeys = filteredByTags
-    .flatMap((p) => (p.variants || []).map((v: any) => normalizeKey(String(v.sku || v.barcode || v.displayName || ""))))
-    .filter(Boolean)
-    .slice(0, 10);
-  const debugMatchedVariantKeys = debugVariantKeys.filter((k) => !!skuLinkMap.get(k));
-  const debugMissingVariantKeys = debugVariantKeys.filter((k) => !skuLinkMap.get(k));
-  const debugSkuOrderSize = skuOrderItems.length;
-  const debugSkuOrderWithLink = skuOrderItems.filter((i) => String(i.link || "").trim()).length;
+  const pendingPriceNotification = await getPendingPriceNotificationForDealer({
+    dealerShortName: session.shortName,
+    priceTier: session.priceTier,
+    products: enrichedProducts,
+  });
 
   return (
-    <main className="mx-auto w-full max-w-7xl space-y-5 overflow-x-hidden p-4 md:p-6 fade-in">
-      <section className="rounded-2xl bg-gradient-to-r from-[#ff6b35] via-[#f97316] to-[#e63946] p-5 text-white shadow-xl">
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <h1 className="text-2xl font-bold">Bảng giá đại lý The Manson</h1>
-            <p className="mt-1 text-sm text-white/90">Danh sách sản phẩm hiển thị theo nhóm giá: {session.priceTier === "agent1" ? "Đại lý 1" : "Đại lý 2"}</p>
+    <>
+      <main className="mx-auto w-full max-w-7xl space-y-5 overflow-x-hidden p-4 md:p-6 fade-in">
+        <section className="rounded-2xl bg-gradient-to-r from-[#ff6b35] via-[#f97316] to-[#e63946] p-5 text-white shadow-xl">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <h1 className="text-2xl font-bold">Bảng giá đại lý The Manson</h1>
+              <p className="mt-1 text-sm text-white/90">Danh sách sản phẩm hiển thị theo nhóm giá: {session.priceTier === "agent1" ? "Đại lý 1" : "Đại lý 2"}</p>
+            </div>
+            <form action={logoutAction}>
+              <button type="submit" className="rounded-lg border border-white/60 bg-white/10 px-3 py-1.5 text-sm font-semibold text-white">Logout</button>
+            </form>
           </div>
-          <form action={logoutAction}>
-            <button type="submit" className="rounded-lg border border-white/60 bg-white/10 px-3 py-1.5 text-sm font-semibold text-white">Logout</button>
-          </form>
+        </section>
+
+        <ProductsSearchForm activeTags={activeTags} productNames={[...new Set(filteredSorted.map((p) => String(p.name || "").trim()).filter(Boolean))]} />
+
+        <div id="product-list">
+          <ProductsSectionList
+            products={filteredByTags}
+            priceTier={session.priceTier}
+          />
         </div>
-      </section>
 
-      <ProductsSearchForm activeTags={activeTags} productNames={[...new Set(filteredSorted.map((p) => String(p.name || "").trim()).filter(Boolean))]} />
+        <HotQuickTags tags={quickTags} />
+      </main>
 
-      {/* <div className="rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 text-sm text-blue-700 space-y-1">
-        <div>Debug: tổng variant có link = <b>{variantsWithLinkCount}</b></div>
-        <div>SKU order tổng: {debugSkuOrderSize}, có link: {debugSkuOrderWithLink}</div>
-        <div>SKU order item[0]: {JSON.stringify(skuOrderItems[0] || null)}</div>
-        <div>SKU order (10): {debugSkuOrderKeys.join(" | ")}</div>
-        <div>Variant keys (10): {debugVariantKeys.join(" | ")}</div>
-        <div>Matched keys: {debugMatchedVariantKeys.join(" | ") || "(none)"}</div>
-        <div>Missing keys: {debugMissingVariantKeys.join(" | ") || "(none)"}</div>
-      </div> */}
-
-      <div id="product-list">
-        <ProductsSectionList
-          products={filteredByTags}
-          priceTier={session.priceTier}
-        />
-      </div>
-
-      <HotQuickTags tags={quickTags} />
-    </main>
+      <PriceChangeNotificationPopup notification={pendingPriceNotification} />
+    </>
   );
 }
