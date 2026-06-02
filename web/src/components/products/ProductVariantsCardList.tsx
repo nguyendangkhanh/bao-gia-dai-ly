@@ -80,15 +80,17 @@ export default function ProductVariantsCardList({ productName: _productName, var
   const shouldUseRetailFloorRule = retailFloorPrice > selectedDealer;
   const minimumSellingPolicyText = shouldUseRetailFloorRule
     ? `Giá khách chốt phải từ ${formatVnd(minimumSellingPrice)} trở lên.`
-    : `Giá khách chốt phải cao hơn giá đại lý (${formatVnd(selectedDealer)}).`;
+    // : `Giá khách chốt phải cao hơn giá đại lý (${formatVnd(selectedDealer)}).`;
+    : ``;
+
   const minimumSellingPolicyDetail = shouldUseRetailFloorRule
     ? `Mức tối thiểu được áp dụng là giá bán lẻ trừ ${formatVnd(retailFloorGap)}.`
-    : "Mức sàn theo giá bán lẻ không áp dụng vì đang thấp hơn giá đại lý.";
+    : "";
   const minimumSellingViolationText = `Giá khách chốt đang thấp hơn mức tối thiểu ${formatVnd(minimumSellingPrice)}.`;
   const minimumSellingViolationDetail = minimumSellingGap > 0 ? `Thiếu ${formatVnd(minimumSellingGap)} vì ${minimumPriceReason}.` : "";
   const minimumSellingHint = shouldUseRetailFloorRule
     ? `Tối thiểu ${minimumSellingPrice.toLocaleString("vi-VN")}đ`
-    : `Trên ${selectedDealer.toLocaleString("vi-VN")}đ`;
+    : `>${selectedDealer.toLocaleString("vi-VN")}đ`;
   const quickProfitBase = hasQuickCalc ? Math.max(0, sellingPrice - selectedDealer - (dealerPaysShipping ? shippingFee : 0)) : null;
   const quickProfitNet = quickProfitBase === null ? null : Math.max(0, quickProfitBase - (quickProfitBase * 17) / 100);
 
@@ -148,7 +150,7 @@ export default function ProductVariantsCardList({ productName: _productName, var
 
   const quickCalcFormulaText = quickCalcFormula;
 
-  const quickCalcPolicyText = selectedRetail ? `Chính sách: không thấp hơn niêm yết 250.000đ.` : "";
+  const quickCalcPolicyText = selectedRetail ? `` : "";
 
   const formatCurrencyField = (value: string) => {
     const amount = parseCurrencyInput(value);
@@ -185,11 +187,11 @@ export default function ProductVariantsCardList({ productName: _productName, var
               <div className="text-xs text-zinc-500">Chọn sản phẩm và nhập giá bán thực tế để cập nhật trực tiếp ô lợi nhuận bên dưới.</div>
             </div>
 
-            <div className="grid grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-4">
-              <div className="flex flex-col gap-1 text-sm text-zinc-700">
+            <div className="grid grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-4 xl:items-start">
+              <div className="flex h-full flex-col gap-1 text-sm text-zinc-700">
                 <span className="font-medium">Sản phẩm</span>
                 <div
-                  className="relative"
+                  className="relative flex-1"
                   onBlur={(e) => {
                     if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
                       setIsVariantPickerOpen(false);
@@ -199,7 +201,7 @@ export default function ProductVariantsCardList({ productName: _productName, var
                   <button
                     type="button"
                     onClick={() => setIsVariantPickerOpen((open) => !open)}
-                    className="flex min-h-14 w-full items-start justify-between gap-3 rounded-xl border border-orange-200 bg-white px-3 py-2 text-left shadow-sm outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100"
+                    className="flex min-h-14 w-full items-start justify-between gap-3 rounded-xl border border-orange-200 bg-white px-3 py-2 text-left shadow-sm outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100 xl:h-[56px]"
                   >
                     <span className="min-w-0 flex-1">
                       <span className="block break-words text-sm font-medium leading-5 text-zinc-800 [overflow-wrap:anywhere]">
@@ -254,7 +256,7 @@ export default function ProductVariantsCardList({ productName: _productName, var
                 />
               </label> */}
 
-              <label className="flex flex-col gap-1 text-sm text-zinc-700">
+              <label className="flex h-full flex-col gap-1 text-sm text-zinc-700 xl:justify-start">
                 <span className="font-medium">Giá khách chốt</span>
                 <input
                   inputMode="numeric"
@@ -265,27 +267,27 @@ export default function ProductVariantsCardList({ productName: _productName, var
                   }}
                   onBlur={() => setSellingPriceBlurred(true)}
                   placeholder={sellingPriceHint}
-                  className={sellingPriceInputClassName}
+                  className={`${sellingPriceInputClassName} xl:h-[56px]`}
                 />
                 {quickCalcShouldShowHelp && <span className={sellingPriceHelpClassName}>{sellingPriceHelpText}</span>}
               </label>
 
-              <label className="flex flex-col gap-1 text-sm text-zinc-700">
+              <label className="flex h-full flex-col gap-1 text-sm text-zinc-700 xl:justify-start">
                 <span className="font-medium">Phí ship/lắp</span>
                 <input
                   inputMode="numeric"
                   value={formatCurrencyField(shippingFeeInput)}
                   onChange={(e) => setShippingFeeInput(e.target.value)}
                   placeholder="Nhập phí ship/lắp"
-                  className="rounded-lg border border-orange-200 px-3 py-2 outline-none focus:border-orange-400"
+                  className="rounded-lg border border-orange-200 px-3 py-2 outline-none focus:border-orange-400 xl:h-[56px]"
                 />
               </label>
             </div>
 
-            <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-              <div className={quickCalcSummaryClassName}>
+            <div className="flex flex-col gap-3 lg:items-center">
+              <div className={`${quickCalcSummaryClassName} ${hasQuickCalc ? "mx-auto w-full max-w-2xl text-center" : ""}`}>
                 {hasQuickCalc ? (
-                  <div className="space-y-1">
+                  <div className="space-y-1 text-center">
                     <div className={quickCalcFormulaClassName}>{quickCalcFormulaText}</div>
                     <div>
                       {quickProfitLabel}: <span className={quickCalcProfitTextClassName}>{quickCalcValue}</span>
