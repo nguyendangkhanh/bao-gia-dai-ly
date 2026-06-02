@@ -11,7 +11,9 @@ export async function POST(req: Request) {
   const productName = String(body?.productName || "").trim();
   if (!productName) return NextResponse.json({ ok: false }, { status: 400 });
 
-  await notifyDealerViewProduct(session.shortName, productName);
+  if (session.name !== "Khanh") {
+    await notifyDealerViewProduct(session.shortName, productName);
+  }
   await appendTelemetryEvent({ type: "view_product", shortName: session.shortName, groupName: session.groupName, productName });
   return NextResponse.json({ ok: true });
 }

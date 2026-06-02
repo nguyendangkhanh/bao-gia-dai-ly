@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { loginAction } from "./actions";
 import LoginSubmitButton from "./LoginSubmitButton";
 
@@ -21,28 +23,53 @@ export default async function LoginPage({
   const detail = params.detail ? decodeURIComponent(params.detail) : "";
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-7xl items-center justify-center p-4 md:p-6 fade-in">
-      <div className="w-full max-w-md space-y-4">
-        <section className="rounded-2xl bg-gradient-to-r from-[#ff6b35] via-[#f97316] to-[#e63946] p-5 text-white shadow-xl">
-          <h1 className="text-2xl font-bold">Đăng nhập đại lý</h1>
-          <p className="mt-1 text-sm text-white/90">The Manson Dealer Pricing Portal</p>
+    <main className="min-h-screen bg-[#f7f7f5] fade-in">
+      <div className="mx-auto grid min-h-screen max-w-7xl grid-cols-1 gap-6 px-4 py-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:px-6 lg:py-8">
+        <section className="relative overflow-hidden rounded-[32px] bg-white p-3 shadow-[0_20px_80px_rgba(15,23,42,0.08)] sm:p-4 lg:p-5">
+          <Image
+            src="/banner-dai-ly.png"
+            alt="Manson Dealer Program"
+            width={1080}
+            height={1080}
+            className="h-auto w-full rounded-[26px] object-cover"
+            priority
+          />
         </section>
 
-        <form action={loginAction} className="rounded-2xl border border-orange-100 bg-white p-5 shadow-lg space-y-4">
-          {error && (
-            <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
-              <div>{error}</div>
-              {detail && <div className="mt-1 break-all text-xs text-red-600">Chi tiết: {detail}</div>}
+        <section className="mx-auto w-full max-w-md">
+          <div className="rounded-[28px] border border-orange-100 bg-white p-6 shadow-[0_20px_60px_rgba(249,115,22,0.12)] sm:p-7">
+            <div className="mb-6 text-center">
+              <div className="text-sm font-semibold uppercase tracking-[0.24em] text-[#ff6b1a]">Dealer Portal</div>
+              <h2 className="mt-2 text-3xl font-bold text-zinc-950">Đăng nhập đại lý</h2>
+              <p className="mt-2 text-sm leading-6 text-zinc-500">
+                Nhập mật khẩu để truy cập hệ thống báo giá
+              </p>
             </div>
-          )}
 
-          <div className="space-y-2">
-            <label className="block text-sm font-semibold text-slate-700">Mật khẩu</label>
-            <input name="pass" type="password" className="tm-input" placeholder="Nhập mật khẩu đại lý" />
+            <form action={loginAction} className="space-y-4">
+              {error && (
+                <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                  <div>{error}</div>
+                  {detail && <div className="mt-1 break-all text-xs text-red-600">Chi tiết: {detail}</div>}
+                </div>
+              )}
+
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold text-zinc-700">Mật khẩu</label>
+                <input
+                  name="pass"
+                  type="password"
+                  className="w-full rounded-2xl border border-orange-200 bg-orange-50/40 px-4 py-3 text-base text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-orange-400 focus:bg-white focus:ring-4 focus:ring-orange-100"
+                  placeholder="Nhập mật khẩu đại lý"
+                />
+              </div>
+
+              <LoginSubmitButton />
+            </form>
+
+           
           </div>
-
-          <LoginSubmitButton />
-        </form>
+        </section>
       </div>
     </main>
   );

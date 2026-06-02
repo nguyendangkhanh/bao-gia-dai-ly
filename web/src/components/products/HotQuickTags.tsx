@@ -32,14 +32,9 @@ export default function HotQuickTags(_: { tags: string[] }) {
   };
 
   const items = useMemo<ContactItem[]>(() => {
-    const hour = new Date().getHours();
-    const zaloLink = hour >= 22 || hour <= 8 ? "https://zalo.me/0902334600" : "https://zalo.me/621397219625060903";
+    const zaloLink = "https://zalo.me/0986084004";
     return [
-      { title: "Youtube", description: "Xem video thực tế sản phẩm", link: "https://www.youtube.com/@themanson8754", type: "youtube" },
-      { title: "Messenger", description: "Nhân viên đang trực tuyến", link: "http://m.me/themanson.official", type: "messenger" },
-      { title: "Facebook", description: "Cộng đồng Công Thái Học", link: "https://facebook.com/539522584066851", type: "fanpage" },
       { title: "Zalo", description: "Nhắn tin miễn phí 24/24", link: zaloLink, type: "zalo" },
-      { title: "Gọi điện", description: "Gọi ngay để được tư vấn, báo giá", link: "tel:1900998836", type: "call" },
       { title: "Quận 2 (Đỗ Ô Tô)", description: "80 Nguyễn Hoàng, An Phú, Quận 2, TP. Hồ Chí Minh", link: "https://maps.app.goo.gl/vxv7M3BaKRqngXWp8", type: "store" },
       { title: "Tân Phú (Đỗ Ô Tô)", description: "25 Phan Chu Trinh, Tân Thành, Tân Phú, TP. Hồ Chí Minh", link: "https://maps.app.goo.gl/jFVwy9CxxTcAJjQb6", type: "store" },
       { title: "Trung Văn (Đỗ Ô Tô)", description: "Số 8, khu BT4 - 3, Vinaconex 3, Trung Văn, Nam Từ Liêm, TP. Hà Nội", link: "https://maps.app.goo.gl/ym6VAq54Fw1aKDpM9", type: "store" },
