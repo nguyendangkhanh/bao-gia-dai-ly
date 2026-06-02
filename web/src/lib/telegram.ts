@@ -23,6 +23,8 @@ export async function notifyDealerLogin(shortName: string) {
 }
 
 export async function notifyDealerViewProduct(shortName: string, productName: string) {
+  if (shortName === "Khanh") return;
+
   await sendTelegramMessage(`${shortName} đang xem sản phẩm: ${productName}`);
 }
 
