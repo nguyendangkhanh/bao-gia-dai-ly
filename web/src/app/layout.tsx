@@ -15,6 +15,15 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Đại Lý The Manson",
   description: "Chi tiết các sản phẩm được cung cấp chính hãng từ The Manson",
+  icons: {
+    icon: [
+      { url: "/static/favicon.ico" },
+      { url: "/static/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/static/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/static/apple-touch-icon.png",
+    shortcut: "/static/favicon.ico",
+  },
 };
 
 export default function RootLayout({
