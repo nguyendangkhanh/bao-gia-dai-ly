@@ -6,6 +6,14 @@ import ProductsSearchForm from "@/components/products/ProductsSearchForm";
 import PriceChangeNotificationPopup from "@/components/products/PriceChangeNotificationPopup";
 import { getPendingPriceNotificationForDealer } from "@/lib/price-notifications";
 import { Product, ProductVariant } from "@/types/product";
+
+type ProductListItem = Product & {
+  cover?: string;
+  retailMin: number;
+  retailMax: number;
+  skuOrder: number;
+  variants: ProductVariant[];
+};
 import { redirect } from "next/navigation";
 
 const ignoreByNameInclude = [
@@ -74,7 +82,7 @@ function getProductOrderByVariants(variants: { sku?: string | null }[], skuOrder
   return best;
 }
 
-function filterAndSortProducts(products: Product[], tierKey: "agentPrice1" | "agentPrice2", skuOrderMap: Map<string, number>) {
+function filterAndSortProducts(products: Product[], tierKey: "agentPrice1" | "agentPrice2", skuOrderMap: Map<string, number>): ProductListItem[] {
   return filterIgnoredProducts(products)
     .map((p) => {
       const variants = sortVariantsByDealerPrice(
@@ -143,7 +151,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
 
   const tierKey = session.priceTier === "agent2" ? "agentPrice2" : "agentPrice1";
   const filteredSorted = filterAndSortProducts(enrichedProducts, tierKey, skuOrderMap);
-  const searchableProducts = filteredSorted as Array<Product & { variants: ProductVariant[] }>;
+  const searchableProducts: ProductListItem[] = filteredSorted;
   const filteredByTags = activeTags.length
     ? searchableProducts.filter((p) => {
         const haystack = [
