@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 type Variant = {
   id: number;
@@ -490,44 +491,47 @@ export default function ProductVariantsCardList({ productName: _productName, var
         </div>
       )}
 
-      {lightbox && currentLightboxImage && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4"
-          onClick={closeLightbox}
-        >
-          <div
-            className="relative flex w-full max-w-5xl items-center justify-center"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              onClick={showPrevLightboxImage}
-              className="absolute left-2 z-10 rounded-full bg-white/90 px-3 py-2 text-lg font-bold text-zinc-700 shadow hover:bg-white"
-            >
-              ‹
-            </button>
-            <img
-              src={imageUrl(currentLightboxImage.url)}
-              alt="Variant preview"
-              className="max-h-[85vh] w-auto max-w-full rounded-xl bg-white object-contain"
-            />
-            <button
-              type="button"
-              onClick={showNextLightboxImage}
-              className="absolute right-2 z-10 rounded-full bg-white/90 px-3 py-2 text-lg font-bold text-zinc-700 shadow hover:bg-white"
-            >
-              ›
-            </button>
-            <button
-              type="button"
+      {typeof document !== "undefined" && lightbox && currentLightboxImage
+        ? createPortal(
+            <div
+              className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/85 p-4"
               onClick={closeLightbox}
-              className="absolute right-2 top-2 rounded-full bg-white/90 px-3 py-1.5 text-sm font-semibold text-zinc-700 shadow hover:bg-white"
             >
-              Đóng
-            </button>
-          </div>
-        </div>
-      )}
+              <div
+                className="relative flex w-full max-w-5xl items-center justify-center"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  type="button"
+                  onClick={showPrevLightboxImage}
+                  className="absolute left-2 z-10 rounded-full bg-white/90 px-3 py-2 text-lg font-bold text-zinc-700 shadow hover:bg-white"
+                >
+                  ‹
+                </button>
+                <img
+                  src={imageUrl(currentLightboxImage.url)}
+                  alt="Variant preview"
+                  className="max-h-[85vh] w-auto max-w-full rounded-xl bg-white object-contain"
+                />
+                <button
+                  type="button"
+                  onClick={showNextLightboxImage}
+                  className="absolute right-2 z-10 rounded-full bg-white/90 px-3 py-2 text-lg font-bold text-zinc-700 shadow hover:bg-white"
+                >
+                  ›
+                </button>
+                <button
+                  type="button"
+                  onClick={closeLightbox}
+                  className="absolute right-2 top-2 rounded-full bg-white/90 px-3 py-1.5 text-sm font-semibold text-zinc-700 shadow hover:bg-white"
+                >
+                  Đóng
+                </button>
+              </div>
+            </div>,
+            document.body,
+          )
+        : null}
     </div>
   );
 }
