@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type Variant = {
   id: number;
@@ -59,6 +59,19 @@ export default function ProductVariantsCardList({ productName: _productName, var
   const [sellingPriceBlurred, setSellingPriceBlurred] = useState(false);
   const [shippingFeeInput, setShippingFeeInput] = useState("");
   const [dealerPaysShipping, setDealerPaysShipping] = useState(true);
+  const quickProfitRef = useRef<HTMLDivElement | null>(null);
+  const hasScrolledToQuickProfitRef = useRef(false);
+
+  useEffect(() => {
+    hasScrolledToQuickProfitRef.current = false;
+  }, [selectedVariantId]);
+
+  useEffect(() => {
+    if (!isExpanded || typeof window === "undefined" || window.innerWidth >= 1024 || hasScrolledToQuickProfitRef.current) return;
+
+    quickProfitRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    hasScrolledToQuickProfitRef.current = true;
+  }, [isExpanded]);
 
   const selectedVariant = useMemo(() => {
     if (!variants.length) return null;
@@ -158,7 +171,12 @@ export default function ProductVariantsCardList({ productName: _productName, var
   };
 
   return (
-    <div className="mt-4 grid gap-3" onClick={(e) => e.stopPropagation()}>
+    <div
+      className="mt-4 grid gap-3"
+      onClick={(e) => e.stopPropagation()}
+      onTouchStartCapture={(e) => e.stopPropagation()}
+      onTouchEndCapture={(e) => e.stopPropagation()}
+    >
       <div className="rounded-xl border border-orange-100 bg-orange-50/40 p-3">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-wrap items-center gap-4 text-sm">
@@ -182,7 +200,7 @@ export default function ProductVariantsCardList({ productName: _productName, var
 
         <div className="mt-3 rounded-lg border border-orange-100 bg-white p-3">
           <div className="flex flex-col gap-3">
-            <div className="flex flex-col gap-1">
+            <div ref={quickProfitRef} className="flex flex-col gap-1">
               <div className="text-sm font-semibold text-zinc-800">Tính nhanh lợi nhuận</div>
               <div className="text-xs text-zinc-500">Chọn sản phẩm và nhập giá bán thực tế để cập nhật trực tiếp ô lợi nhuận bên dưới.</div>
             </div>
