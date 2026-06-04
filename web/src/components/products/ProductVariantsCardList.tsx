@@ -5,15 +5,17 @@ import { useEffect, useMemo, useRef, useState } from "react";
 type Variant = {
   id: number;
   barcode: string | null;
+  sku?: string | null;
   displayName: string | null;
   price: number | null;
   agentPrice1: number | null;
   agentPrice2: number | null;
   imageId: number | null;
+  imageDecorIds?: number[] | null;
   link?: string | null;
 };
 
-type ProductImage = { id: number; url: string };
+type ProductImage = { id: number; url: string; variantIds?: number[] };
 
 type Props = {
   productName: string;
@@ -42,6 +44,29 @@ function getVariantImage(images: ProductImage[], imageId?: number | null) {
   return images.find((img) => img.id === imageId)?.url || "";
 }
 
+function getVariantDecorImages(images: ProductImage[], variant: Variant) {
+  const imageIds = Array.from(
+    new Set(
+      [
+        ...(variant.imageDecorIds || []),
+        ...images.filter((img) => img.variantIds?.includes(variant.id)).map((img) => img.id),
+      ].filter((id): id is number => Boolean(id)),
+    ),
+  );
+
+  const decorImages = imageIds
+    .map((id) => images.find((img) => img.id === id))
+    .filter((img): img is ProductImage => Boolean(img?.url));
+
+  const mainImage = images.find((img) => img.id === variant.imageId && img.url);
+
+  if (mainImage && !decorImages.some((img) => img.id === mainImage.id)) {
+    decorImages.unshift(mainImage);
+  }
+
+  return decorImages;
+}
+
 function formatVnd(value: number) {
   return `${value.toLocaleString("vi-VN")}đ`;
 }
@@ -59,8 +84,38 @@ export default function ProductVariantsCardList({ productName: _productName, var
   const [sellingPriceBlurred, setSellingPriceBlurred] = useState(false);
   const [shippingFeeInput, setShippingFeeInput] = useState("");
   const [dealerPaysShipping, setDealerPaysShipping] = useState(true);
+  const [lightbox, setLightbox] = useState<{ variantId: number; index: number; images: ProductImage[] } | null>(null);
   const quickProfitRef = useRef<HTMLDivElement | null>(null);
   const hasScrolledToQuickProfitRef = useRef(false);
+
+  const closeLightbox = () => setLightbox(null);
+
+  const showPrevLightboxImage = () => {
+    setLightbox((current) => {
+      if (!current || current.images.length === 0) return current;
+      return {
+        ...current,
+        index: (current.index - 1 + current.images.length) % current.images.length,
+      };
+    });
+  };
+
+  const showNextLightboxImage = () => {
+    setLightbox((current) => {
+      if (!current || current.images.length === 0) return current;
+      return {
+        ...current,
+        index: (current.index + 1) % current.images.length,
+      };
+    });
+  };
+
+  const openLightbox = (variantId: number, gallery: ProductImage[], index: number) => {
+    if (gallery.length === 0) return;
+    setLightbox({ variantId, images: gallery, index });
+  };
+
+  const currentLightboxImage = lightbox?.images[lightbox.index] || null;
 
   useEffect(() => {
     hasScrolledToQuickProfitRef.current = false;
@@ -329,7 +384,8 @@ export default function ProductVariantsCardList({ productName: _productName, var
       {isExpanded && (
         <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
           {variants.map((v) => {
-            const variantImage = getVariantImage(images || [], v.imageId);
+            const variantGallery = getVariantDecorImages(images || [], v);
+            const variantImage = getVariantImage(images || [], v.imageId) || variantGallery[0]?.url || "";
             const retail = v.price || 0;
             const dealer = (priceTier === "agent1" ? v.agentPrice1 : v.agentPrice2) || 0;
             const profit = Math.max(0, retail - dealer);
@@ -344,16 +400,39 @@ export default function ProductVariantsCardList({ productName: _productName, var
               <article key={v.id} className="relative overflow-hidden rounded-2xl border border-orange-100 bg-gradient-to-r from-white to-orange-50/40 p-3.5">
                 <div className="relative z-10">
                 <div className="flex items-start gap-3">
-                  <div className="h-14 w-14 shrink-0 overflow-hidden rounded-lg border border-orange-100 bg-white sm:h-16 sm:w-16">
-                    {variantImage ? (
-                      <img src={imageUrl(variantImage)} alt={v.barcode || v.displayName || "variant"} className="h-full w-full object-cover" />
-                    ) : (
-                      <div className="flex h-full w-full items-center justify-center text-[11px] text-zinc-400">No image</div>
+                  <div className="w-24 shrink-0 sm:w-28">
+                    <button
+                      type="button"
+                      onClick={() => variantImage && openLightbox(v.id, variantGallery.length ? variantGallery : [{ id: v.imageId || v.id, url: variantImage }], 0)}
+                      className="block h-24 w-full overflow-hidden rounded-lg border border-orange-100 bg-white sm:h-28"
+                    >
+                      {variantImage ? (
+                        <img src={imageUrl(variantImage)} alt={v.barcode || v.displayName || "variant"} className="h-full w-full object-cover" />
+                      ) : (
+                        <div className="flex h-full w-full items-center justify-center text-[11px] text-zinc-400">No image</div>
+                      )}
+                    </button>
+                    {variantGallery.length > 1 && (
+                      <div className="mt-2 flex gap-2 overflow-x-auto pb-1">
+                        {variantGallery.slice(0, 6).map((image, index) => (
+                          <button
+                            key={image.id}
+                            type="button"
+                            onClick={() => openLightbox(v.id, variantGallery, index)}
+                            className="h-10 w-10 shrink-0 overflow-hidden rounded-md border border-orange-100 bg-white transition hover:border-orange-300"
+                          >
+                            <img src={imageUrl(image.url)} alt={v.barcode || v.displayName || "variant"} className="h-full w-full object-cover" />
+                          </button>
+                        ))}
+                      </div>
                     )}
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-start gap-2">
-                      <p className="text-base font-semibold leading-snug text-[#1a1a1a] break-words [overflow-wrap:anywhere]">{v.barcode || v.displayName || "-"}</p>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-base font-semibold leading-snug text-[#1a1a1a] break-words [overflow-wrap:anywhere]">{v.barcode || v.displayName || "-"}</p>
+                        {v.sku && <p className="mt-1 text-xs font-medium uppercase tracking-wide text-zinc-500">SKU: {v.sku}</p>}
+                      </div>
                       {v.link && (
                         <a
                           href={v.link}
@@ -408,6 +487,45 @@ export default function ProductVariantsCardList({ productName: _productName, var
               </article>
             );
           })}
+        </div>
+      )}
+
+      {lightbox && currentLightboxImage && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4"
+          onClick={closeLightbox}
+        >
+          <div
+            className="relative flex w-full max-w-5xl items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={showPrevLightboxImage}
+              className="absolute left-2 z-10 rounded-full bg-white/90 px-3 py-2 text-lg font-bold text-zinc-700 shadow hover:bg-white"
+            >
+              ‹
+            </button>
+            <img
+              src={imageUrl(currentLightboxImage.url)}
+              alt="Variant preview"
+              className="max-h-[85vh] w-auto max-w-full rounded-xl bg-white object-contain"
+            />
+            <button
+              type="button"
+              onClick={showNextLightboxImage}
+              className="absolute right-2 z-10 rounded-full bg-white/90 px-3 py-2 text-lg font-bold text-zinc-700 shadow hover:bg-white"
+            >
+              ›
+            </button>
+            <button
+              type="button"
+              onClick={closeLightbox}
+              className="absolute right-2 top-2 rounded-full bg-white/90 px-3 py-1.5 text-sm font-semibold text-zinc-700 shadow hover:bg-white"
+            >
+              Đóng
+            </button>
+          </div>
         </div>
       )}
     </div>

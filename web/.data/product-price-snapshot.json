@@ -1,6 +1,6 @@
 {
-  "version": "2026-06-02T06:22:35.715Z",
-  "createdAt": "2026-06-02T06:22:35.715Z",
+  "version": "2026-06-04T10:24:20.704Z",
+  "createdAt": "2026-06-04T10:24:20.704Z",
   "products": [
     {
       "productId": 2,
@@ -235,7 +235,7 @@
     },
     {
       "productId": 6,
-      "productName": "Kê Chân Công Thái Học",
+      "productName": "Kê Chân Công Thái Học Fr08 - Fr09 - Lumi",
       "variants": [
         {
           "variantId": 23,
@@ -261,17 +261,17 @@
           "barcode": "Kê Chân FR09 Xám",
           "displayName": "Fr09 Xám",
           "price": 395000,
-          "agentPrice1": 260000,
-          "agentPrice2": 260000
+          "agentPrice1": 255000,
+          "agentPrice2": 245000
         },
         {
           "variantId": 957,
           "sku": "LUMI-BLACK",
           "barcode": "Kê Chân Lumi Đen",
           "displayName": null,
-          "price": 350000,
-          "agentPrice1": 299000,
-          "agentPrice2": 299000
+          "price": 390000,
+          "agentPrice1": 285000,
+          "agentPrice2": 285000
         }
       ]
     },
@@ -308,7 +308,7 @@
           "sku": "NH-DEN-12",
           "barcode": "Khung Nâng Hạ Đen 1.2m",
           "displayName": "1.2m / Đen",
-          "price": 1950000,
+          "price": 2000000,
           "agentPrice1": 1475000,
           "agentPrice2": 1475000
         },
@@ -317,7 +317,7 @@
           "sku": "NH-TRANG-12",
           "barcode": "Khung Nâng Hạ Trắng 1.2m",
           "displayName": "1.2m / Trắng",
-          "price": 1950000,
+          "price": 2000000,
           "agentPrice1": 1475000,
           "agentPrice2": 1475000
         },
@@ -326,7 +326,7 @@
           "sku": "NH-DEN-1416",
           "barcode": "Khung Nâng Hạ Đen 1.4m",
           "displayName": "1.4m-1.6m / Đen",
-          "price": 2000000,
+          "price": 2050000,
           "agentPrice1": 1525000,
           "agentPrice2": 1525000
         },
@@ -335,7 +335,7 @@
           "sku": "NH-TRANG-1416",
           "barcode": "Khung Nâng Hạ Trắng 1.4m",
           "displayName": "1.4m-1.6m / Trắng",
-          "price": 2000000,
+          "price": 2050000,
           "agentPrice1": 1525000,
           "agentPrice2": 1525000
         }
@@ -374,7 +374,7 @@
           "sku": "HMASAYLGREY",
           "barcode": "Herman Sayl Xám",
           "displayName": "Xám",
-          "price": 14000000,
+          "price": 15990000,
           "agentPrice1": null,
           "agentPrice2": null
         },
@@ -383,7 +383,7 @@
           "sku": "HMASAYLBLACK",
           "barcode": "Herman Sayl Đen",
           "displayName": "Đen",
-          "price": 14000000,
+          "price": 15990000,
           "agentPrice1": null,
           "agentPrice2": null
         }
@@ -1514,7 +1514,7 @@
           "sku": "NH-DEN-12&1206-MB-DEN",
           "barcode": "Combo Khung 1.2m Đen, Mặt 1.2m x 0.6m Đen",
           "displayName": "1.2m Đen,1.2m x 0.6m Đen",
-          "price": 2550000,
+          "price": 2500000,
           "agentPrice1": 1850000,
           "agentPrice2": 1850000
         },
@@ -1523,7 +1523,7 @@
           "sku": "NH-DEN-12&1206-MB-VANGO",
           "barcode": "Combo Khung 1.2m Đen, Mặt 1.2m x 0.6m Walnut",
           "displayName": "1.2m Đen,1.2m x 0.6m Walnut",
-          "price": 2550000,
+          "price": 2500000,
           "agentPrice1": 1850000,
           "agentPrice2": 1850000
         },
@@ -1568,7 +1568,7 @@
           "sku": "NH-TRANG-12&1206-MB-TRANG",
           "barcode": "Combo Khung 1.2m Trắng, Mặt 1.2m x 0.6m Trắng",
           "displayName": "1.2m Trắng, 1.2m x 0.6m Trắng",
-          "price": 2550000,
+          "price": 2500000,
           "agentPrice1": 1850000,
           "agentPrice2": 1850000
         },
@@ -1577,7 +1577,7 @@
           "sku": "NH-TRANG-12&1206-MB-VANGO",
           "barcode": "Combo Khung 1.2m Trắng, Mặt 1.2m x 0.6m Walnut",
           "displayName": "1.2m Trắng, 1.2m x 0.6m Walnut",
-          "price": 2550000,
+          "price": 2500000,
           "agentPrice1": 1850000,
           "agentPrice2": 1850000
         },
@@ -1622,7 +1622,7 @@
           "sku": "NH-DEN-12&1206-MB-TRANG",
           "barcode": "Combo Khung 1.2m Đen, Mặt 1.2m x 0.6m Trắng",
           "displayName": null,
-          "price": 2550000,
+          "price": 2500000,
           "agentPrice1": 1850000,
           "agentPrice2": 1850000
         },
@@ -1631,7 +1631,7 @@
           "sku": "NH-TRANG-12&1206-MB-DEN",
           "barcode": "Combo Khung 1.2m Trắng, Mặt 1.2m x 0.6m Đen",
           "displayName": null,
-          "price": 2550000,
+          "price": 2500000,
           "agentPrice1": 1850000,
           "agentPrice2": 1850000
         },
@@ -1676,7 +1676,7 @@
           "sku": "NH-DEN-12&1206-MB-SOI-OAK",
           "barcode": "Combo Khung 1.2m Đen, Mặt 1.2m x 0.6m Sồi Oak",
           "displayName": null,
-          "price": 2550000,
+          "price": 2500000,
           "agentPrice1": 1850000,
           "agentPrice2": 1850000
         },
@@ -1685,7 +1685,7 @@
           "sku": "NH-TRANG-12&1206-MB-SOI-OAK",
           "barcode": "Combo Khung 1.2m Trắng, Mặt 1.2m x 0.6m Sồi Oak",
           "displayName": null,
-          "price": 2550000,
+          "price": 2500000,
           "agentPrice1": 1850000,
           "agentPrice2": 1850000
         },
@@ -1988,8 +1988,8 @@
           "barcode": "Foris Đen",
           "displayName": null,
           "price": 4000000,
-          "agentPrice1": 2900000,
-          "agentPrice2": 2900000
+          "agentPrice1": 3000000,
+          "agentPrice2": 3000000
         },
         {
           "variantId": 1457,
@@ -1997,8 +1997,8 @@
           "barcode": "Foris Xám",
           "displayName": null,
           "price": 4000000,
-          "agentPrice1": 2900000,
-          "agentPrice2": 2900000
+          "agentPrice1": 3000000,
+          "agentPrice2": 3000000
         },
         {
           "variantId": 1458,
@@ -2006,8 +2006,8 @@
           "barcode": "Foris Đen Gác Chân",
           "displayName": null,
           "price": 4300000,
-          "agentPrice1": 3100000,
-          "agentPrice2": 3100000
+          "agentPrice1": 3200000,
+          "agentPrice2": 3200000
         },
         {
           "variantId": 1459,
@@ -2015,8 +2015,8 @@
           "barcode": "Foris Xám Gác Chân",
           "displayName": null,
           "price": 4300000,
-          "agentPrice1": 3100000,
-          "agentPrice2": 3100000
+          "agentPrice1": 3200000,
+          "agentPrice2": 3200000
         }
       ]
     },
@@ -2027,20 +2027,128 @@
         {
           "variantId": 1467,
           "sku": "LOD-BLACK",
-          "barcode": null,
+          "barcode": "Libernovo Đen",
           "displayName": "Midnight Black",
-          "price": 15900000,
-          "agentPrice1": null,
-          "agentPrice2": null
+          "price": 16900000,
+          "agentPrice1": 15500000,
+          "agentPrice2": 15500000
         },
         {
           "variantId": 1468,
           "sku": "LOD-GREY",
-          "barcode": null,
+          "barcode": "Libernovo Xám",
           "displayName": "Space Grey",
-          "price": 15900000,
-          "agentPrice1": null,
-          "agentPrice2": null
+          "price": 16900000,
+          "agentPrice1": 15500000,
+          "agentPrice2": 15500000
+        },
+        {
+          "variantId": 1482,
+          "sku": "LOD-GREEN",
+          "barcode": "Libernovo Xanh",
+          "displayName": null,
+          "price": 16900000,
+          "agentPrice1": 15500000,
+          "agentPrice2": 15500000
+        },
+        {
+          "variantId": 1483,
+          "sku": "LOD-BLACK&libernovo-stepsync-footrest-black",
+          "barcode": "Libernovo Đen Kèm Gác Chân",
+          "displayName": null,
+          "price": 18300000,
+          "agentPrice1": 16500000,
+          "agentPrice2": 16500000
+        },
+        {
+          "variantId": 1484,
+          "sku": "LOD-GREY&libernovo-stepsync-footrest-white",
+          "barcode": "Libernovo Xám Kèm Gác Chân",
+          "displayName": null,
+          "price": 18300000,
+          "agentPrice1": 16500000,
+          "agentPrice2": 16500000
+        },
+        {
+          "variantId": 1485,
+          "sku": "LOD-GREEN&libernovo-stepsync-footrest-green",
+          "barcode": "Libernovo Xanh Kèm Gác Chân",
+          "displayName": null,
+          "price": 18300000,
+          "agentPrice1": 16500000,
+          "agentPrice2": 16500000
+        },
+        {
+          "variantId": 1492,
+          "sku": "SE-BLACK",
+          "barcode": "Libernovo SE Đen",
+          "displayName": null,
+          "price": 12900000,
+          "agentPrice1": 11500000,
+          "agentPrice2": 11500000
+        },
+        {
+          "variantId": 1493,
+          "sku": "SE-BLACK&libernovo-stepsync-footrest-black",
+          "barcode": "Libernovo SE Đen Kèm Gác Chân",
+          "displayName": null,
+          "price": 14300000,
+          "agentPrice1": 12500000,
+          "agentPrice2": 12500000
+        },
+        {
+          "variantId": 1494,
+          "sku": "SE-GREY",
+          "barcode": "Libernovo SE Xám",
+          "displayName": null,
+          "price": 12900000,
+          "agentPrice1": 11500000,
+          "agentPrice2": 11500000
+        },
+        {
+          "variantId": 1495,
+          "sku": "SE-GREY&libernovo-stepsync-footrest-white",
+          "barcode": "Libernovo SE Xám Kèm Gác Chân",
+          "displayName": null,
+          "price": 14300000,
+          "agentPrice1": 12500000,
+          "agentPrice2": 12500000
+        },
+        {
+          "variantId": 1496,
+          "sku": "PRO-BLACK",
+          "barcode": "Libernovo PRO Đen",
+          "displayName": null,
+          "price": 19900000,
+          "agentPrice1": 18200000,
+          "agentPrice2": 18200000
+        },
+        {
+          "variantId": 1497,
+          "sku": "PRO-BLACK&libernovo-stepsync-footrest-black",
+          "barcode": "Libernovo PRO Đen Kèm Gác Chân",
+          "displayName": null,
+          "price": 21300000,
+          "agentPrice1": 19200000,
+          "agentPrice2": 19200000
+        },
+        {
+          "variantId": 1498,
+          "sku": "PRO-GREY",
+          "barcode": "Libernovo PRO Xám",
+          "displayName": null,
+          "price": 19900000,
+          "agentPrice1": 18200000,
+          "agentPrice2": 18200000
+        },
+        {
+          "variantId": 1499,
+          "sku": "PRO-GREY&libernovo-stepsync-footrest-white",
+          "barcode": "Libernovo PRO Xám Kèm Gác Chân",
+          "displayName": null,
+          "price": 21300000,
+          "agentPrice1": 19200000,
+          "agentPrice2": 19200000
         }
       ]
     },
@@ -2051,20 +2159,53 @@
         {
           "variantId": 1471,
           "sku": "libernovo-stepsync-footrest-black",
-          "barcode": null,
+          "barcode": "Gác Chân Libernovo Đen",
           "displayName": "Midnigh Black",
           "price": 1500000,
-          "agentPrice1": null,
-          "agentPrice2": null
+          "agentPrice1": 1000000,
+          "agentPrice2": 1000000
         },
         {
           "variantId": 1472,
           "sku": "libernovo-stepsync-footrest-white",
-          "barcode": null,
+          "barcode": "Gác Chân Libernovo Xám",
           "displayName": "Space Grey",
           "price": 1500000,
-          "agentPrice1": null,
-          "agentPrice2": null
+          "agentPrice1": 1000000,
+          "agentPrice2": 1000000
+        },
+        {
+          "variantId": 1487,
+          "sku": "libernovo-stepsync-footrest-green",
+          "barcode": "Gác Chân Libernovo Xanh",
+          "displayName": null,
+          "price": 1500000,
+          "agentPrice1": 1000000,
+          "agentPrice2": 1000000
+        }
+      ]
+    },
+    {
+      "productId": 60,
+      "productName": "Manson M77 Pro",
+      "variants": [
+        {
+          "variantId": 1489,
+          "sku": "M77-PRO-BLACK",
+          "barcode": "m77 pro đen",
+          "displayName": "M77 Pro Đen",
+          "price": 2350000,
+          "agentPrice1": 1750000,
+          "agentPrice2": 1750000
+        },
+        {
+          "variantId": 1490,
+          "sku": "M77-PRO-GREY",
+          "barcode": "m77 pro xám",
+          "displayName": "M77 Pro Xám",
+          "price": 2350000,
+          "agentPrice1": 1750000,
+          "agentPrice2": 1750000
         }
       ]
     }

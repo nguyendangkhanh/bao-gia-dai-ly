@@ -3,6 +3,7 @@ export interface ProductImage {
   url: string;
   alt: string | null;
   position: number | null;
+  variantIds?: number[];
 }
 
 export interface ProductVariant {
@@ -15,6 +16,7 @@ export interface ProductVariant {
   agentPrice2: number | null;
   active: boolean;
   imageId: number | null;
+  imageDecorIds?: number[] | null;
   link?: string | null;
 }
 
