@@ -3,6 +3,7 @@ import { clearSession, getSession } from "@/lib/auth";
 import ProductsSectionList from "@/components/products/ProductsSectionList";
 import HotQuickTags from "@/components/products/HotQuickTags";
 import ProductsSearchForm from "@/components/products/ProductsSearchForm";
+import DealerPolicyTabs from "@/components/products/DealerPolicyTabs";
 import PriceChangeNotificationPopup from "@/components/products/PriceChangeNotificationPopup";
 import { getPendingPriceNotificationForDealer } from "@/lib/price-notifications";
 import { Product, ProductVariant } from "@/types/product";
@@ -182,6 +183,8 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
             </form>
           </div>
         </section>
+
+        <DealerPolicyTabs />
 
         <ProductsSearchForm activeTags={activeTags} productNames={[...new Set(filteredSorted.map((p) => String(p.name || "").trim()).filter(Boolean))]} />
 
