@@ -48,8 +48,12 @@ export async function loginAction(formData: FormData) {
 
   await setSession(user);
   if (!isKhanhOverride) {
-    await notifyDealerLogin(user.shortName);
+    notifyDealerLogin(user.shortName).catch((err) => {
+      console.error("Failed to send Telegram login notification:", err);
+    });
   }
-  await appendTelemetryEvent({ type: "login", shortName: user.shortName, groupName: user.groupName });
+  appendTelemetryEvent({ type: "login", shortName: user.shortName, groupName: user.groupName }).catch((err) => {
+    console.error("Failed to append login telemetry event:", err);
+  });
   redirect("/products");
 }

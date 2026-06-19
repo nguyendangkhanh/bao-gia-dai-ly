@@ -18,6 +18,10 @@ type Product = {
     agentPrice1: number | null;
     agentPrice2: number | null;
     imageId: number | null;
+    weight?: number | null;
+    packageLength?: number | null;
+    packageWidth?: number | null;
+    packageHeight?: number | null;
   }[];
   images?: { id: number; url: string }[];
 };
@@ -132,9 +136,33 @@ export default function ProductsSectionList({ products, priceTier }: { products:
               </div>
               <div className="min-w-0 flex-1 overflow-hidden">
                 <h2 className="text-base sm:text-lg font-semibold text-[#1a1a1a] break-words [overflow-wrap:anywhere] leading-snug">{p.name}</h2>
-                <p className="mt-1 inline-flex max-w-full rounded-full bg-orange-50 px-2 py-1 text-xs font-semibold text-orange-700 break-all">
-                  Giá lẻ: {p.retailMin === p.retailMax ? `${p.retailMax.toLocaleString("vi-VN")} đ` : `${p.retailMin.toLocaleString("vi-VN")} - ${p.retailMax.toLocaleString("vi-VN")} đ`}
-                </p>
+                <div className="mt-1 flex">
+                  <span className="inline-flex items-center rounded-full bg-orange-50 px-2 py-0.5 text-xs font-semibold text-orange-700">
+                    Giá lẻ: {p.retailMin === p.retailMax ? `${p.retailMax.toLocaleString("vi-VN")} đ` : `${p.retailMin.toLocaleString("vi-VN")} - ${p.retailMax.toLocaleString("vi-VN")} đ`}
+                  </span>
+                </div>
+                {(() => {
+                  const firstVariant = p.variants?.[0];
+                  const weightKg = firstVariant?.weight ? firstVariant.weight / 1000 : null;
+                  const dimensionsText = (firstVariant?.packageLength && firstVariant?.packageWidth && firstVariant?.packageHeight)
+                    ? `${firstVariant.packageLength}x${firstVariant.packageWidth}x${firstVariant.packageHeight} cm`
+                    : null;
+                  if (!weightKg && !dimensionsText) return null;
+                  return (
+                    <div className="mt-1.5 flex items-center gap-2">
+                      {weightKg && (
+                        <span className="inline-flex items-center rounded-full bg-slate-50 border border-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600">
+                          ⚖️ {weightKg} kg
+                        </span>
+                      )}
+                      {dimensionsText && (
+                        <span className="inline-flex items-center rounded-full bg-slate-50 border border-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600">
+                          📦 {dimensionsText}
+                        </span>
+                      )}
+                    </div>
+                  );
+                })()}
               </div>
             </div>
 
@@ -155,7 +183,31 @@ export default function ProductsSectionList({ products, priceTier }: { products:
         <div className="fixed inset-0 z-50 hidden items-center justify-center bg-black/45 p-4 lg:flex" onClick={closePopup}>
           <div className="max-h-[88vh] w-full max-w-4xl overflow-y-auto rounded-2xl bg-white p-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
             <div className="mb-3 flex items-start justify-between gap-3">
-              <h3 className="text-lg font-bold text-slate-900">{popupProduct.name}</h3>
+              <div className="min-w-0 flex-1">
+                <h3 className="text-lg font-bold text-slate-900">{popupProduct.name}</h3>
+                {(() => {
+                  const firstVariant = popupProduct.variants?.[0];
+                  const weightKg = firstVariant?.weight ? firstVariant.weight / 1000 : null;
+                  const dimensionsText = (firstVariant?.packageLength && firstVariant?.packageWidth && firstVariant?.packageHeight)
+                    ? `${firstVariant.packageLength}x${firstVariant.packageWidth}x${firstVariant.packageHeight} cm`
+                    : null;
+                  if (!weightKg && !dimensionsText) return null;
+                  return (
+                    <div className="mt-1.5 flex flex-wrap items-center gap-2">
+                      {weightKg && (
+                        <span className="inline-flex items-center rounded-full bg-slate-50 border border-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600">
+                          ⚖️ {weightKg} kg
+                        </span>
+                      )}
+                      {dimensionsText && (
+                        <span className="inline-flex items-center rounded-full bg-slate-50 border border-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600">
+                          📦 {dimensionsText}
+                        </span>
+                      )}
+                    </div>
+                  );
+                })()}
+              </div>
               <button type="button" onClick={closePopup} className="rounded-md border border-slate-200 px-2 py-1 text-sm font-semibold text-slate-700 hover:bg-slate-50">Đóng</button>
             </div>
             <ProductVariantsCardList
