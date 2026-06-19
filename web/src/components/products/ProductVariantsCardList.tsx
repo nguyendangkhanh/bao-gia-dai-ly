@@ -552,8 +552,10 @@ export default function ProductVariantsCardList({ productName: _productName, var
                     : "border-orange-100 bg-gradient-to-r from-white to-orange-50/40 hover:border-orange-200"
                 }`}
               >
-                <div className="relative z-10">
-                  <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 lg:gap-6">
+                <div className="relative z-10 flex flex-col gap-4">
+                  {/* Row 1: 2 columns */}
+                  <div className="flex items-start gap-3 sm:gap-4 lg:gap-6">
+                    {/* Column 1: Image, Gallery, Weight/Dimensions */}
                     <div className="w-24 shrink-0 sm:w-28 lg:w-36" onClick={(e) => e.stopPropagation()}>
                       <button
                         type="button"
@@ -606,47 +608,23 @@ export default function ProductVariantsCardList({ productName: _productName, var
                       })()}
                     </div>
 
+                    {/* Column 2: Pricing Content */}
                     <div className="min-w-0 flex-1">
-                      <div>
-                        {group.variants.length === 1 ? (
-                          <div>
-                            <p className="text-base sm:text-lg lg:text-xl font-semibold leading-snug text-[#1a1a1a] break-words [overflow-wrap:anywhere]">{first.barcode || first.displayName || "-"}</p>
-                            {first.sku && <p className="mt-1 text-xs lg:text-sm font-medium uppercase tracking-wide text-zinc-500">SKU: {first.sku}</p>}
-                          </div>
-                        ) : (
-                          <div>
-                            <p className="text-xs lg:text-sm font-semibold uppercase tracking-wider text-orange-600">Nhóm đồng giá ({group.variants.length})</p>
-                            <div className="mt-1 flex flex-wrap gap-1">
-                              {group.variants.map((v) => {
-                                const isActive = activeVariant.id === v.id;
-                                return (
-                                  <button
-                                    key={v.id}
-                                    type="button"
-                                    onClick={(e) => {
-                                      e.stopPropagation();
-                                      setActiveVariantIds((prev) => ({
-                                        ...prev,
-                                        [group.key]: v.id,
-                                      }));
-                                      setSelectedVariantId(v.id);
-                                    }}
-                                    className={`inline-flex items-center rounded px-1.5 py-0.5 lg:px-2.5 lg:py-1.5 text-[10px] lg:text-xs font-medium border transition ${
-                                      isActive
-                                        ? "bg-orange-50 border-orange-200 text-orange-700 font-semibold shadow-sm"
-                                        : "bg-zinc-50 hover:bg-zinc-100 text-zinc-600 border-zinc-200"
-                                    }`}
-                                  >
-                                    {v.barcode || v.displayName || `Variant ${v.id}`}
-                                  </button>
-                                );
-                              })}
-                            </div>
-                          </div>
+
+                      {/* Product/Variant Name under prices */}
+                      <div className="mt-3">
+                        <p className="text-base sm:text-lg lg:text-xl font-semibold leading-snug text-[#1a1a1a] break-words [overflow-wrap:anywhere]">
+                          {activeVariant.barcode || activeVariant.displayName || "-"}
+                        </p>
+                        {activeVariant.sku && (
+                          <p className="mt-1 text-xs lg:text-sm font-medium uppercase tracking-wide text-zinc-500">
+                            SKU: {activeVariant.sku}
+                          </p>
                         )}
                       </div>
 
-                      <div className="mt-2 lg:mt-3 flex flex-wrap items-center gap-1.5 lg:gap-2" onClick={(e) => e.stopPropagation()}>
+                      {/* Actions */}
+                      <div className="mt-3 flex flex-wrap items-center gap-1.5 lg:gap-2" onClick={(e) => e.stopPropagation()}>
                         <button
                           type="button"
                           onClick={() => handleCopyGroupQuote({ variants: [activeVariant], retail, dealer, key: group.key })}
@@ -685,8 +663,8 @@ export default function ProductVariantsCardList({ productName: _productName, var
                           </a>
                         )}
                       </div>
-
-                      <div className="mt-2 lg:mt-3 min-w-0 overflow-hidden space-y-1.5 lg:space-y-2">
+                      {/* Prices and profit */}
+                      <div className="min-w-0 overflow-hidden space-y-1.5 lg:space-y-2">
                         <div className="flex flex-wrap gap-1.5 lg:gap-2.5">
                           <p className="inline-flex rounded-full bg-orange-50 px-2 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm font-semibold text-orange-700">
                             Giá bán: {formatVnd(retail)}
@@ -723,8 +701,41 @@ export default function ProductVariantsCardList({ productName: _productName, var
                           )}
                         </div>
                       </div>
+
                     </div>
                   </div>
+
+                  {/* Row 2: 1 merged column (the "Nhóm đồng giá" buttons list) */}
+                  {group.variants.length > 1 && (
+                    <div className="w-full border-t border-orange-100/80 pt-3" onClick={(e) => e.stopPropagation()}>
+                      <p className="text-xs lg:text-sm font-semibold uppercase tracking-wider text-orange-600">Nhóm đồng giá ({group.variants.length})</p>
+                      <div className="mt-2 flex flex-wrap gap-1.5">
+                        {group.variants.map((v) => {
+                          const isActive = activeVariant.id === v.id;
+                          return (
+                            <button
+                              key={v.id}
+                              type="button"
+                              onClick={() => {
+                                setActiveVariantIds((prev) => ({
+                                  ...prev,
+                                  [group.key]: v.id,
+                                }));
+                                setSelectedVariantId(v.id);
+                              }}
+                              className={`inline-flex items-center rounded px-1.5 py-0.5 lg:px-2.5 lg:py-1.5 text-[10px] lg:text-xs font-medium border transition ${
+                                isActive
+                                  ? "bg-orange-50 border-orange-200 text-orange-700 font-semibold shadow-sm"
+                                  : "bg-zinc-50 hover:bg-zinc-100 text-zinc-600 border-zinc-200"
+                              }`}
+                            >
+                              {v.barcode || v.displayName || `Variant ${v.id}`}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </article>
             );
