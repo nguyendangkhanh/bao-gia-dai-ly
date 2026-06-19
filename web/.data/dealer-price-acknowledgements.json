@@ -11,6 +11,12 @@
       "snapshotVersion": "2026-06-04T10:24:20.704Z",
       "priceTier": "agent1",
       "acknowledgedAt": "2026-06-04T10:24:23.481Z"
+    },
+    {
+      "dealerShortName": "khanh",
+      "snapshotVersion": "2026-06-19T05:06:08.848Z",
+      "priceTier": "agent1",
+      "acknowledgedAt": "2026-06-19T05:06:13.774Z"
     }
   ]
 }

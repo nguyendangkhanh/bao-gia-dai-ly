@@ -18,6 +18,10 @@ export interface ProductVariant {
   imageId: number | null;
   imageDecorIds?: number[] | null;
   link?: string | null;
+  weight?: number | null;
+  packageLength?: number | null;
+  packageWidth?: number | null;
+  packageHeight?: number | null;
 }
 
 export interface Product {

@@ -14,6 +14,10 @@ type Variant = {
   imageId: number | null;
   imageDecorIds?: number[] | null;
   link?: string | null;
+  weight?: number | null;
+  packageLength?: number | null;
+  packageWidth?: number | null;
+  packageHeight?: number | null;
 };
 
 type ProductImage = { id: number; url: string; variantIds?: number[] };
@@ -78,7 +82,7 @@ function parseCurrencyInput(value: string) {
 }
 
 export default function ProductVariantsCardList({ productName: _productName, variants, images, priceTier, isExpanded }: Props) {
-  const [takeVat, setTakeVat] = useState(false);
+  const [vatsMap, setVatsMap] = useState<Record<number, boolean>>({});
   const [selectedVariantId, setSelectedVariantId] = useState<number | null>(null);
   const [isVariantPickerOpen, setIsVariantPickerOpen] = useState(false);
   const [sellingPriceInput, setSellingPriceInput] = useState("");
@@ -88,6 +92,10 @@ export default function ProductVariantsCardList({ productName: _productName, var
   const [lightbox, setLightbox] = useState<{ variantId: number; index: number; images: ProductImage[] } | null>(null);
   const quickProfitRef = useRef<HTMLDivElement | null>(null);
   const hasScrolledToQuickProfitRef = useRef(false);
+
+  const [groupSamePrices, setGroupSamePrices] = useState(true);
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
+  const [activeVariantIds, setActiveVariantIds] = useState<Record<string, number>>({});
 
   const closeLightbox = () => setLightbox(null);
 
@@ -178,8 +186,9 @@ export default function ProductVariantsCardList({ productName: _productName, var
     ? `${formatVnd(sellingPrice)} - ${formatVnd(selectedDealer)} - ${formatVnd(effectiveShippingFee)}`
     : `${formatVnd(sellingPrice)} - ${formatVnd(selectedDealer)}`;
 
-  const quickProfitDisplay = takeVat ? quickProfitNet || 0 : quickProfitBase || 0;
-  const quickProfitLabel = takeVat ? "Lợi nhuận sau VAT" : "Lợi nhuận";
+  const isSelectedVariantVat = selectedVariant ? !!vatsMap[selectedVariant.id] : false;
+  const quickProfitDisplay = isSelectedVariantVat ? quickProfitNet || 0 : quickProfitBase || 0;
+  const quickProfitLabel = isSelectedVariantVat ? "Lợi nhuận sau VAT" : "Lợi nhuận";
 
   const minimumSellingPriceWarning = selectedRetail ? minimumSellingPolicyText : "";
 
@@ -226,6 +235,88 @@ export default function ProductVariantsCardList({ productName: _productName, var
     return amount ? amount.toLocaleString("vi-VN") : "";
   };
 
+  const groups = useMemo(() => {
+    if (!groupSamePrices) {
+      return variants.map((v) => ({
+        key: String(v.id),
+        variants: [v],
+        retail: v.price || 0,
+        dealer: (priceTier === "agent1" ? v.agentPrice1 : v.agentPrice2) || 0,
+      }));
+    }
+
+    const map: Record<string, Variant[]> = {};
+    variants.forEach((v) => {
+      const retail = v.price || 0;
+      const dealer = (priceTier === "agent1" ? v.agentPrice1 : v.agentPrice2) || 0;
+      const key = `${retail}_${dealer}`;
+      if (!map[key]) {
+        map[key] = [];
+      }
+      map[key].push(v);
+    });
+
+    return Object.entries(map).map(([key, list]) => {
+      const first = list[0];
+      return {
+        key,
+        variants: list,
+        retail: first.price || 0,
+        dealer: (priceTier === "agent1" ? first.agentPrice1 : first.agentPrice2) || 0,
+      };
+    });
+  }, [variants, priceTier, groupSamePrices]);
+
+  const handleCopyGroupQuote = async (group: { variants: Variant[]; retail: number; dealer: number; key: string }) => {
+    const names = group.variants.map((v) => v.barcode || v.displayName || "Sản phẩm").join(" / ");
+    const groupTakeVat = group.variants.some((v) => !!vatsMap[v.id]);
+    
+    let text = `${_productName} - ${names}\n`;
+    if (groupTakeVat) {
+      const retailVat = group.retail + (group.retail * 8) / 100;
+      text += `- Giá bán lẻ (+8% VAT): ${formatVnd(retailVat)}\n`;
+    } else {
+      text += `- Giá bán lẻ: ${formatVnd(group.retail)}\n`;
+    }
+    text += `- Giá đại lý: ${formatVnd(group.dealer)}`;
+
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedKey(`group-${group.key}`);
+      setTimeout(() => setCopiedKey((prev) => (prev === `group-${group.key}` ? null : prev)), 1200);
+    } catch (err) {
+      console.error("Failed to copy quote:", err);
+    }
+  };
+
+  const handleCopyAllQuotes = async () => {
+    const text = groups.map((g) => {
+      const names = g.variants.map((v) => v.barcode || v.displayName || "Sản phẩm").join(" / ");
+      const retail = g.retail;
+      const dealer = g.dealer;
+      const groupTakeVat = g.variants.some((v) => !!vatsMap[v.id]);
+
+      let itemText = `• ${names}\n`;
+      if (groupTakeVat) {
+        const retailVat = retail + (retail * 8) / 100;
+        itemText += `  - Giá bán lẻ (+8% VAT): ${formatVnd(retailVat)}\n`;
+      } else {
+        itemText += `  - Giá bán lẻ: ${formatVnd(retail)}\n`;
+      }
+      itemText += `  - Giá đại lý: ${formatVnd(dealer)}`;
+      return itemText;
+    }).join("\n\n");
+
+    const fullText = `Báo giá: ${_productName}\n--------------------------------\n${text}`;
+    try {
+      await navigator.clipboard.writeText(fullText);
+      setCopiedKey("all");
+      setTimeout(() => setCopiedKey((prev) => (prev === "all" ? null : prev)), 1200);
+    } catch (err) {
+      console.error("Failed to copy all quotes:", err);
+    }
+  };
+
   return (
     <div
       className="mt-4 grid gap-3"
@@ -236,11 +327,23 @@ export default function ProductVariantsCardList({ productName: _productName, var
       <div className="rounded-xl border border-orange-100 bg-orange-50/40 p-3">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-wrap items-center gap-4 text-sm">
-            <label className="inline-flex items-center gap-1.5 font-medium text-zinc-700">
-              <input type="checkbox" checked={takeVat} onChange={(e) => setTakeVat(e.target.checked)} className="h-4 w-4" />
+            <label className="inline-flex items-center gap-1.5 font-medium text-zinc-700 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={selectedVariant ? !!vatsMap[selectedVariant.id] : false}
+                onChange={(e) => {
+                  if (selectedVariant) {
+                    setVatsMap((prev) => ({
+                      ...prev,
+                      [selectedVariant.id]: e.target.checked,
+                    }));
+                  }
+                }}
+                className="h-4 w-4"
+              />
               lấy VAT
             </label>
-            <label className="inline-flex items-center gap-2 text-sm font-medium text-zinc-700">
+            <label className="inline-flex items-center gap-2 text-sm font-medium text-zinc-700 cursor-pointer">
               <input
                 type="checkbox"
                 checked={dealerPaysShipping}
@@ -249,8 +352,27 @@ export default function ProductVariantsCardList({ productName: _productName, var
               />
               Đại lý trả phí ship/lắp
             </label>
+            <label className="inline-flex items-center gap-2 text-sm font-medium text-zinc-700 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={groupSamePrices}
+                onChange={(e) => setGroupSamePrices(e.target.checked)}
+                className="h-4 w-4"
+              />
+              Gom nhóm cùng giá
+            </label>
           </div>
-          <div className="text-xs text-zinc-500">Giá hiển thị theo lựa chọn VAT</div>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={handleCopyAllQuotes}
+              className="inline-flex items-center gap-1 rounded-lg border border-orange-200 bg-white px-2 py-1 text-xs font-semibold text-orange-700 hover:bg-orange-50 transition"
+            >
+              <span>📋</span>
+              <span>{copiedKey === "all" ? "Đã copy toàn bộ" : "Copy toàn bộ báo giá"}</span>
+            </button>
+            <div className="text-xs text-zinc-500">Giá hiển thị theo lựa chọn VAT</div>
+          </div>
         </div>
 
 
@@ -284,6 +406,11 @@ export default function ProductVariantsCardList({ productName: _productName, var
                       <span className="mt-0.5 block truncate text-xs text-zinc-500">
                         Giá bán lẻ: {formatVnd(selectedVariant?.price || 0)}
                       </span>
+                      {selectedVariant && (
+                        <span className="mt-0.5 block truncate text-xs text-zinc-500">
+                          Giá đại lý: {formatVnd(selectedDealer)}
+                        </span>
+                      )}
                     </span>
                     <span className={`shrink-0 text-xs text-zinc-400 transition ${isVariantPickerOpen ? "rotate-180" : ""}`}>▾</span>
                   </button>
@@ -295,6 +422,7 @@ export default function ProductVariantsCardList({ productName: _productName, var
                           const isActive = selectedVariant?.id === variant.id;
                           const primaryLabel = variant.barcode || variant.displayName || `Variant ${variant.id}`;
                           const priceLabel = formatVnd(variant.price || 0);
+                          const dealerPrice = (priceTier === "agent1" ? variant.agentPrice1 : variant.agentPrice2) || 0;
 
                           return (
                             <button
@@ -311,6 +439,9 @@ export default function ProductVariantsCardList({ productName: _productName, var
                               <span className="w-full break-words text-sm font-medium leading-5 [overflow-wrap:anywhere]">{primaryLabel}</span>
                               <span className={`w-full truncate text-xs ${isActive ? "text-orange-600" : "text-zinc-500"}`}>
                                 Giá bán lẻ: {priceLabel}
+                              </span>
+                              <span className={`w-full truncate text-xs ${isActive ? "text-orange-600" : "text-zinc-500"}`}>
+                                Giá đại lý: {formatVnd(dealerPrice)}
                               </span>
                             </button>
                           );
@@ -383,107 +514,217 @@ export default function ProductVariantsCardList({ productName: _productName, var
       </div>
 
       {isExpanded && (
-        <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
-          {variants.map((v) => {
-            const variantGallery = getVariantDecorImages(images || [], v);
-            const variantImage = getVariantImage(images || [], v.imageId) || variantGallery[0]?.url || "";
-            const retail = v.price || 0;
-            const dealer = (priceTier === "agent1" ? v.agentPrice1 : v.agentPrice2) || 0;
+        <div className="grid grid-cols-1 gap-3 lg:gap-4">
+          {groups.map((group) => {
+            const first = group.variants[0];
+            const activeVariantId = activeVariantIds[group.key] || first.id;
+            const activeVariant = group.variants.find((v) => v.id === activeVariantId) || first;
+
+            const retail = group.retail;
+            const dealer = group.dealer;
             const profit = Math.max(0, retail - dealer);
             const retailVat = retail + (retail * 8) / 100;
-            const isQuickCalcTarget = selectedVariant?.id === v.id;
+
+            const isQuickCalcTarget = selectedVariant?.id === activeVariant.id;
             const displayedProfit = isQuickCalcTarget && quickProfitBase !== null ? quickProfitBase : profit;
             const displayedProfitNet = Math.max(0, displayedProfit - (displayedProfit * 17) / 100);
             const deduction = (displayedProfit * 17) / 100;
             const isQuickCalcActive = isQuickCalcTarget && quickProfitBase !== null;
+            const variantTakeVat = !!vatsMap[activeVariant.id];
+
+            const activeVariantGallery = getVariantDecorImages(images || [], activeVariant);
+            const variantImage = getVariantImage(images || [], activeVariant.imageId) || activeVariantGallery[0]?.url || "";
+
+            const activeLink = activeVariant.link || null;
 
             return (
-              <article key={v.id} className="relative overflow-hidden rounded-2xl border border-orange-100 bg-gradient-to-r from-white to-orange-50/40 p-3.5">
+              <article
+                key={group.key}
+                onClick={() => {
+                  setSelectedVariantId(activeVariant.id);
+                  if (typeof window !== "undefined" && window.innerWidth < 1024) {
+                    quickProfitRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }
+                }}
+                className={`relative overflow-hidden rounded-2xl border p-3.5 sm:p-5 lg:p-6 cursor-pointer transition ${
+                  isQuickCalcTarget
+                    ? "border-orange-300 bg-gradient-to-r from-orange-50/30 to-orange-100/30 ring-2 ring-orange-100"
+                    : "border-orange-100 bg-gradient-to-r from-white to-orange-50/40 hover:border-orange-200"
+                }`}
+              >
                 <div className="relative z-10">
-                <div className="flex items-start gap-3">
-                  <div className="w-24 shrink-0 sm:w-28">
-                    <button
-                      type="button"
-                      onClick={() => variantImage && openLightbox(v.id, variantGallery.length ? variantGallery : [{ id: v.imageId || v.id, url: variantImage }], 0)}
-                      className="block h-24 w-full overflow-hidden rounded-lg border border-orange-100 bg-white sm:h-28"
-                    >
-                      {variantImage ? (
-                        <img src={imageUrl(variantImage)} alt={v.barcode || v.displayName || "variant"} className="h-full w-full object-cover" />
-                      ) : (
-                        <div className="flex h-full w-full items-center justify-center text-[11px] text-zinc-400">No image</div>
+                  <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 lg:gap-6">
+                    <div className="w-24 shrink-0 sm:w-28 lg:w-36" onClick={(e) => e.stopPropagation()}>
+                      <button
+                        type="button"
+                        onClick={() => variantImage && openLightbox(activeVariant.id, activeVariantGallery.length ? activeVariantGallery : [{ id: activeVariant.imageId || activeVariant.id, url: variantImage }], 0)}
+                        className="block h-24 w-full overflow-hidden rounded-lg border border-orange-100 bg-white sm:h-28 lg:h-36"
+                      >
+                        {variantImage ? (
+                          <img src={imageUrl(variantImage)} alt={activeVariant.barcode || activeVariant.displayName || "variant"} className="h-full w-full object-cover" />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center text-[11px] text-zinc-400">No image</div>
+                        )}
+                      </button>
+                      {activeVariantGallery.length > 1 && (
+                        <div className="mt-2 flex gap-2 overflow-x-auto pb-1">
+                          {activeVariantGallery.slice(0, 6).map((image, index) => (
+                            <button
+                              key={image.id}
+                              type="button"
+                              onClick={() => openLightbox(activeVariant.id, activeVariantGallery, index)}
+                              className="h-10 w-10 lg:h-12 lg:w-12 shrink-0 overflow-hidden rounded-md border border-orange-100 bg-white transition hover:border-orange-300"
+                            >
+                              <img src={imageUrl(image.url)} alt={activeVariant.barcode || activeVariant.displayName || "variant"} className="h-full w-full object-cover" />
+                            </button>
+                          ))}
+                        </div>
                       )}
-                    </button>
-                    {variantGallery.length > 1 && (
-                      <div className="mt-2 flex gap-2 overflow-x-auto pb-1">
-                        {variantGallery.slice(0, 6).map((image, index) => (
-                          <button
-                            key={image.id}
-                            type="button"
-                            onClick={() => openLightbox(v.id, variantGallery, index)}
-                            className="h-10 w-10 shrink-0 overflow-hidden rounded-md border border-orange-100 bg-white transition hover:border-orange-300"
-                          >
-                            <img src={imageUrl(image.url)} alt={v.barcode || v.displayName || "variant"} className="h-full w-full object-cover" />
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-start gap-2">
-                      <div className="min-w-0 flex-1">
-                        <p className="text-base font-semibold leading-snug text-[#1a1a1a] break-words [overflow-wrap:anywhere]">{v.barcode || v.displayName || "-"}</p>
-                        {v.sku && <p className="mt-1 text-xs font-medium uppercase tracking-wide text-zinc-500">SKU: {v.sku}</p>}
-                      </div>
-                      {v.link && (
-                        <a
-                          href={v.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex shrink-0 items-center gap-1 rounded-md border border-orange-200 bg-orange-50 px-2 py-0.5 text-[11px] font-semibold text-orange-700 hover:bg-orange-100"
-                          title="Mở trang sản phẩm"
-                        >
-                          <span aria-hidden>↗</span>
-                          <span>Link</span>
-                        </a>
-                      )}
-                    </div>
-                    <div className="mt-2 min-w-0 overflow-hidden space-y-1">
-                      <p className="inline-flex max-w-full rounded-full bg-orange-50 px-2 py-1 text-xs font-semibold text-orange-700 break-all">
-                        Giá bán: {formatVnd(retail)}
-                      </p>
-                      <p className={`inline-flex max-w-full rounded-full bg-orange-50 px-2 py-1 text-xs font-semibold text-orange-700 break-all transition-opacity ${takeVat ? "opacity-100" : "opacity-0"}`}>
-                        +8%: {formatVnd((retail * 8) / 100)}
-                      </p>
-                      <p className={`inline-flex max-w-full rounded-full bg-orange-50 px-2 py-1 text-xs font-semibold text-orange-700 break-all transition-opacity ${takeVat ? "opacity-100" : "opacity-0"}`}>
-                        Sau VAT: {formatVnd(retailVat)}
-                      </p>
-                    </div>
-                  </div>
-                </div>
 
-                <div className="mt-3 grid grid-cols-2 gap-2.5 text-base">
-                  <div className="rounded-lg bg-white p-3 text-left">
-                    <div className="text-sm text-zinc-500">Giá đại lý</div>
-                    <div className="mt-1 text-lg font-semibold text-[#e63946]">{formatVnd(dealer)}</div>
-                  </div>
-                  {takeVat ? (
-                    <div className="rounded-lg bg-white p-3 text-left">
-                      <div className="text-sm text-zinc-500">Lợi nhuận sau VAT</div>
-                      <div className="mt-1 text-xs text-zinc-500">
-                        Lợi nhuận gốc: {formatVnd(displayedProfit)}
-                        {isQuickCalcActive && <span className="ml-1 font-medium text-orange-600">(đã áp dụng tính nhanh)</span>}
+                      {(() => {
+                        const weightKg = activeVariant.weight ? activeVariant.weight / 1000 : null;
+                        const dimensionsText = (activeVariant.packageLength && activeVariant.packageWidth && activeVariant.packageHeight)
+                          ? `${activeVariant.packageLength}x${activeVariant.packageWidth}x${activeVariant.packageHeight} cm`
+                          : null;
+                        if (!weightKg && !dimensionsText) return null;
+                        return (
+                          <div className="mt-2.5 space-y-1 lg:space-y-1.5 text-left text-[11px] lg:text-xs text-zinc-500 font-medium leading-tight border-t border-orange-50 pt-2">
+                            {weightKg && (
+                              <div className="flex items-center gap-1">
+                                <span>⚖️</span>
+                                <span>{weightKg} kg</span>
+                              </div>
+                            )}
+                            {dimensionsText && (
+                              <div className="flex items-start gap-1">
+                                <span className="pt-0.5">📦</span>
+                                <span className="break-words">{dimensionsText}</span>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })()}
+                    </div>
+
+                    <div className="min-w-0 flex-1">
+                      <div>
+                        {group.variants.length === 1 ? (
+                          <div>
+                            <p className="text-base sm:text-lg lg:text-xl font-semibold leading-snug text-[#1a1a1a] break-words [overflow-wrap:anywhere]">{first.barcode || first.displayName || "-"}</p>
+                            {first.sku && <p className="mt-1 text-xs lg:text-sm font-medium uppercase tracking-wide text-zinc-500">SKU: {first.sku}</p>}
+                          </div>
+                        ) : (
+                          <div>
+                            <p className="text-xs lg:text-sm font-semibold uppercase tracking-wider text-orange-600">Nhóm đồng giá ({group.variants.length})</p>
+                            <div className="mt-1 flex flex-wrap gap-1">
+                              {group.variants.map((v) => {
+                                const isActive = activeVariant.id === v.id;
+                                return (
+                                  <button
+                                    key={v.id}
+                                    type="button"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setActiveVariantIds((prev) => ({
+                                        ...prev,
+                                        [group.key]: v.id,
+                                      }));
+                                      setSelectedVariantId(v.id);
+                                    }}
+                                    className={`inline-flex items-center rounded px-1.5 py-0.5 lg:px-2.5 lg:py-1.5 text-[10px] lg:text-xs font-medium border transition ${
+                                      isActive
+                                        ? "bg-orange-50 border-orange-200 text-orange-700 font-semibold shadow-sm"
+                                        : "bg-zinc-50 hover:bg-zinc-100 text-zinc-600 border-zinc-200"
+                                    }`}
+                                  >
+                                    {v.barcode || v.displayName || `Variant ${v.id}`}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        )}
                       </div>
-                      <div className="mt-0.5 text-xs text-red-500">Khấu trừ 17%: -{formatVnd(deduction)}</div>
-                      <div className="mt-1 text-lg font-semibold text-emerald-700">{formatVnd(displayedProfitNet)}</div>
+
+                      <div className="mt-2 lg:mt-3 flex flex-wrap items-center gap-1.5 lg:gap-2" onClick={(e) => e.stopPropagation()}>
+                        <button
+                          type="button"
+                          onClick={() => handleCopyGroupQuote({ variants: [activeVariant], retail, dealer, key: group.key })}
+                          className="inline-flex items-center gap-1 rounded-md border border-orange-200 bg-orange-50 px-1.5 py-0.5 lg:px-2.5 lg:py-1 text-[11px] lg:text-xs font-semibold text-orange-700 hover:bg-orange-100"
+                          title="Copy báo giá của sản phẩm đang chọn"
+                        >
+                          <span>📋</span>
+                          <span>{copiedKey === `group-${group.key}` ? "Đã copy" : "Copy"}</span>
+                        </button>
+
+                        <label className="inline-flex items-center gap-1 rounded-md border border-orange-200 bg-orange-50 px-1.5 py-0.5 lg:px-2.5 lg:py-1 text-[11px] lg:text-xs font-semibold text-orange-700 hover:bg-orange-100 cursor-pointer font-medium">
+                          <input
+                            type="checkbox"
+                            checked={variantTakeVat}
+                            onChange={(e) => {
+                              setVatsMap((prev) => ({
+                                ...prev,
+                                [activeVariant.id]: e.target.checked,
+                              }));
+                            }}
+                            className="h-3 w-3 lg:h-3.5 lg:w-3.5"
+                          />
+                          VAT
+                        </label>
+
+                        {activeLink && (
+                          <a
+                            href={activeLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 rounded-md border border-orange-200 bg-orange-50 px-1.5 py-0.5 lg:px-2.5 lg:py-1 text-[11px] lg:text-xs font-semibold text-orange-700 hover:bg-orange-100"
+                            title={`Mở trang: ${activeVariant.barcode || activeVariant.displayName || ''}`}
+                          >
+                            <span aria-hidden>↗</span>
+                            <span>Link</span>
+                          </a>
+                        )}
+                      </div>
+
+                      <div className="mt-2 lg:mt-3 min-w-0 overflow-hidden space-y-1.5 lg:space-y-2">
+                        <div className="flex flex-wrap gap-1.5 lg:gap-2.5">
+                          <p className="inline-flex rounded-full bg-orange-50 px-2 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm font-semibold text-orange-700">
+                            Giá bán: {formatVnd(retail)}
+                          </p>
+                          {variantTakeVat && (
+                            <>
+                              <p className="inline-flex rounded-full bg-orange-50 px-2 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm font-semibold text-orange-700">
+                                +8%: {formatVnd((retail * 8) / 100)}
+                              </p>
+                              <p className="inline-flex rounded-full bg-orange-50 px-2 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm font-semibold text-orange-700">
+                                Sau VAT: {formatVnd(retailVat)}
+                              </p>
+                            </>
+                          )}
+                        </div>
+                        <div className="flex flex-wrap gap-1.5 lg:gap-2.5">
+                          <p className="inline-flex rounded-full bg-[#fdf2f2] border border-[#fde8e8] px-2 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm font-semibold text-[#e63946]">
+                            Giá đại lý: {formatVnd(dealer)}
+                          </p>
+                          {variantTakeVat ? (
+                            <div className="inline-flex flex-col rounded-xl bg-emerald-50 border border-emerald-100 px-2.5 py-1 lg:px-3.5 lg:py-2 text-xs lg:text-sm text-emerald-800">
+                              <span className="font-semibold text-emerald-700">Lợi nhuận sau VAT: {formatVnd(displayedProfitNet)}</span>
+                              <span className="text-[10px] lg:text-xs text-zinc-500 mt-0.5">
+                                Lợi nhuận gốc: {formatVnd(displayedProfit)}
+                                {isQuickCalcActive && " (đã tính nhanh)"}
+                              </span>
+                              <span className="text-[10px] lg:text-xs text-red-500">Khấu trừ 17%: -{formatVnd(deduction)}</span>
+                            </div>
+                          ) : (
+                            <p className="inline-flex rounded-full bg-emerald-50 border border-emerald-100 px-2 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm font-semibold text-emerald-700">
+                              Lợi nhuận: {formatVnd(displayedProfit)}
+                              {isQuickCalcActive && <span className="ml-1 text-[10px] lg:text-xs text-orange-600 font-medium">(đã tính nhanh)</span>}
+                            </p>
+                          )}
+                        </div>
+                      </div>
                     </div>
-                  ) : (
-                    <div className="rounded-lg bg-white p-3 text-left">
-                      <div className="text-sm text-zinc-500">Lợi nhuận</div>
-                      <div className="mt-1 text-lg font-semibold text-emerald-700">{formatVnd(displayedProfit)}</div>
-                      {isQuickCalcActive && <div className="mt-0.5 text-xs text-orange-600">Đã áp dụng giá khách chốt và phí ship/lắp</div>}
-                    </div>
-                  )}
-                </div>
+                  </div>
                 </div>
               </article>
             );
