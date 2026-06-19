@@ -582,49 +582,76 @@ export default function ProductVariantsCardList({ productName: _productName, var
                           ))}
                         </div>
                       )}
-
-                      {(() => {
-                        const weightKg = activeVariant.weight ? activeVariant.weight / 1000 : null;
-                        const dimensionsText = (activeVariant.packageLength && activeVariant.packageWidth && activeVariant.packageHeight)
-                          ? `${activeVariant.packageLength}x${activeVariant.packageWidth}x${activeVariant.packageHeight} cm`
-                          : null;
-                        if (!weightKg && !dimensionsText) return null;
-                        return (
-                          <div className="mt-2.5 space-y-1 lg:space-y-1.5 text-left text-[11px] lg:text-xs text-zinc-500 font-medium leading-tight border-t border-orange-50 pt-2">
-                            {weightKg && (
-                              <div className="flex items-center gap-1">
-                                <span>⚖️</span>
-                                <span>{weightKg} kg</span>
-                              </div>
-                            )}
-                            {dimensionsText && (
-                              <div className="flex items-start gap-1">
-                                <span className="pt-0.5">📦</span>
-                                <span className="break-words">{dimensionsText}</span>
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })()}
                     </div>
 
-                    {/* Column 2: Pricing Content */}
-                    <div className="min-w-0 flex-1">
-
-                      {/* Product/Variant Name under prices */}
-                      <div className="mt-3">
+                    <div className="min-w-0 flex-1 ">
+                      <div className="min-w-0 overflow-hidden space-y-1.5 lg:space-y-2">
+                           <div className="mt-3">
                         <p className="text-base sm:text-lg lg:text-xl font-semibold leading-snug text-[#1a1a1a] break-words [overflow-wrap:anywhere]">
                           {activeVariant.barcode || activeVariant.displayName || "-"}
                         </p>
-                        {activeVariant.sku && (
-                          <p className="mt-1 text-xs lg:text-sm font-medium uppercase tracking-wide text-zinc-500">
-                            SKU: {activeVariant.sku}
+                        {(() => {
+                          const weightKg = activeVariant.weight ? activeVariant.weight / 1000 : null;
+                          const dimensionsText = (activeVariant.packageLength && activeVariant.packageWidth && activeVariant.packageHeight)
+                            ? `${activeVariant.packageLength}x${activeVariant.packageWidth}x${activeVariant.packageHeight} cm`
+                            : null;
+                          if (!weightKg && !dimensionsText) return null;
+                          return (
+                            <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-xs lg:text-sm font-medium text-zinc-500">
+                              {weightKg && (
+                                <span className="inline-flex items-center gap-1">
+                                  <span>⚖️</span>
+                                  <span>{weightKg} kg</span>
+                                </span>
+                              )}
+                              {dimensionsText && (
+                                <span className="inline-flex items-center gap-1">
+                                  <span>📦</span>
+                                  <span>{dimensionsText}</span>
+                                </span>
+                              )}
+                            </div>
+                          );
+                        })()}
+                      </div>
+                        <div className="flex flex-wrap gap-1.5 lg:gap-2.5">
+                          <p className="inline-flex rounded-full bg-orange-50 px-2 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm font-semibold text-orange-700">
+                            Giá bán: {formatVnd(retail)}
                           </p>
-                        )}
+                          {variantTakeVat && (
+                            <>
+                              <p className="inline-flex rounded-full bg-orange-50 px-2 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm font-semibold text-orange-700">
+                                +8%: {formatVnd((retail * 8) / 100)}
+                              </p>
+                              <p className="inline-flex rounded-full bg-orange-50 px-2 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm font-semibold text-orange-700">
+                                Sau VAT: {formatVnd(retailVat)}
+                              </p>
+                            </>
+                          )}
+                        </div>
+                        <div className="flex flex-wrap gap-1.5 lg:gap-2.5">
+                          <p className="inline-flex rounded-full bg-[#fdf2f2] border border-[#fde8e8] px-2 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm font-semibold text-[#e63946]">
+                            Giá đại lý: {formatVnd(dealer)}
+                          </p>
+                          {variantTakeVat ? (
+                            <div className="inline-flex flex-col rounded-xl bg-emerald-50 border border-emerald-100 px-2.5 py-1 lg:px-3.5 lg:py-2 text-xs lg:text-sm text-emerald-800">
+                              <span className="font-semibold text-emerald-700">Lợi nhuận sau VAT: {formatVnd(displayedProfitNet)}</span>
+                              <span className="text-[10px] lg:text-xs text-zinc-500 mt-0.5">
+                                Lợi nhuận gốc: {formatVnd(displayedProfit)}
+                                {isQuickCalcActive && " (đã tính nhanh)"}
+                              </span>
+                              <span className="text-[10px] lg:text-xs text-red-500">Khấu trừ 17%: -{formatVnd(deduction)}</span>
+                            </div>
+                          ) : (
+                            <p className="inline-flex rounded-full bg-emerald-50 border border-emerald-100 px-2 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm font-semibold text-emerald-700">
+                              Lợi nhuận: {formatVnd(displayedProfit)}
+                              {isQuickCalcActive && <span className="ml-1 text-[10px] lg:text-xs text-orange-600 font-medium">(đã tính nhanh)</span>}
+                            </p>
+                          )}
+                        </div>
                       </div>
 
-                      {/* Actions */}
-                      <div className="mt-3 flex flex-wrap items-center gap-1.5 lg:gap-2" onClick={(e) => e.stopPropagation()}>
+                      <div className="mt-3 flex flex-wrap items-center gap-1.5 lg:gap-2 " onClick={(e) => e.stopPropagation()}>
                         <button
                           type="button"
                           onClick={() => handleCopyGroupQuote({ variants: [activeVariant], retail, dealer, key: group.key })}
@@ -663,45 +690,6 @@ export default function ProductVariantsCardList({ productName: _productName, var
                           </a>
                         )}
                       </div>
-                      {/* Prices and profit */}
-                      <div className="min-w-0 overflow-hidden space-y-1.5 lg:space-y-2">
-                        <div className="flex flex-wrap gap-1.5 lg:gap-2.5">
-                          <p className="inline-flex rounded-full bg-orange-50 px-2 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm font-semibold text-orange-700">
-                            Giá bán: {formatVnd(retail)}
-                          </p>
-                          {variantTakeVat && (
-                            <>
-                              <p className="inline-flex rounded-full bg-orange-50 px-2 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm font-semibold text-orange-700">
-                                +8%: {formatVnd((retail * 8) / 100)}
-                              </p>
-                              <p className="inline-flex rounded-full bg-orange-50 px-2 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm font-semibold text-orange-700">
-                                Sau VAT: {formatVnd(retailVat)}
-                              </p>
-                            </>
-                          )}
-                        </div>
-                        <div className="flex flex-wrap gap-1.5 lg:gap-2.5">
-                          <p className="inline-flex rounded-full bg-[#fdf2f2] border border-[#fde8e8] px-2 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm font-semibold text-[#e63946]">
-                            Giá đại lý: {formatVnd(dealer)}
-                          </p>
-                          {variantTakeVat ? (
-                            <div className="inline-flex flex-col rounded-xl bg-emerald-50 border border-emerald-100 px-2.5 py-1 lg:px-3.5 lg:py-2 text-xs lg:text-sm text-emerald-800">
-                              <span className="font-semibold text-emerald-700">Lợi nhuận sau VAT: {formatVnd(displayedProfitNet)}</span>
-                              <span className="text-[10px] lg:text-xs text-zinc-500 mt-0.5">
-                                Lợi nhuận gốc: {formatVnd(displayedProfit)}
-                                {isQuickCalcActive && " (đã tính nhanh)"}
-                              </span>
-                              <span className="text-[10px] lg:text-xs text-red-500">Khấu trừ 17%: -{formatVnd(deduction)}</span>
-                            </div>
-                          ) : (
-                            <p className="inline-flex rounded-full bg-emerald-50 border border-emerald-100 px-2 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm font-semibold text-emerald-700">
-                              Lợi nhuận: {formatVnd(displayedProfit)}
-                              {isQuickCalcActive && <span className="ml-1 text-[10px] lg:text-xs text-orange-600 font-medium">(đã tính nhanh)</span>}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-
                     </div>
                   </div>
 
