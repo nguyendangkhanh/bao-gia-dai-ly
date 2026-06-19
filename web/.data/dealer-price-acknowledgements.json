@@ -11,6 +11,12 @@
       "snapshotVersion": "2026-06-04T10:24:20.704Z",
       "priceTier": "agent1",
       "acknowledgedAt": "2026-06-04T10:24:23.481Z"
+    },
+    {
+      "dealerShortName": "Đại Lý Think",
+      "snapshotVersion": "2026-06-05T04:16:10.855Z",
+      "priceTier": "agent2",
+      "acknowledgedAt": "2026-06-05T04:16:13.350Z"
     }
   ]
 }
