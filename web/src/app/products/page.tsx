@@ -1,11 +1,10 @@
 import { getProductById, getProducts, getSkuOrder } from "@/lib/api";
 import { clearSession, getSession } from "@/lib/auth";
-import ProductsSectionList from "@/components/products/ProductsSectionList";
+import ProductsCatalog from "@/components/products/ProductsCatalog";
 import HotQuickTags from "@/components/products/HotQuickTags";
-import ProductsSearchForm from "@/components/products/ProductsSearchForm";
 import DealerPolicyTabs from "@/components/products/DealerPolicyTabs";
 import PriceChangeNotificationPopup from "@/components/products/PriceChangeNotificationPopup";
-import { getPendingPriceNotificationForDealer } from "@/lib/price-notifications";
+import { getPendingPriceNotificationForDealer, getRecentlyAcknowledgedChanges } from "@/lib/price-notifications";
 import { Product, ProductVariant } from "@/types/product";
 
 type ProductListItem = Product & {
@@ -121,13 +120,13 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
   const tagsFromParam = String(params.tags || "").split("||").map((t) => t.trim()).filter(Boolean);
   const legacySearch = String(params.search || "").trim();
   const activeTags = tagsFromParam.length ? tagsFromParam : legacySearch ? [legacySearch] : [];
-  const searchTerm = activeTags.join(" ").trim();
-  const productLimit = searchTerm ? 120 : 300;
+  
+  // Fetch the entire product catalog (limit 500) to support local search & caching
   const [res, skuOrderItems] = await Promise.all([
-    getProducts(1, productLimit, searchTerm),
+    getProducts(1, 500, ""),
     getSkuOrder(),
   ]);
-  const needsDetailFetch = !Array.isArray(res.data[0]?.variants);
+  const needsDetailFetch = !res.data[0] || !Array.isArray(res.data[0]?.variants);
   const productsBase = needsDetailFetch
     ? await Promise.all(res.data.map((p) => getProductById(String(p.id))))
     : res.data;
@@ -152,22 +151,15 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
 
   const tierKey = session.priceTier === "agent2" ? "agentPrice2" : "agentPrice1";
   const filteredSorted = filterAndSortProducts(enrichedProducts, tierKey, skuOrderMap);
-  const searchableProducts: ProductListItem[] = filteredSorted;
-  const filteredByTags = activeTags.length
-    ? searchableProducts.filter((p) => {
-        const haystack = [
-          String(p.name || ""),
-          ...((p.variants || []).map((v) => String(v.barcode || v.displayName || ""))),
-        ].join(" ").toLowerCase();
-        return activeTags.some((tag) => haystack.includes(tag.toLowerCase()));
-      })
-    : searchableProducts;
 
-  const pendingPriceNotification = await getPendingPriceNotificationForDealer({
-    dealerShortName: session.shortName,
-    priceTier: session.priceTier,
-    products: enrichedProducts,
-  });
+  const [pendingPriceNotification, recentlyChangedPriceDeltas] = await Promise.all([
+    getPendingPriceNotificationForDealer({
+      dealerShortName: session.shortName,
+      priceTier: session.priceTier,
+      products: enrichedProducts,
+    }),
+    getRecentlyAcknowledgedChanges(session.shortName),
+  ]);
 
   return (
     <>
@@ -186,14 +178,12 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
 
         <DealerPolicyTabs />
 
-        <ProductsSearchForm activeTags={activeTags} productNames={[...new Set(filteredSorted.map((p) => String(p.name || "").trim()).filter(Boolean))]} />
-
-        <div id="product-list">
-          <ProductsSectionList
-            products={filteredByTags}
-            priceTier={session.priceTier}
-          />
-        </div>
+        <ProductsCatalog
+          initialProducts={filteredSorted}
+          priceTier={session.priceTier}
+          initialTags={activeTags}
+          recentlyChangedPriceDeltas={recentlyChangedPriceDeltas}
+        />
 
         <HotQuickTags tags={quickTags} />
       </main>

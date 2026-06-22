@@ -43,7 +43,15 @@ export default function PriceChangeNotificationPopup({ notification }: { notific
       const res = await fetch("/api/price-notifications/acknowledge", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ snapshotVersion: notification.snapshotVersion }),
+        body: JSON.stringify({
+          snapshotVersion: notification.snapshotVersion,
+          variantIds: notification.items.map((item) => item.variantId),
+          changes: notification.items.map((item) => ({
+            variantId: item.variantId,
+            retailChange: item.retailChange,
+            dealerChange: item.dealerChange,
+          })),
+        }),
       });
 
       if (!res.ok) {

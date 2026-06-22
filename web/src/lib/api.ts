@@ -1,5 +1,7 @@
 import { PaginatedResponse, Product } from "@/types/product";
 import https from "node:https";
+import { unstable_cache } from "next/cache";
+
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 const API_TOKEN = process.env.BACKEND_BEARER_TOKEN;
@@ -78,17 +80,29 @@ async function request<T>(path: string): Promise<T> {
 }
 
 export async function getProducts(page = 1, limit = 10, search = "") {
-  const query = new URLSearchParams({
-    page: String(page),
-    limit: String(limit),
-  });
-  if (search) query.set("search", search);
-  return request<PaginatedResponse<Product>>(`/api/products?${query.toString()}`);
+  return unstable_cache(
+    async () => {
+      const query = new URLSearchParams({
+        page: String(page),
+        limit: String(limit),
+      });
+      if (search) query.set("search", search);
+      return request<PaginatedResponse<Product>>(`/api/products?${query.toString()}`);
+    },
+    ["products-list", String(page), String(limit), search],
+    { revalidate: 300, tags: ["products"] }
+  )();
 }
 
 export async function getProductById(id: string) {
-  const res = await request<{ data: Product }>(`/api/products/${id}`);
-  return res.data;
+  return unstable_cache(
+    async () => {
+      const res = await request<{ data: Product }>(`/api/products/${id}`);
+      return res.data;
+    },
+    ["product-detail", id],
+    { revalidate: 300, tags: [`product-${id}`] }
+  )();
 }
 
 export interface SkuOrderItem {

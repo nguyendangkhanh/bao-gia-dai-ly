@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import type { PriceAcknowledgementVariantChange } from "@/lib/price-notifications";
 
 type Variant = {
   id: number;
@@ -28,6 +29,7 @@ type Props = {
   images: ProductImage[];
   priceTier: "agent1" | "agent2";
   isExpanded: boolean;
+  recentlyChangedPriceDeltas?: PriceAcknowledgementVariantChange[];
 };
 
 function imageUrl(url?: string | null) {
@@ -76,12 +78,28 @@ function formatVnd(value: number) {
   return `${value.toLocaleString("vi-VN")}đ`;
 }
 
+function formatDate(isoString?: string) {
+  if (!isoString) return "";
+  try {
+    const d = new Date(isoString);
+    if (isNaN(d.getTime())) return "";
+    const day = String(d.getDate()).padStart(2, "0");
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const year = d.getFullYear();
+    const hours = String(d.getHours()).padStart(2, "0");
+    const minutes = String(d.getMinutes()).padStart(2, "0");
+    return `${day}-${month}-${year} ${hours}:${minutes}`;
+  } catch {
+    return "";
+  }
+}
+
 function parseCurrencyInput(value: string) {
   const digits = value.replace(/\D/g, "");
   return digits ? Number(digits) : 0;
 }
 
-export default function ProductVariantsCardList({ productName: _productName, variants, images, priceTier, isExpanded }: Props) {
+export default function ProductVariantsCardList({ productName: _productName, variants, images, priceTier, isExpanded, recentlyChangedPriceDeltas = [] }: Props) {
   const [vatsMap, setVatsMap] = useState<Record<number, boolean>>({});
   const [selectedVariantId, setSelectedVariantId] = useState<number | null>(null);
   const [isVariantPickerOpen, setIsVariantPickerOpen] = useState(false);
@@ -141,6 +159,11 @@ export default function ProductVariantsCardList({ productName: _productName, var
     if (!variants.length) return null;
     return variants.find((variant) => variant.id === selectedVariantId) || variants[0];
   }, [selectedVariantId, variants]);
+
+  const activeVariantChange = useMemo(() => {
+    if (!selectedVariant) return null;
+    return recentlyChangedPriceDeltas.find((c) => c.variantId === selectedVariant.id) || null;
+  }, [selectedVariant, recentlyChangedPriceDeltas]);
 
   const selectedRetail = selectedVariant?.price || 0;
   const selectedDealer = ((priceTier === "agent1" ? selectedVariant?.agentPrice1 : selectedVariant?.agentPrice2) || 0);
@@ -369,7 +392,7 @@ export default function ProductVariantsCardList({ productName: _productName, var
               className="inline-flex items-center gap-1 rounded-lg border border-orange-200 bg-white px-2 py-1 text-xs font-semibold text-orange-700 hover:bg-orange-50 transition"
             >
               <span>📋</span>
-              <span>{copiedKey === "all" ? "Đã copy toàn bộ" : "Copy toàn bộ báo giá"}</span>
+              <span>{copiedKey === "all" ? "Đã copy toàn bộ" : "Copy báo giá"}</span>
             </button>
             <div className="text-xs text-zinc-500">Giá hiển thị theo lựa chọn VAT</div>
           </div>
@@ -377,6 +400,44 @@ export default function ProductVariantsCardList({ productName: _productName, var
 
 
         <div className="mt-3 rounded-lg border border-orange-100 bg-white p-3">
+          {activeVariantChange && (
+            <div className="rounded-xl bg-amber-50 border border-amber-200 p-3 text-xs text-amber-900 mb-3">
+              <div className="font-bold flex items-center gap-1.5 text-amber-800">
+                <span>🔔 Xác nhận đổi giá của "{_productName} - {selectedVariant?.displayName || selectedVariant?.barcode || `Variant ${selectedVariant?.id}`}" vào lúc: {activeVariantChange.acknowledgedAt ? formatDate(activeVariantChange.acknowledgedAt) : "Tuần này"}</span>
+              </div>
+              {activeVariantChange.dealerChange || activeVariantChange.retailChange ? (
+                <div className="mt-1.5 grid gap-2 sm:grid-cols-2">
+                  {activeVariantChange.dealerChange && (
+                    <div className="flex items-center justify-between rounded-lg bg-white/60 px-3 py-1.5">
+                      <span>Giá đại lý:</span>
+                      <span className="font-bold flex items-center gap-1">
+                        <span className="text-zinc-500 line-through font-normal">{formatVnd(activeVariantChange.dealerChange.oldValue || 0)}</span>
+                        <span className="text-zinc-400">→</span>
+                        <span className={activeVariantChange.dealerChange.direction === "increased" ? "text-red-700" : "text-emerald-700"}>
+                          {formatVnd(activeVariantChange.dealerChange.newValue || 0)}
+                        </span>
+                      </span>
+                    </div>
+                  )}
+                  {activeVariantChange.retailChange && (
+                    <div className="flex items-center justify-between rounded-lg bg-white/60 px-3 py-1.5">
+                      <span>Giá bán lẻ:</span>
+                      <span className="font-bold flex items-center gap-1">
+                        <span className="text-zinc-500 line-through font-normal">{formatVnd(activeVariantChange.retailChange.oldValue || 0)}</span>
+                        <span className="text-zinc-400">→</span>
+                        <span className={activeVariantChange.retailChange.direction === "increased" ? "text-red-700" : "text-emerald-700"}>
+                          {formatVnd(activeVariantChange.retailChange.newValue || 0)}
+                        </span>
+                      </span>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="mt-1 text-[11px] text-amber-800 italic">Vừa cập nhật giá</div>
+              )}
+            </div>
+          )}
+
           <div className="flex flex-col gap-3">
             <div ref={quickProfitRef} className="flex flex-col gap-1">
               <div className="text-sm font-semibold text-zinc-800">Tính nhanh lợi nhuận</div>
@@ -420,6 +481,7 @@ export default function ProductVariantsCardList({ productName: _productName, var
                       <div className="max-h-72 overflow-y-auto p-1.5">
                         {variants.map((variant) => {
                           const isActive = selectedVariant?.id === variant.id;
+                          const isRecentlyChanged = recentlyChangedPriceDeltas.some((c) => c.variantId === variant.id);
                           const primaryLabel = variant.barcode || variant.displayName || `Variant ${variant.id}`;
                           const priceLabel = formatVnd(variant.price || 0);
                           const dealerPrice = (priceTier === "agent1" ? variant.agentPrice1 : variant.agentPrice2) || 0;
@@ -436,7 +498,14 @@ export default function ProductVariantsCardList({ productName: _productName, var
                                 isActive ? "bg-orange-50 text-orange-700" : "text-zinc-700 hover:bg-zinc-50"
                               }`}
                             >
-                              <span className="w-full break-words text-sm font-medium leading-5 [overflow-wrap:anywhere]">{primaryLabel}</span>
+                              <span className="flex w-full items-center justify-between text-sm font-medium leading-5">
+                                <span className="break-words [overflow-wrap:anywhere]">{primaryLabel}</span>
+                                {isRecentlyChanged && (
+                                  <span className="rounded bg-amber-100 px-1 py-0.5 text-[9px] font-bold text-amber-800 shrink-0 ml-1">
+                                    Cập nhật giá
+                                  </span>
+                                )}
+                              </span>
                               <span className={`w-full truncate text-xs ${isActive ? "text-orange-600" : "text-zinc-500"}`}>
                                 Giá bán lẻ: {priceLabel}
                               </span>
@@ -700,6 +769,7 @@ export default function ProductVariantsCardList({ productName: _productName, var
                       <div className="mt-2 flex flex-wrap gap-1.5">
                         {group.variants.map((v) => {
                           const isActive = activeVariant.id === v.id;
+                          const isRecentlyChanged = recentlyChangedPriceDeltas.some((c) => c.variantId === v.id);
                           return (
                             <button
                               key={v.id}
@@ -711,13 +781,16 @@ export default function ProductVariantsCardList({ productName: _productName, var
                                 }));
                                 setSelectedVariantId(v.id);
                               }}
-                              className={`inline-flex items-center rounded px-1.5 py-0.5 lg:px-2.5 lg:py-1.5 text-[10px] lg:text-xs font-medium border transition ${
+                              className={`inline-flex items-center rounded px-1.5 py-0.5 lg:px-2.5 lg:py-1.5 text-[10px] lg:text-xs font-medium border transition gap-1 ${
                                 isActive
                                   ? "bg-orange-50 border-orange-200 text-orange-700 font-semibold shadow-sm"
-                                  : "bg-zinc-50 hover:bg-zinc-100 text-zinc-600 border-zinc-200"
+                                  : isRecentlyChanged
+                                    ? "bg-amber-50 border-amber-300 text-amber-800 font-semibold"
+                                    : "bg-zinc-50 hover:bg-zinc-100 text-zinc-600 border-zinc-200"
                               }`}
                             >
-                              {v.barcode || v.displayName || `Variant ${v.id}`}
+                              <span>{v.barcode || v.displayName || `Variant ${v.id}`}</span>
+                              {isRecentlyChanged && <span className="text-[9px] text-amber-600 font-bold">⚡</span>}
                             </button>
                           );
                         })}
