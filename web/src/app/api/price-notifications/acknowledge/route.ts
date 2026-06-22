@@ -8,12 +8,16 @@ export async function POST(req: Request) {
 
   const body = await req.json().catch(() => ({}));
   const snapshotVersion = String(body?.snapshotVersion || "").trim();
+  const changedVariantIds = Array.isArray(body?.variantIds) ? body.variantIds.map(Number) : undefined;
+  const changes = Array.isArray(body?.changes) ? body.changes : undefined;
   if (!snapshotVersion) return NextResponse.json({ ok: false }, { status: 400 });
 
   await acknowledgePriceNotification({
     dealerShortName: session.shortName,
     snapshotVersion,
     priceTier: session.priceTier,
+    changedVariantIds,
+    changes,
   });
 
   return NextResponse.json({ ok: true });

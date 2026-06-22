@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import ProductVariantsCardList from "@/components/products/ProductVariantsCardList";
+import type { PriceAcknowledgementVariantChange } from "@/lib/price-notifications";
 
 type Product = {
   id: number;
@@ -41,7 +42,36 @@ function imageUrl(url?: string | null) {
   return resolved;
 }
 
-export default function ProductsSectionList({ products, priceTier }: { products: Product[]; priceTier: "agent1" | "agent2" }) {
+function formatVnd(value: number | null | undefined) {
+  if (value === null || value === undefined) return "0đ";
+  return `${value.toLocaleString("vi-VN")}đ`;
+}
+
+function formatDate(isoString?: string) {
+  if (!isoString) return "";
+  try {
+    const d = new Date(isoString);
+    if (isNaN(d.getTime())) return "";
+    const day = String(d.getDate()).padStart(2, "0");
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const year = d.getFullYear();
+    const hours = String(d.getHours()).padStart(2, "0");
+    const minutes = String(d.getMinutes()).padStart(2, "0");
+    return `${day}-${month}-${year} ${hours}:${minutes}`;
+  } catch {
+    return "";
+  }
+}
+
+export default function ProductsSectionList({
+  products,
+  priceTier,
+  recentlyChangedPriceDeltas = [],
+}: {
+  products: Product[];
+  priceTier: "agent1" | "agent2";
+  recentlyChangedPriceDeltas?: PriceAcknowledgementVariantChange[];
+}) {
   const [expandedProductId, setExpandedProductId] = useState<number | null>(null);
   const [popupProductId, setPopupProductId] = useState<number | null>(null);
   const touchStartYRef = useRef<number | null>(null);
@@ -113,11 +143,26 @@ export default function ProductsSectionList({ products, priceTier }: { products:
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 2xl:grid-cols-3">
       {products.map((p) => {
         const isExpanded = expandedProductId === p.id;
+        
+        const productChanges = p.variants
+          .map((v) => recentlyChangedPriceDeltas.find((c) => c.variantId === v.id))
+          .filter(Boolean) as PriceAcknowledgementVariantChange[];
+        const hasChangedPrice = productChanges.length > 0;
+        
+        const latestAckAt = productChanges.reduce((latest, c) => {
+          if (!c.acknowledgedAt) return latest;
+          if (!latest) return c.acknowledgedAt;
+          return new Date(c.acknowledgedAt) > new Date(latest) ? c.acknowledgedAt : latest;
+        }, undefined as string | undefined);
 
         return (
           <section
             key={p.id}
-            className="relative cursor-pointer overflow-hidden rounded-2xl border border-orange-100 bg-white p-4 shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl"
+            className={`relative cursor-pointer overflow-hidden rounded-2xl border p-4 shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl ${
+              hasChangedPrice
+                ? "border-orange-500 shadow-[0_0_12px_rgba(249,115,22,0.15)] ring-1 ring-orange-500/30"
+                : "border-orange-100 bg-white"
+            }`}
             onClick={() => onSectionClick(p.id, p.name)}
             onTouchStart={onSectionTouchStart}
             onTouchEnd={(event) => onSectionTouchEnd(p.id, p.name, event)}
@@ -126,6 +171,12 @@ export default function ProductsSectionList({ products, priceTier }: { products:
             tabIndex={0}
           >
             <div className="relative z-10">
+            {hasChangedPrice && (
+              <span className="absolute top-0 right-0 flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-orange-500"></span>
+              </span>
+            )}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="h-20 w-20 sm:h-24 sm:w-24 shrink-0 overflow-hidden rounded-xl border border-orange-100 bg-orange-50">
                 {p.cover ? (
@@ -166,6 +217,51 @@ export default function ProductsSectionList({ products, priceTier }: { products:
               </div>
             </div>
 
+            {hasChangedPrice && (
+              <div className="mt-3 rounded-xl bg-orange-50/80 border border-orange-100 p-2.5 text-xs text-orange-900 space-y-1" onClick={(e) => e.stopPropagation()}>
+                <div className="font-bold flex items-center gap-1">
+                  <span>✨ Xác nhận đổi giá: {latestAckAt ? formatDate(latestAckAt) : "Tuần này"}</span>
+                </div>
+                <div className="divide-y divide-orange-100/50">
+                  {productChanges.map((change) => {
+                    const v = p.variants.find((variant) => variant.id === change.variantId);
+                    if (!v) return null;
+                    const label = v.displayName || v.barcode || "Sản phẩm";
+                    return (
+                      <div key={change.variantId} className="py-1 first:pt-0 last:pb-0">
+                        <div className="font-semibold text-slate-800 truncate" title={label}>{label}</div>
+                        <div className="mt-0.5 flex flex-col gap-0.5 text-[10px] text-slate-600">
+                          {change.dealerChange && (
+                            <div className="flex items-center gap-1">
+                              <span className="font-medium">Đại lý:</span>
+                              <span className="font-semibold text-zinc-600 line-through">{formatVnd(change.dealerChange.oldValue)}</span>
+                              <span className="text-zinc-400">→</span>
+                              <span className={`font-semibold ${change.dealerChange.direction === "increased" ? "text-red-600" : "text-emerald-600"}`}>
+                                {formatVnd(change.dealerChange.newValue)}
+                              </span>
+                            </div>
+                          )}
+                          {change.retailChange && (
+                            <div className="flex items-center gap-1">
+                              <span className="font-medium">Bán lẻ:</span>
+                              <span className="font-semibold text-zinc-600 line-through">{formatVnd(change.retailChange.oldValue)}</span>
+                              <span className="text-zinc-400">→</span>
+                              <span className={`font-semibold ${change.retailChange.direction === "increased" ? "text-red-600" : "text-emerald-600"}`}>
+                                {formatVnd(change.retailChange.newValue)}
+                              </span>
+                            </div>
+                          )}
+                          {!change.dealerChange && !change.retailChange && (
+                            <span className="text-[10px] text-zinc-500 italic">Vừa cập nhật giá</span>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+ 
             {isExpanded && (
               <ProductVariantsCardList
                 productName={p.name}
@@ -173,6 +269,7 @@ export default function ProductsSectionList({ products, priceTier }: { products:
                 images={p.images || []}
                 priceTier={priceTier}
                 isExpanded={isExpanded}
+                recentlyChangedPriceDeltas={recentlyChangedPriceDeltas}
               />
             )}
             </div>
@@ -216,6 +313,7 @@ export default function ProductsSectionList({ products, priceTier }: { products:
               images={popupProduct.images || []}
               priceTier={priceTier}
               isExpanded
+              recentlyChangedPriceDeltas={recentlyChangedPriceDeltas}
             />
           </div>
         </div>

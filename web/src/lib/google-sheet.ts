@@ -52,16 +52,9 @@ async function readSheet(sheetId: string, tier: "agent1" | "agent2"): Promise<De
     .filter((r) => r.pass);
 }
 
-let cachedDealers: DealerRecord[] | null = null;
-let lastFetchTime = 0;
-const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+import { unstable_cache } from "next/cache";
 
-export async function getAllDealers() {
-  const now = Date.now();
-  if (cachedDealers && now - lastFetchTime < CACHE_TTL) {
-    return cachedDealers;
-  }
-
+async function fetchDealersFromSheets(): Promise<DealerRecord[]> {
   const s1 = process.env.GOOGLE_SHEET_ID_agentPrice1 || "";
   const s2 = process.env.GOOGLE_SHEET_ID_agentPrice2 || "";
 
@@ -69,20 +62,27 @@ export async function getAllDealers() {
     throw new Error("Missing GOOGLE_SHEET_ID_agentPrice1/GOOGLE_SHEET_ID_agentPrice2");
   }
 
+  const [d1, d2] = await Promise.all([
+    s1 ? readSheet(s1, "agent1") : Promise.resolve([]),
+    s2 ? readSheet(s2, "agent2") : Promise.resolve([]),
+  ]);
+  return [...d1, ...d2];
+}
+
+const getCachedDealers = unstable_cache(
+  async () => {
+    return fetchDealersFromSheets();
+  },
+  ["all-dealers"],
+  { revalidate: 300, tags: ["dealers"] }
+);
+
+export async function getAllDealers() {
   try {
-    const [d1, d2] = await Promise.all([
-      s1 ? readSheet(s1, "agent1") : Promise.resolve([]),
-      s2 ? readSheet(s2, "agent2") : Promise.resolve([]),
-    ]);
-    cachedDealers = [...d1, ...d2];
-    lastFetchTime = now;
-    return cachedDealers;
+    return await getCachedDealers();
   } catch (error) {
-    if (cachedDealers) {
-      console.warn("Failed to fetch Google Sheets, returning stale cached dealers:", error);
-      return cachedDealers;
-    }
     const details = error instanceof Error ? error.message : String(error);
     throw new Error(`SHEET_READ_FAILED:${details}`);
   }
 }
+

@@ -1,6 +1,6 @@
 {
-  "version": "2026-06-19T05:06:08.848Z",
-  "createdAt": "2026-06-19T05:06:08.848Z",
+  "version": "2026-06-22T04:37:38.226Z",
+  "createdAt": "2026-06-22T04:37:38.226Z",
   "products": [
     {
       "productId": 2,
@@ -1034,27 +1034,18 @@
           "sku": "MansonE3Xam",
           "barcode": "Manson E3 Pro Xám",
           "displayName": "Xám",
-          "price": 7490000,
-          "agentPrice1": 6800000,
-          "agentPrice2": 6700000
+          "price": 7790000,
+          "agentPrice1": 7100000,
+          "agentPrice2": 7000000
         },
         {
           "variantId": 94,
           "sku": "MansonE3Den",
           "barcode": "Manson E3 Pro Đen",
           "displayName": "Đen",
-          "price": 7090000,
-          "agentPrice1": 6400000,
-          "agentPrice2": 6300000
-        },
-        {
-          "variantId": 97,
-          "sku": "MansonE3XamGC",
-          "barcode": "Manson E3 Pro Xám + Gác Chân",
-          "displayName": "Xám Gác Chân",
-          "price": 8040000,
-          "agentPrice1": 7350000,
-          "agentPrice2": 7250000
+          "price": 7390000,
+          "agentPrice1": 6700000,
+          "agentPrice2": 6600000
         },
         {
           "variantId": 98,
@@ -1070,9 +1061,18 @@
           "sku": "MansonE3DenGC",
           "barcode": "Manson E3 Pro Đen Gác Chân",
           "displayName": "Đen Gác Chân",
-          "price": 7640000,
-          "agentPrice1": 6950000,
-          "agentPrice2": 6850000
+          "price": 7940000,
+          "agentPrice1": 7250000,
+          "agentPrice2": 7150000
+        },
+        {
+          "variantId": 97,
+          "sku": "MansonE3XamGC",
+          "barcode": "Manson E3 Pro Xám + Gác Chân",
+          "displayName": "Xám Gác Chân",
+          "price": 8340000,
+          "agentPrice1": 7650000,
+          "agentPrice2": 7550000
         }
       ]
     },

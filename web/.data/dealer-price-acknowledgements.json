@@ -17,6 +17,56 @@
       "snapshotVersion": "2026-06-19T05:06:08.848Z",
       "priceTier": "agent1",
       "acknowledgedAt": "2026-06-19T05:06:13.774Z"
+    },
+    {
+      "dealerShortName": "khanh",
+      "snapshotVersion": "2026-06-22T03:10:41.717Z",
+      "priceTier": "agent1",
+      "acknowledgedAt": "2026-06-22T03:16:00.456Z"
+    },
+    {
+      "dealerShortName": "khanh",
+      "snapshotVersion": "2026-06-22T04:29:24.988Z",
+      "priceTier": "agent1",
+      "acknowledgedAt": "2026-06-22T04:29:28.500Z",
+      "changedVariantIds": [
+        94
+      ]
+    },
+    {
+      "dealerShortName": "khanh",
+      "snapshotVersion": "2026-06-22T04:31:11.150Z",
+      "priceTier": "agent1",
+      "acknowledgedAt": "2026-06-22T04:31:19.379Z",
+      "changedVariantIds": [
+        94
+      ]
+    },
+    {
+      "dealerShortName": "khanh",
+      "snapshotVersion": "2026-06-22T04:37:38.226Z",
+      "priceTier": "agent1",
+      "acknowledgedAt": "2026-06-22T04:37:44.947Z",
+      "changedVariantIds": [
+        94
+      ],
+      "changes": [
+        {
+          "variantId": 94,
+          "retailChange": {
+            "oldValue": 7690000,
+            "newValue": 7390000,
+            "amount": 300000,
+            "direction": "decreased"
+          },
+          "dealerChange": {
+            "oldValue": 7000000,
+            "newValue": 6700000,
+            "amount": 300000,
+            "direction": "decreased"
+          }
+        }
+      ]
     }
   ]
 }

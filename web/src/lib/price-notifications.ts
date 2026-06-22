@@ -27,11 +27,20 @@ export type PriceSnapshot = {
   products: PriceSnapshotProduct[];
 };
 
+export type PriceAcknowledgementVariantChange = {
+  variantId: number;
+  retailChange: PriceDelta | null;
+  dealerChange: PriceDelta | null;
+  acknowledgedAt?: string;
+};
+
 export type PriceAcknowledgement = {
   dealerShortName: string;
   snapshotVersion: string;
   acknowledgedAt: string;
   priceTier: PriceTier;
+  changedVariantIds?: number[];
+  changes?: PriceAcknowledgementVariantChange[];
 };
 
 type PriceAcknowledgementStore = {
@@ -165,22 +174,79 @@ async function writeAcknowledgements(store: PriceAcknowledgementStore) {
   await writeJsonFile(ACK_FILE, store);
 }
 
-export async function acknowledgePriceNotification(input: { dealerShortName: string; snapshotVersion: string; priceTier: PriceTier }) {
+export async function acknowledgePriceNotification(input: {
+  dealerShortName: string;
+  snapshotVersion: string;
+  priceTier: PriceTier;
+  changedVariantIds?: number[];
+  changes?: PriceAcknowledgementVariantChange[];
+}) {
   const store = await readAcknowledgements();
   const existing = store.acknowledgements.find(
     (item) => item.dealerShortName === input.dealerShortName && item.snapshotVersion === input.snapshotVersion,
   );
 
-  if (existing) return;
+  if (existing) {
+    let updated = false;
+    if (input.changedVariantIds && !existing.changedVariantIds) {
+      existing.changedVariantIds = input.changedVariantIds;
+      updated = true;
+    }
+    if (input.changes && !existing.changes) {
+      existing.changes = input.changes;
+      updated = true;
+    }
+    if (updated) {
+      await writeAcknowledgements(store);
+    }
+    return;
+  }
 
   store.acknowledgements.push({
     dealerShortName: input.dealerShortName,
     snapshotVersion: input.snapshotVersion,
     priceTier: input.priceTier,
     acknowledgedAt: new Date().toISOString(),
+    changedVariantIds: input.changedVariantIds || input.changes?.map((c) => c.variantId),
+    changes: input.changes,
   });
 
   await writeAcknowledgements(store);
+}
+
+export async function getRecentlyAcknowledgedChanges(dealerShortName: string): Promise<PriceAcknowledgementVariantChange[]> {
+  const store = await readAcknowledgements();
+  const oneWeekAgo = new Date();
+  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
+  const activeAcks = store.acknowledgements.filter(
+    (item) => item.dealerShortName === dealerShortName && new Date(item.acknowledgedAt) >= oneWeekAgo
+  );
+
+  const changesMap = new Map<number, PriceAcknowledgementVariantChange>();
+  for (const ack of activeAcks) {
+    if (ack.changes) {
+      for (const change of ack.changes) {
+        changesMap.set(change.variantId, {
+          ...change,
+          acknowledgedAt: ack.acknowledgedAt,
+        });
+      }
+    } else if (ack.changedVariantIds) {
+      for (const id of ack.changedVariantIds) {
+        if (!changesMap.has(id)) {
+          changesMap.set(id, {
+            variantId: id,
+            retailChange: null,
+            dealerChange: null,
+            acknowledgedAt: ack.acknowledgedAt,
+          });
+        }
+      }
+    }
+  }
+
+  return Array.from(changesMap.values());
 }
 
 function hasAcknowledged(store: PriceAcknowledgementStore, dealerShortName: string, snapshotVersion: string) {
