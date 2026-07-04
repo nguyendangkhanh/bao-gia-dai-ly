@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+export const maxDuration = 60;
+
 import { loginAction } from "./actions";
 import LoginSubmitButton from "./LoginSubmitButton";
 
@@ -19,8 +21,8 @@ export default async function LoginPage({
   searchParams: Promise<{ error?: string; detail?: string }>;
 }) {
   const params = await searchParams;
-  const error = params.error ? ERROR_MESSAGE[params.error] : "";
-  const detail = params.detail ? decodeURIComponent(params.detail) : "";
+  const error = params.error ? ERROR_MESSAGE[params.error as string] : "";
+  const detail = params.detail ? (typeof params.detail === 'string' ? params.detail : params.detail[0]) : "";
 
   return (
     <main className="min-h-screen bg-[#f7f7f5] fade-in">
