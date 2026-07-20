@@ -38,8 +38,7 @@ export async function loginAction(formData: FormData) {
     if (message.includes("Requested entity was not found") || message.includes("Unable to parse range")) {
       redirect("/login?error=sheet_not_found");
     }
-    const encoded = encodeURIComponent(message.slice(0, 180));
-    redirect(`/login?error=sheet_unavailable&detail=${encoded}`);
+    redirect("/login?error=sheet_unavailable");
   }
 
   if (!user) {
