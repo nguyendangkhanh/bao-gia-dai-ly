@@ -1,0 +1,320 @@
+{
+  "updatedAt": "2026-07-20T05:28:09.350Z",
+  "dealers": [
+    {
+      "name": "Đại lý Hoàn - The Manson (HUY)",
+      "shortName": "Đại Lý Hoàn",
+      "groupName": "Đại lý Hoàn - The Manson (HUY)",
+      "pass": "hoan2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại Lý Thanh Hoà - The Manson (HUY)",
+      "shortName": "Đại Lý Thanh Hòa",
+      "groupName": "Đại Lý Thanh Hoà - The Manson (HUY)",
+      "pass": "thanhhoa2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại Lý Thành - The Manson (HUY)",
+      "shortName": "Đại Lý Thành",
+      "groupName": "Đại Lý Thành - The Manson (HUY)",
+      "pass": "thanh2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại lý Giang - The Manson (HUY)",
+      "shortName": "Đại Lý Giang",
+      "groupName": "Đại lý Giang - The Manson (HUY)",
+      "pass": "giang2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại Lý Vũ - The Manson (HUY)",
+      "shortName": "Đại Lý Vũ",
+      "groupName": "Đại Lý Vũ - The Manson (HUY)",
+      "pass": "vu2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại lý Vinaoffice - The Manson (HUY)",
+      "shortName": "Đại Lý Vinaoffice",
+      "groupName": "Đại lý Vinaoffice - The Manson (HUY)",
+      "pass": "vinaoffice2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại Lý Nhật Minh - Manson (HUY)",
+      "shortName": "Đại Lý Nhật Minh",
+      "groupName": "Đại Lý Nhật Minh - Manson (HUY)",
+      "pass": "nhatminh2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại lý Cường - The Manson (HUY)",
+      "shortName": "Đại Lý Cường",
+      "groupName": "Đại lý Cường - The Manson (HUY)",
+      "pass": "cuong2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại Lý Vũ Xuyến - The Manson (HUY)",
+      "shortName": "Đại Lý Vũ Xuyến",
+      "groupName": "Đại Lý Vũ Xuyến - The Manson (HUY)",
+      "pass": "vuxuyen2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại lý Mộc Thanh Thanh - The Manson (HUY)",
+      "shortName": "Đại Lý Mộc Thanh Thanh",
+      "groupName": "Đại lý Mộc Thanh Thanh - The Manson (HUY)",
+      "pass": "mtt2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại Lý Thịnh - The Manson (HUY)",
+      "shortName": "Đại Lý Thịnh",
+      "groupName": "Đại Lý Thịnh - The Manson (HUY)",
+      "pass": "thinh2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại Lý Chung - The Manson (HUY)",
+      "shortName": "Đại Lý Chung",
+      "groupName": "Đại Lý Chung - The Manson (HUY)",
+      "pass": "chung2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "HUY XEM",
+      "shortName": "Huy",
+      "groupName": "HUY XEM",
+      "pass": "huy2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại Lý The Zenka - The Manson (HUY)",
+      "shortName": "Đại Lý Zenka",
+      "groupName": "Đại Lý The Zenka - The Manson (HUY)",
+      "pass": "zenka2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại lý Mộc Phương - The Manson (HUY)",
+      "shortName": "Đại lý Mộc Phương",
+      "groupName": "Đại lý Mộc Phương - The Manson (HUY)",
+      "pass": "mocphuong2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "aVui",
+      "shortName": "Nội Thất Cơ Khí - a Vui",
+      "groupName": "aVui",
+      "pass": "noithatcokhi2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Phương Hoa Bg, Duy, Ngọc Quỳnh, The Manson",
+      "shortName": "Live Phương Hoa BG",
+      "groupName": "Phương Hoa Bg, Duy, Ngọc Quỳnh, The Manson",
+      "pass": "phuonghoabg",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Manson - Azaudio (2023)",
+      "shortName": "Đại Lý Azaudio",
+      "groupName": "Manson - Azaudio (2023)",
+      "pass": "azaudio2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "TheManson x COMBAT VN",
+      "shortName": "Đại Lý Combat VN",
+      "groupName": "TheManson x COMBAT VN",
+      "pass": "combat2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Tongkhoghevanphong x Manson",
+      "shortName": "Tongkhoghevanphong",
+      "groupName": "Tongkhoghevanphong x Manson",
+      "pass": "tongkhoghevanphong",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại Lý Máy Tính Đăng Quang - The Manson",
+      "shortName": "Đại Lý Đăng Quang",
+      "groupName": "Đại Lý Máy Tính Đăng Quang - The Manson",
+      "pass": "dangquang2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Cybershop X TheManson",
+      "shortName": "Đại Lý Cybershop",
+      "groupName": "Cybershop X TheManson",
+      "pass": "cybershop2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại lý moon.store Manson",
+      "shortName": "Đại lý moon.store",
+      "groupName": "Đại lý moon.store Manson",
+      "pass": "moonstore2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại Lý Anh Tú Hà Nội X Manson",
+      "shortName": "Đại Lý Anh Tú",
+      "groupName": "Đại Lý Anh Tú Hà Nội X Manson",
+      "pass": "anhtu2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại lý Anh Đức Digital ĐN X The Manson",
+      "shortName": "Đại lý Anh Đức Digital",
+      "groupName": "Đại lý Anh Đức Digital ĐN X The Manson",
+      "pass": "anhduc2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại Lý Nội Thất H'Furni - Nha Trang X The Manson",
+      "shortName": "Đại Lý H'Furni",
+      "groupName": "Đại Lý Nội Thất H'Furni - Nha Trang X The Manson",
+      "pass": "hfurni2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại lý Lam Nguyen x The Manson 0968121186",
+      "shortName": "Đại lý Lam Nguyen",
+      "groupName": "Đại lý Lam Nguyen x The Manson 0968121186",
+      "pass": "lamnguyen2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại lý The Gioi Gear - The Manson",
+      "shortName": "Đại lý The Gioi Gear",
+      "groupName": "Đại lý The Gioi Gear - The Manson",
+      "pass": "thegioigear2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại lý VT Gear x TheManson",
+      "shortName": "Đại lý VT Gear",
+      "groupName": "Đại lý VT Gear x TheManson",
+      "pass": "vtgear2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại Lý New Gear - The Manson",
+      "shortName": "Đại Lý New Gear",
+      "groupName": "Đại Lý New Gear - The Manson",
+      "pass": "newgear2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại Lý Minh Tuấn Gaming",
+      "shortName": "Đại Lý Minh Tuấn",
+      "groupName": "Đại Lý Minh Tuấn Gaming",
+      "pass": "minhtuan2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại Lý Truyện",
+      "shortName": "Đại Lý Truyện",
+      "groupName": "Đại Lý Truyện",
+      "pass": "dailytruyen2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại Lý VDStoreHCM - The Manson",
+      "shortName": "VDStoreHCM",
+      "groupName": "Đại Lý VDStoreHCM - The Manson",
+      "pass": "vdstore2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại Lý Techspace x Manson",
+      "shortName": "Đại Lý Techspace",
+      "groupName": "Đại Lý Techspace x Manson",
+      "pass": "techspace2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại lý MyGear x TheManson",
+      "shortName": "Đại lý MyGear",
+      "groupName": "Đại lý MyGear x TheManson",
+      "pass": "mygear2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại Lý - Nội Thất Văn Phòng HN",
+      "shortName": "Đại Lý Nội Thất Văn Phòng HN",
+      "groupName": "Đại Lý - Nội Thất Văn Phòng HN",
+      "pass": "noithatvanphong2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Manson x Think | Đặt hàng",
+      "shortName": "Đại Lý Think",
+      "groupName": "Manson x Think | Đặt hàng",
+      "pass": "2026think",
+      "priceTier": "agent2"
+    },
+    {
+      "name": "Đại lý Nguyenvu.store - The Manson 0988448311",
+      "shortName": "Đại Lý Nguyễn Vũ",
+      "groupName": "Đại lý Nguyenvu.store - The Manson 0988448311",
+      "pass": "2026nguyen.vu",
+      "priceTier": "agent2"
+    },
+    {
+      "name": "Manson - Mega Đà Nẵng",
+      "shortName": "Đại Lý Mega",
+      "groupName": "Manson - Mega Đà Nẵng",
+      "pass": "2026mega",
+      "priceTier": "agent2"
+    },
+    {
+      "name": "LUXVIE - MANSON",
+      "shortName": "Đại Lý Luxvie",
+      "groupName": "LUXVIE - MANSON",
+      "pass": "2026luxvie",
+      "priceTier": "agent2"
+    },
+    {
+      "name": "TIN HỌC NGÔI SAO X THE MANSON",
+      "shortName": "Đại Lý Tin Học Ngôi Sao",
+      "groupName": "TIN HỌC NGÔI SAO X THE MANSON",
+      "pass": "2026thns",
+      "priceTier": "agent2"
+    },
+    {
+      "name": "STAR DAKLAK x MANSON",
+      "shortName": "Đại Lý Star DakLak",
+      "groupName": "STAR DAKLAK x MANSON",
+      "pass": "2026startdl",
+      "priceTier": "agent2"
+    },
+    {
+      "name": "Đại Lý Techspace x Manson",
+      "shortName": "Đại Lý Techspace",
+      "groupName": "Đại Lý Techspace x Manson",
+      "pass": "2026techspace",
+      "priceTier": "agent2"
+    },
+    {
+      "name": "Laviehome _ Manson",
+      "shortName": "Đại Lý Laviehome",
+      "groupName": "Laviehome _ Manson",
+      "pass": "2026lavie",
+      "priceTier": "agent2"
+    },
+    {
+      "name": "Đại Lý Hacom x Manson (NCC Quốc tế Phúc Hưng)",
+      "shortName": "Đại Lý Hacom",
+      "groupName": "Đại Lý Hacom x Manson (NCC Quốc tế Phúc Hưng)",
+      "pass": "2026hacom",
+      "priceTier": "agent2"
+    }
+  ]
+}

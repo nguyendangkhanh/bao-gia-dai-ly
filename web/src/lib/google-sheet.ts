@@ -5,11 +5,13 @@ import path from "node:path";
 
 export type DealerRecord = {
   name: string;
-  shortName:string;
+  shortName: string;
   groupName: string;
   pass: string;
   priceTier: "agent1" | "agent2";
 };
+
+const DEALERS_CACHE_FILE = path.join(process.cwd(), ".data", "dealers-cache.json");
 
 async function getAuthClient() {
   const credentialPath = path.join(process.cwd(), "client_secret.json");
@@ -52,7 +54,31 @@ async function readSheet(sheetId: string, tier: "agent1" | "agent2"): Promise<De
     .filter((r) => r.pass);
 }
 
-import { unstable_cache } from "next/cache";
+async function readDealerDiskCache(): Promise<DealerRecord[] | null> {
+  try {
+    const raw = await fs.readFile(DEALERS_CACHE_FILE, "utf-8");
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed.dealers) && parsed.dealers.length > 0) {
+      return parsed.dealers as DealerRecord[];
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+async function writeDealerDiskCache(dealers: DealerRecord[]): Promise<void> {
+  try {
+    await fs.mkdir(path.dirname(DEALERS_CACHE_FILE), { recursive: true });
+    await fs.writeFile(
+      DEALERS_CACHE_FILE,
+      JSON.stringify({ updatedAt: new Date().toISOString(), dealers }, null, 2),
+      "utf-8",
+    );
+  } catch {
+    // non-critical, ignore
+  }
+}
 
 async function fetchDealersFromSheets(): Promise<DealerRecord[]> {
   const s1 = process.env.GOOGLE_SHEET_ID_agentPrice1 || "";
@@ -69,20 +95,48 @@ async function fetchDealersFromSheets(): Promise<DealerRecord[]> {
   return [...d1, ...d2];
 }
 
-const getCachedDealers = unstable_cache(
-  async () => {
-    return fetchDealersFromSheets();
-  },
-  ["all-dealers"],
-  { revalidate: 300, tags: ["dealers"] }
-);
+// In-memory cache: reused within the same Node.js process across requests
+let memCache: { dealers: DealerRecord[]; fetchedAt: number } | null = null;
+const MEM_CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
 
-export async function getAllDealers() {
+export async function getAllDealers(): Promise<DealerRecord[]> {
+  // 1. Return in-memory cache if still fresh
+  if (memCache && Date.now() - memCache.fetchedAt < MEM_CACHE_TTL_MS) {
+    return memCache.dealers;
+  }
+
+  // 2. Try fetching live from Google Sheets
   try {
-    return await getCachedDealers();
+    const dealers = await fetchDealersFromSheets();
+    memCache = { dealers, fetchedAt: Date.now() };
+    // persist to disk asynchronously — don't await, never blocks login
+    writeDealerDiskCache(dealers).catch(() => {});
+    return dealers;
   } catch (error) {
-    const details = error instanceof Error ? error.message : String(error);
-    throw new Error(`SHEET_READ_FAILED:${details}`);
+    const msg = error instanceof Error ? error.message : String(error);
+
+    // Re-throw errors that are configuration problems (not transient)
+    if (msg.includes("CREDENTIAL_NOT_SERVICE_ACCOUNT")) throw error;
+    if (msg.includes("Missing GOOGLE_SHEET_ID")) throw error;
+    if (msg.includes("The caller does not have permission") || msg.includes("PERMISSION_DENIED")) throw error;
+    if (msg.includes("Requested entity was not found") || msg.includes("Unable to parse range")) throw error;
+
+    // 3. Transient error (rate-limit, timeout, network) — try stale in-memory
+    if (memCache) {
+      console.warn("[dealers] Sheet fetch failed, using stale in-memory cache:", msg);
+      return memCache.dealers;
+    }
+
+    // 4. Fall back to disk cache
+    const diskCached = await readDealerDiskCache();
+    if (diskCached) {
+      console.warn("[dealers] Sheet fetch failed, using disk cache:", msg);
+      memCache = { dealers: diskCached, fetchedAt: Date.now() - MEM_CACHE_TTL_MS + 60_000 };
+      return diskCached;
+    }
+
+    // 5. No cache at all — surface the error
+    throw new Error(`SHEET_READ_FAILED:${msg}`);
   }
 }
 
