@@ -17,9 +17,6 @@ type ProductListItem = Product & {
 import { redirect } from "next/navigation";
 
 const ignoreByNameInclude = [
-  "Khung Bàn Nâng Hạ Manson SmartDesk",
-  "Khung Nâng Hạ 2 Động Cơ Trắng",
-  "Khung Nâng Hạ 2 Động Cơ Đen",
   "sihoo",
   "gtchair",
   "T21",
