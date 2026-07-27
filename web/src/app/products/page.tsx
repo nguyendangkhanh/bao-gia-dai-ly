@@ -25,7 +25,6 @@ const ignoreByNameInclude = [
   "T21",
   "Vera Wintex",
   "Iris Wintex",
-  "Khung Bàn Nâng Hạ 2 Động Cơ",
 ];
 const ignoreBySku = ["XMS.T21D", "XMS.T21X"];
 
