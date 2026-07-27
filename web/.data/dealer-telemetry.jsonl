@@ -216,6 +216,11 @@
 {"type":"view_product","shortName":"khanh","groupName":"agentPrice1","productName":"Manson E3 Pro","at":"2026-06-22T04:53:08.077Z"}
 {"type":"view_product","shortName":"khanh","groupName":"agentPrice1","productName":"Manson E3 Pro","at":"2026-06-22T04:53:23.019Z"}
 {"type":"view_product","shortName":"khanh","groupName":"agentPrice1","productName":"Manson E3 Pro","at":"2026-06-22T04:54:13.581Z"}
+<<<<<<< HEAD
 {"type":"login","shortName":"khanh","groupName":"agentPrice1","at":"2026-06-22T05:46:55.614Z"}
 {"type":"login","shortName":"khanh","groupName":"agentPrice1","at":"2026-06-22T05:49:09.788Z"}
 {"type":"login","shortName":"khanh","groupName":"agentPrice1","at":"2026-06-22T05:49:11.472Z"}
+=======
+{"type":"login","shortName":"khanh","groupName":"agentPrice1","at":"2026-07-27T06:34:23.928Z"}
+{"type":"view_product","shortName":"khanh","groupName":"agentPrice1","productName":"Khung Bàn Nâng Hạ 2 Động Cơ Omni","at":"2026-07-27T06:34:30.558Z"}
+>>>>>>> 7b50c0350eea571349cdf9b7cbdaa72694416f3f
