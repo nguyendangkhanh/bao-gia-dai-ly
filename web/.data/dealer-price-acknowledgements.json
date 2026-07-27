@@ -67,6 +67,115 @@
           }
         }
       ]
+    },
+    {
+      "dealerShortName": "khanh",
+      "snapshotVersion": "2026-07-27T06:34:24.129Z",
+      "priceTier": "agent1",
+      "acknowledgedAt": "2026-07-27T06:34:26.730Z",
+      "changedVariantIds": [
+        957,
+        903,
+        909,
+        947,
+        948,
+        1369,
+        904,
+        910,
+        1368
+      ],
+      "changes": [
+        {
+          "variantId": 957,
+          "retailChange": null,
+          "dealerChange": {
+            "oldValue": 285000,
+            "newValue": 200000,
+            "amount": 85000,
+            "direction": "decreased"
+          }
+        },
+        {
+          "variantId": 903,
+          "retailChange": {
+            "oldValue": 2500000,
+            "newValue": 2550000,
+            "amount": 50000,
+            "direction": "increased"
+          },
+          "dealerChange": null
+        },
+        {
+          "variantId": 909,
+          "retailChange": {
+            "oldValue": 2500000,
+            "newValue": 2550000,
+            "amount": 50000,
+            "direction": "increased"
+          },
+          "dealerChange": null
+        },
+        {
+          "variantId": 947,
+          "retailChange": {
+            "oldValue": 2500000,
+            "newValue": 2550000,
+            "amount": 50000,
+            "direction": "increased"
+          },
+          "dealerChange": null
+        },
+        {
+          "variantId": 948,
+          "retailChange": {
+            "oldValue": 2500000,
+            "newValue": 2550000,
+            "amount": 50000,
+            "direction": "increased"
+          },
+          "dealerChange": null
+        },
+        {
+          "variantId": 1369,
+          "retailChange": {
+            "oldValue": 2500000,
+            "newValue": 2550000,
+            "amount": 50000,
+            "direction": "increased"
+          },
+          "dealerChange": null
+        },
+        {
+          "variantId": 904,
+          "retailChange": {
+            "oldValue": 2500000,
+            "newValue": 2550000,
+            "amount": 50000,
+            "direction": "increased"
+          },
+          "dealerChange": null
+        },
+        {
+          "variantId": 910,
+          "retailChange": {
+            "oldValue": 2500000,
+            "newValue": 2550000,
+            "amount": 50000,
+            "direction": "increased"
+          },
+          "dealerChange": null
+        },
+        {
+          "variantId": 1368,
+          "retailChange": {
+            "oldValue": 2500000,
+            "newValue": 2550000,
+            "amount": 50000,
+            "direction": "increased"
+          },
+          "dealerChange": null
+        }
+      ]
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
-  "version": "2026-06-22T04:37:38.226Z",
-  "createdAt": "2026-06-22T04:37:38.226Z",
+  "version": "2026-07-27T06:34:24.129Z",
+  "createdAt": "2026-07-27T06:34:24.129Z",
   "products": [
     {
       "productId": 2,
@@ -235,17 +235,8 @@
     },
     {
       "productId": 6,
-      "productName": "Kê Chân Công Thái Học Fr08 - Fr09 - Lumi",
+      "productName": "Kê Chân Công Thái Học",
       "variants": [
-        {
-          "variantId": 25,
-          "sku": "FR09GREY",
-          "barcode": "Kê Chân FR09 Xám",
-          "displayName": "Fr09 Xám",
-          "price": 395000,
-          "agentPrice1": 255000,
-          "agentPrice2": 245000
-        },
         {
           "variantId": 24,
           "sku": "FR09",
@@ -261,8 +252,8 @@
           "barcode": "Kê Chân Lumi Đen",
           "displayName": null,
           "price": 390000,
-          "agentPrice1": 285000,
-          "agentPrice2": 285000
+          "agentPrice1": 200000,
+          "agentPrice2": 200000
         },
         {
           "variantId": 23,
@@ -272,6 +263,15 @@
           "price": 255000,
           "agentPrice1": 180000,
           "agentPrice2": 170000
+        },
+        {
+          "variantId": 25,
+          "sku": "FR09GREY",
+          "barcode": "Kê Chân FR09 Xám",
+          "displayName": "Fr09 Xám",
+          "price": 395000,
+          "agentPrice1": 255000,
+          "agentPrice2": 245000
         }
       ]
     },
@@ -1399,22 +1399,31 @@
     },
     {
       "productId": 36,
-      "productName": "Xiaomi Manson Regal",
+      "productName": "Manson Regal",
       "variants": [
-        {
-          "variantId": 133,
-          "sku": "XMS.RGX",
-          "barcode": "Regal Xanh",
-          "displayName": "Xanh",
-          "price": 1680000,
-          "agentPrice1": 1380000,
-          "agentPrice2": 1330000
-        },
         {
           "variantId": 132,
           "sku": "XMS.RGD",
           "barcode": "Regal Đen",
           "displayName": "Đen",
+          "price": 1680000,
+          "agentPrice1": 1380000,
+          "agentPrice2": 1330000
+        },
+        {
+          "variantId": 131,
+          "sku": "XMS.RGT",
+          "barcode": "Regal Trắng",
+          "displayName": "Trắng",
+          "price": 1680000,
+          "agentPrice1": 1380000,
+          "agentPrice2": 1330000
+        },
+        {
+          "variantId": 133,
+          "sku": "XMS.RGX",
+          "barcode": "Regal Xanh",
+          "displayName": "Xanh",
           "price": 1680000,
           "agentPrice1": 1380000,
           "agentPrice2": 1330000
@@ -1436,21 +1445,12 @@
           "price": 1680000,
           "agentPrice1": 1380000,
           "agentPrice2": 1330000
-        },
-        {
-          "variantId": 131,
-          "sku": "XMS.RGT",
-          "barcode": "Regal Trắng",
-          "displayName": "Trắng",
-          "price": 1680000,
-          "agentPrice1": 1380000,
-          "agentPrice2": 1330000
         }
       ]
     },
     {
       "productId": 37,
-      "productName": "Xiaomi Manson Ergonomic",
+      "productName": "Manson Ergonomic",
       "variants": [
         {
           "variantId": 136,
@@ -1510,11 +1510,20 @@
       "productName": "Combo Bàn Nâng Hạ Manson SmartDesk",
       "variants": [
         {
+          "variantId": 903,
+          "sku": "NH-DEN-12&1206-MB-DEN",
+          "barcode": "Combo Khung 1.2m Đen, Mặt 1.2m x 0.6m Đen",
+          "displayName": "1.2m Đen,1.2m x 0.6m Đen",
+          "price": 2550000,
+          "agentPrice1": 1850000,
+          "agentPrice2": 1850000
+        },
+        {
           "variantId": 909,
           "sku": "NH-TRANG-12&1206-MB-TRANG",
           "barcode": "Combo Khung 1.2m Trắng, Mặt 1.2m x 0.6m Trắng",
           "displayName": "1.2m Trắng, 1.2m x 0.6m Trắng",
-          "price": 2500000,
+          "price": 2550000,
           "agentPrice1": 1850000,
           "agentPrice2": 1850000
         },
@@ -1546,15 +1555,6 @@
           "agentPrice2": 2000000
         },
         {
-          "variantId": 903,
-          "sku": "NH-DEN-12&1206-MB-DEN",
-          "barcode": "Combo Khung 1.2m Đen, Mặt 1.2m x 0.6m Đen",
-          "displayName": "1.2m Đen,1.2m x 0.6m Đen",
-          "price": 2500000,
-          "agentPrice1": 1850000,
-          "agentPrice2": 1850000
-        },
-        {
           "variantId": 951,
           "sku": "NH-TRANG-1416&1406-MB-DEN",
           "barcode": "Combo Khung 1.4m-1.6m Trắng, Mặt 1.4m x 0.6m Đen",
@@ -1568,7 +1568,7 @@
           "sku": "NH-DEN-12&1206-MB-TRANG",
           "barcode": "Combo Khung 1.2m Đen, Mặt 1.2m x 0.6m Trắng",
           "displayName": null,
-          "price": 2500000,
+          "price": 2550000,
           "agentPrice1": 1850000,
           "agentPrice2": 1850000
         },
@@ -1595,7 +1595,7 @@
           "sku": "NH-TRANG-12&1206-MB-DEN",
           "barcode": "Combo Khung 1.2m Trắng, Mặt 1.2m x 0.6m Đen",
           "displayName": null,
-          "price": 2500000,
+          "price": 2550000,
           "agentPrice1": 1850000,
           "agentPrice2": 1850000
         },
@@ -1618,11 +1618,20 @@
           "agentPrice2": 2050000
         },
         {
-          "variantId": 910,
-          "sku": "NH-TRANG-12&1206-MB-VANGO",
-          "barcode": "Combo Khung 1.2m Trắng, Mặt 1.2m x 0.6m Walnut",
-          "displayName": "1.2m Trắng, 1.2m x 0.6m Walnut",
-          "price": 2500000,
+          "variantId": 1369,
+          "sku": "NH-TRANG-12&1206-MB-SOI-OAK",
+          "barcode": "Combo Khung 1.2m Trắng, Mặt 1.2m x 0.6m Sồi Oak",
+          "displayName": null,
+          "price": 2550000,
+          "agentPrice1": 1850000,
+          "agentPrice2": 1850000
+        },
+        {
+          "variantId": 904,
+          "sku": "NH-DEN-12&1206-MB-VANGO",
+          "barcode": "Combo Khung 1.2m Đen, Mặt 1.2m x 0.6m Walnut",
+          "displayName": "1.2m Đen,1.2m x 0.6m Walnut",
+          "price": 2550000,
           "agentPrice1": 1850000,
           "agentPrice2": 1850000
         },
@@ -1634,6 +1643,24 @@
           "price": 2750000,
           "agentPrice1": 2050000,
           "agentPrice2": 2050000
+        },
+        {
+          "variantId": 910,
+          "sku": "NH-TRANG-12&1206-MB-VANGO",
+          "barcode": "Combo Khung 1.2m Trắng, Mặt 1.2m x 0.6m Walnut",
+          "displayName": "1.2m Trắng, 1.2m x 0.6m Walnut",
+          "price": 2550000,
+          "agentPrice1": 1850000,
+          "agentPrice2": 1850000
+        },
+        {
+          "variantId": 1368,
+          "sku": "NH-DEN-12&1206-MB-SOI-OAK",
+          "barcode": "Combo Khung 1.2m Đen, Mặt 1.2m x 0.6m Sồi Oak",
+          "displayName": null,
+          "price": 2550000,
+          "agentPrice1": 1850000,
+          "agentPrice2": 1850000
         },
         {
           "variantId": 949,
@@ -1661,33 +1688,6 @@
           "price": 2750000,
           "agentPrice1": 2050000,
           "agentPrice2": 2050000
-        },
-        {
-          "variantId": 1368,
-          "sku": "NH-DEN-12&1206-MB-SOI-OAK",
-          "barcode": "Combo Khung 1.2m Đen, Mặt 1.2m x 0.6m Sồi Oak",
-          "displayName": null,
-          "price": 2500000,
-          "agentPrice1": 1850000,
-          "agentPrice2": 1850000
-        },
-        {
-          "variantId": 1369,
-          "sku": "NH-TRANG-12&1206-MB-SOI-OAK",
-          "barcode": "Combo Khung 1.2m Trắng, Mặt 1.2m x 0.6m Sồi Oak",
-          "displayName": null,
-          "price": 2500000,
-          "agentPrice1": 1850000,
-          "agentPrice2": 1850000
-        },
-        {
-          "variantId": 904,
-          "sku": "NH-DEN-12&1206-MB-VANGO",
-          "barcode": "Combo Khung 1.2m Đen, Mặt 1.2m x 0.6m Walnut",
-          "displayName": "1.2m Đen,1.2m x 0.6m Walnut",
-          "price": 2500000,
-          "agentPrice1": 1850000,
-          "agentPrice2": 1850000
         },
         {
           "variantId": 1370,
@@ -2206,6 +2206,366 @@
           "price": 2350000,
           "agentPrice1": 1750000,
           "agentPrice2": 1750000
+        }
+      ]
+    },
+    {
+      "productId": 61,
+      "productName": "Khung Bàn Nâng Hạ 2 Động Cơ Omni",
+      "variants": [
+        {
+          "variantId": 1508,
+          "sku": "NH-2DC-OMNI-DEN",
+          "barcode": "Khung bàn 2 động cơ Omni Desk - Đen",
+          "displayName": "Đen",
+          "price": 7500000,
+          "agentPrice1": 6000000,
+          "agentPrice2": 6000000
+        },
+        {
+          "variantId": 1509,
+          "sku": "NH-2DC-OMNI-TRANG",
+          "barcode": "Khung bàn 2 động cơ Omni Desk - Trắng",
+          "displayName": "Trắng",
+          "price": 7500000,
+          "agentPrice1": 6000000,
+          "agentPrice2": 6000000
+        }
+      ]
+    },
+    {
+      "productId": 62,
+      "productName": "Mặt Bàn 25mm Dùng Cho Omni và Standing Desk",
+      "variants": [
+        {
+          "variantId": 1514,
+          "sku": "25MM-16075-MB-DEN",
+          "barcode": "mặt bàn 1.6m x 0.75m đen (25mm)",
+          "displayName": "mặt bàn 1.6m x 0.75m / Đen",
+          "price": 1700000,
+          "agentPrice1": 1350000,
+          "agentPrice2": 1350000
+        },
+        {
+          "variantId": 1515,
+          "sku": "25MM-16075-MB-TRANG",
+          "barcode": "mặt bàn 1.6m x 0.75m trắng (25mm)",
+          "displayName": "mặt bàn 1.6m x 0.75m / Trắng",
+          "price": 1700000,
+          "agentPrice1": 1350000,
+          "agentPrice2": 1350000
+        },
+        {
+          "variantId": 1516,
+          "sku": "25MM-16075-MB-VANGO",
+          "barcode": "mặt bàn 1.6m x 0.75m vân gỗ (25mm)",
+          "displayName": "mặt bàn 1.6m x 0.75m / Vân Gỗ",
+          "price": 1700000,
+          "agentPrice1": 1350000,
+          "agentPrice2": 1350000
+        },
+        {
+          "variantId": 1517,
+          "sku": "25MM-16075-MB-SOI-OAK",
+          "barcode": "mặt bàn 1.6m x 0.75m sồi oak (25mm)",
+          "displayName": "mặt bàn 1.6m x 0.75m / Sồi (Oak)",
+          "price": 1700000,
+          "agentPrice1": 1350000,
+          "agentPrice2": 1350000
+        },
+        {
+          "variantId": 1511,
+          "sku": "25MM-1407-MB-TRANG",
+          "barcode": "mặt bàn 1.4m x 0.7m trắng (25mm)",
+          "displayName": "mặt bàn 1.4m x 0.7m / Trắng",
+          "price": 1600000,
+          "agentPrice1": 1250000,
+          "agentPrice2": 1250000
+        },
+        {
+          "variantId": 1513,
+          "sku": "25MM-1407-MB-SOI-OAK",
+          "barcode": "mặt bàn 1.4m x 0.7m sồi oak (25mm)",
+          "displayName": "mặt bàn 1.4m x 0.7m / Sồi (Oak)",
+          "price": 1600000,
+          "agentPrice1": 1250000,
+          "agentPrice2": 1250000
+        },
+        {
+          "variantId": 1521,
+          "sku": "25MM-1808-MB-SOI-OAK",
+          "barcode": "mặt bàn 1.8m x 0.8m sồi oak (25mm)",
+          "displayName": "mặt bàn 1.8m x 0.8m / Sồi (Oak)",
+          "price": 1950000,
+          "agentPrice1": 1500000,
+          "agentPrice2": 1500000
+        },
+        {
+          "variantId": 1510,
+          "sku": "25MM-1407-MB-DEN",
+          "barcode": "mặt bàn 1.4m x 0.7m đen (25mm)",
+          "displayName": "mặt bàn 1.4m x 0.7m / Đen",
+          "price": 1600000,
+          "agentPrice1": 1250000,
+          "agentPrice2": 1250000
+        },
+        {
+          "variantId": 1512,
+          "sku": "25MM-1407-MB-VANGO",
+          "barcode": "mặt bàn 1.4m x 0.7m vân gỗ (25mm)",
+          "displayName": "mặt bàn 1.4m x 0.7m / Vân Gỗ",
+          "price": 1600000,
+          "agentPrice1": 1250000,
+          "agentPrice2": 1250000
+        },
+        {
+          "variantId": 1518,
+          "sku": "25MM-1808-MB-DEN",
+          "barcode": "mặt bàn 1.8m x 0.8m đen (25mm)",
+          "displayName": "mặt bàn 1.8m x 0.8m / Đen",
+          "price": 1950000,
+          "agentPrice1": 1500000,
+          "agentPrice2": 1500000
+        },
+        {
+          "variantId": 1519,
+          "sku": "25MM-1808-MB-TRANG",
+          "barcode": "mặt bàn 1.8m x 0.8m trắng (25mm)",
+          "displayName": "mặt bàn 1.8m x 0.8m / Trắng",
+          "price": 1950000,
+          "agentPrice1": 1500000,
+          "agentPrice2": 1500000
+        },
+        {
+          "variantId": 1520,
+          "sku": "25MM-1808-MB-VANGO",
+          "barcode": "mặt bàn 1.8m x 0.8m vân gỗ (25mm)",
+          "displayName": "mặt bàn 1.8m x 0.8m / Vân Gỗ",
+          "price": 1950000,
+          "agentPrice1": 1500000,
+          "agentPrice2": 1500000
+        }
+      ]
+    },
+    {
+      "productId": 63,
+      "productName": "Combo Bàn Nâng Hạ 2 Động Cơ Omni Desk",
+      "variants": [
+        {
+          "variantId": 1561,
+          "sku": "NH-2DC-OMNI-DEN&25MM-1407-MB-DEN",
+          "barcode": "combo bàn omni - khung đen mặt đen 1.4m (25mm)",
+          "displayName": "khung 2 động cơ omni đen / mặt bàn 1.4m x 0.7m đen",
+          "price": 8800000,
+          "agentPrice1": 7250000,
+          "agentPrice2": 7250000
+        },
+        {
+          "variantId": 1564,
+          "sku": "NH-2DC-OMNI-DEN&25MM-1407-MB-VANGO",
+          "barcode": "combo bàn omni - khung đen mặt vân gỗ 1.4m (25mm)",
+          "displayName": "khung 2 động cơ omni đen / mặt bàn 1.4m x 0.7m vân gỗ",
+          "price": 8800000,
+          "agentPrice1": 7250000,
+          "agentPrice2": 7250000
+        },
+        {
+          "variantId": 1558,
+          "sku": "NH-2DC-OMNI-DEN&25MM-1407-MB-TRANG",
+          "barcode": "combo bàn omni - khung đen mặt trắng 1.4m (25mm)",
+          "displayName": "khung 2 động cơ omni đen / mặt bàn 1.4m x 0.7m trắng",
+          "price": 8800000,
+          "agentPrice1": 7250000,
+          "agentPrice2": 7250000
+        },
+        {
+          "variantId": 1565,
+          "sku": "NH-2DC-OMNI-DEN&25MM-16075-MB-VANGO",
+          "barcode": "combo bàn omni - khung đen mặt vân gỗ 1.6m (25mm)",
+          "displayName": "khung 2 động cơ omni đen / mặt bàn 1.6m x 0.75m vân gỗ",
+          "price": 8900000,
+          "agentPrice1": 7350000,
+          "agentPrice2": 7350000
+        },
+        {
+          "variantId": 1555,
+          "sku": "NH-2DC-OMNI-TRANG&25MM-1407-MB-SOI-OAK",
+          "barcode": "combo bàn omni - khung trắng mặt sồi oak 1.4m (25mm)",
+          "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.4m x 0.7m sồi oak",
+          "price": 8800000,
+          "agentPrice1": 7250000,
+          "agentPrice2": 7250000
+        },
+        {
+          "variantId": 1562,
+          "sku": "NH-2DC-OMNI-DEN&25MM-16075-MB-DEN",
+          "barcode": "combo bàn omni - khung đen mặt đen 1.6m (25mm)",
+          "displayName": "khung 2 động cơ omni đen / mặt bàn 1.6m x 0.75m đen",
+          "price": 8900000,
+          "agentPrice1": 7350000,
+          "agentPrice2": 7350000
+        },
+        {
+          "variantId": 1550,
+          "sku": "NH-2DC-OMNI-TRANG&25MM-16075-MB-DEN",
+          "barcode": "combo bàn omni - khung trắng mặt đen 1.6m (25mm)",
+          "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.6m x 0.75m đen",
+          "price": 8900000,
+          "agentPrice1": 7350000,
+          "agentPrice2": 7350000
+        },
+        {
+          "variantId": 1552,
+          "sku": "NH-2DC-OMNI-TRANG&25MM-1407-MB-VANGO",
+          "barcode": "combo bàn omni - khung trắng mặt vân gỗ 1.4m (25mm)",
+          "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.4m x 0.7m vân gỗ",
+          "price": 8800000,
+          "agentPrice1": 7250000,
+          "agentPrice2": 7250000
+        },
+        {
+          "variantId": 1553,
+          "sku": "NH-2DC-OMNI-TRANG&25MM-16075-MB-VANGO",
+          "barcode": "combo bàn omni - khung trắng mặt vân gỗ 1.6m (25mm)",
+          "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.6m x 0.75m vân gỗ",
+          "price": 8900000,
+          "agentPrice1": 7350000,
+          "agentPrice2": 7350000
+        },
+        {
+          "variantId": 1559,
+          "sku": "NH-2DC-OMNI-DEN&25MM-16075-MB-TRANG",
+          "barcode": "combo bàn omni - khung đen mặt trắng 1.6m (25mm)",
+          "displayName": "khung 2 động cơ omni đen / mặt bàn 1.6m x 0.75m trắng",
+          "price": 8900000,
+          "agentPrice1": 7350000,
+          "agentPrice2": 7350000
+        },
+        {
+          "variantId": 1546,
+          "sku": "NH-2DC-OMNI-TRANG&25MM-1407-MB-TRANG",
+          "barcode": "combo bàn omni - khung trắng mặt trắng 1.4m (25mm)",
+          "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.4m x 0.7m trắng",
+          "price": 8800000,
+          "agentPrice1": 7250000,
+          "agentPrice2": 7250000
+        },
+        {
+          "variantId": 1556,
+          "sku": "NH-2DC-OMNI-TRANG&25MM-16075-MB-SOI-OAK",
+          "barcode": "combo bàn omni - khung trắng mặt sồi oak 1.6m (25mm)",
+          "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.6m x 0.75m sồi oak",
+          "price": 8900000,
+          "agentPrice1": 7350000,
+          "agentPrice2": 7350000
+        },
+        {
+          "variantId": 1563,
+          "sku": "NH-2DC-OMNI-DEN&25MM-1808-MB-DEN",
+          "barcode": "combo bàn omni - khung đen mặt đen 1.8m (25mm)",
+          "displayName": "khung 2 động cơ omni đen / mặt bàn 1.8m x 0.8m đen",
+          "price": 9150000,
+          "agentPrice1": 7500000,
+          "agentPrice2": 7500000
+        },
+        {
+          "variantId": 1547,
+          "sku": "NH-2DC-OMNI-TRANG&25MM-16075-MB-TRANG",
+          "barcode": "combo bàn omni - khung trắng mặt trắng 1.6m (25mm)",
+          "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.6m x 0.75m trắng",
+          "price": 8900000,
+          "agentPrice1": 7350000,
+          "agentPrice2": 7350000
+        },
+        {
+          "variantId": 1560,
+          "sku": "NH-2DC-OMNI-DEN&25MM-1808-MB-TRANG",
+          "barcode": "combo bàn omni - khung đen mặt trắng 1.8m (25mm)",
+          "displayName": "khung 2 động cơ omni đen / mặt bàn 1.8m x 0.8m trắng",
+          "price": 9150000,
+          "agentPrice1": 7500000,
+          "agentPrice2": 7500000
+        },
+        {
+          "variantId": 1548,
+          "sku": "NH-2DC-OMNI-TRANG&25MM-1808-MB-TRANG",
+          "barcode": "combo bàn omni - khung trắng mặt trắng 1.8m (25mm)",
+          "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.8m x 0.8m trắng",
+          "price": 9150000,
+          "agentPrice1": 7500000,
+          "agentPrice2": 7500000
+        },
+        {
+          "variantId": 1549,
+          "sku": "NH-2DC-OMNI-TRANG&25MM-1407-MB-DEN",
+          "barcode": "combo bàn omni - khung trắng mặt đen 1.4m (25mm)",
+          "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.4m x 0.7m đen",
+          "price": 8800000,
+          "agentPrice1": 7250000,
+          "agentPrice2": 7250000
+        },
+        {
+          "variantId": 1551,
+          "sku": "NH-2DC-OMNI-TRANG&25MM-1808-MB-DEN",
+          "barcode": "combo bàn omni - khung trắng mặt đen 1.8m (25mm)",
+          "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.8m x 0.8m đen",
+          "price": 9150000,
+          "agentPrice1": 7500000,
+          "agentPrice2": 7500000
+        },
+        {
+          "variantId": 1554,
+          "sku": "NH-2DC-OMNI-TRANG&25MM-1808-MB-VANGO",
+          "barcode": "combo bàn omni - khung trắng mặt vân gỗ 1.8m (25mm)",
+          "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.8m x 0.8m vân gỗ",
+          "price": 9150000,
+          "agentPrice1": 7500000,
+          "agentPrice2": 7500000
+        },
+        {
+          "variantId": 1557,
+          "sku": "NH-2DC-OMNI-TRANG&25MM-1808-MB-SOI-OAK",
+          "barcode": "combo bàn omni - khung trắng mặt sồi oak 1.8m (25mm)",
+          "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.8m x 0.8m sồi oak",
+          "price": 9150000,
+          "agentPrice1": 7500000,
+          "agentPrice2": 7500000
+        },
+        {
+          "variantId": 1566,
+          "sku": "NH-2DC-OMNI-DEN&25MM-1808-MB-VANGO",
+          "barcode": "combo bàn omni - khung đen mặt vân gỗ 1.8m (25mm)",
+          "displayName": "khung 2 động cơ omni đen / mặt bàn 1.8m x 0.8m vân gỗ",
+          "price": 9150000,
+          "agentPrice1": 7500000,
+          "agentPrice2": 7500000
+        },
+        {
+          "variantId": 1567,
+          "sku": "NH-2DC-OMNI-DEN&25MM-1407-MB-SOI-OAK",
+          "barcode": "combo bàn omni - khung đen mặt sồi oak 1.4m (25mm)",
+          "displayName": "khung 2 động cơ omni đen / mặt bàn 1.4m x 0.7m sồi oak",
+          "price": 8800000,
+          "agentPrice1": 7250000,
+          "agentPrice2": 7250000
+        },
+        {
+          "variantId": 1568,
+          "sku": "NH-2DC-OMNI-DEN&25MM-16075-MB-SOI-OAK",
+          "barcode": "combo bàn omni - khung đen mặt sồi oak 1.6m (25mm)",
+          "displayName": "khung 2 động cơ omni đen / mặt bàn 1.6m x 0.75m sồi oak",
+          "price": 8900000,
+          "agentPrice1": 7350000,
+          "agentPrice2": 7350000
+        },
+        {
+          "variantId": 1569,
+          "sku": "NH-2DC-OMNI-DEN&25MM-1808-MB-SOI-OAK",
+          "barcode": "combo bàn omni - khung đen mặt sồi oak 1.8m (25mm)",
+          "displayName": "khung 2 động cơ omni đen / mặt bàn 1.8m x 0.8m sồi oak",
+          "price": 9150000,
+          "agentPrice1": 7500000,
+          "agentPrice2": 7500000
         }
       ]
     }
