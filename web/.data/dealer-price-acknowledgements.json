@@ -176,6 +176,48 @@
           "dealerChange": null
         }
       ]
+    },
+    {
+      "dealerShortName": "Đại Lý Think",
+      "snapshotVersion": "2026-08-12T09:04:09.317Z",
+      "priceTier": "agent2",
+      "acknowledgedAt": "2026-08-12T09:12:05.167Z",
+      "changedVariantIds": [
+        42,
+        43
+      ],
+      "changes": [
+        {
+          "variantId": 42,
+          "retailChange": {
+            "oldValue": 55500000,
+            "newValue": 57000000,
+            "amount": 1500000,
+            "direction": "increased"
+          },
+          "dealerChange": {
+            "oldValue": 51000000,
+            "newValue": 52000000,
+            "amount": 1000000,
+            "direction": "increased"
+          }
+        },
+        {
+          "variantId": 43,
+          "retailChange": {
+            "oldValue": 55500000,
+            "newValue": 57000000,
+            "amount": 1500000,
+            "direction": "increased"
+          },
+          "dealerChange": {
+            "oldValue": 51000000,
+            "newValue": 52000000,
+            "amount": 1000000,
+            "direction": "increased"
+          }
+        }
+      ]
     }
   ]
 }

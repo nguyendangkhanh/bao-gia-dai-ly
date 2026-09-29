@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-20T05:28:09.350Z",
+  "updatedAt": "2026-09-29T07:07:00.455Z",
   "dealers": [
     {
       "name": "Đại lý Hoàn - The Manson (HUY)",
@@ -107,6 +107,20 @@
       "priceTier": "agent1"
     },
     {
+      "name": "mtcomputer",
+      "shortName": "mtcomputer",
+      "groupName": "mtcomputer",
+      "pass": "mtcomputer",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Coptrontech",
+      "shortName": "Coptrontech",
+      "groupName": "Coptrontech",
+      "pass": "coptrontech2026",
+      "priceTier": "agent1"
+    },
+    {
       "name": "aVui",
       "shortName": "Nội Thất Cơ Khí - a Vui",
       "groupName": "aVui",
@@ -132,6 +146,13 @@
       "shortName": "Đại Lý Combat VN",
       "groupName": "TheManson x COMBAT VN",
       "pass": "combat2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Đại lý Sướng",
+      "shortName": "Đại lý Sướng",
+      "groupName": "Đại lý Sướng",
+      "pass": "xuong2026",
       "priceTier": "agent1"
     },
     {

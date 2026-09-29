@@ -1,6 +1,6 @@
 {
-  "version": "2026-07-27T06:34:24.129Z",
-  "createdAt": "2026-07-27T06:34:24.129Z",
+  "version": "2026-08-12T09:04:09.317Z",
+  "createdAt": "2026-08-12T09:04:09.317Z",
   "products": [
     {
       "productId": 2,
@@ -438,7 +438,7 @@
         {
           "variantId": 40,
           "sku": "ATLEBD",
-          "barcode": "Tựa Đầu Embody x Logitech Màu Xanh (Made In USA)",
+          "barcode": "Tựa Đầu Embody x Logitech Màu Xanh",
           "displayName": "Màu Xanh (Made In USA)",
           "price": 8000000,
           "agentPrice1": 5800000,
@@ -464,18 +464,18 @@
           "sku": "HMALOGITECHBLACK",
           "barcode": "Embody x Logitech Màu Đen",
           "displayName": "Màu Đen",
-          "price": 50000000,
-          "agentPrice1": 45500000,
-          "agentPrice2": 45500000
+          "price": 57000000,
+          "agentPrice1": 52000000,
+          "agentPrice2": 52000000
         },
         {
           "variantId": 43,
           "sku": "HMALOGITECHBLUE",
           "barcode": "Herman Embody x Logitech Màu Xanh",
           "displayName": "Màu Xanh",
-          "price": 50000000,
-          "agentPrice1": 45500000,
-          "agentPrice2": 45500000
+          "price": 57000000,
+          "agentPrice1": 52000000,
+          "agentPrice2": 52000000
         }
       ]
     },
