@@ -73,8 +73,7 @@ export async function POST(req: Request) {
     customerPhone: customerPhone || undefined,
     expectedTime: expectedTime || undefined,
     note: note || undefined,
-    dealerName: session.name || session.shortName,
-    dealerGroup: session.groupName || undefined,
+    dealerName: session.shortName || session.name,
   });
 
   if (!success) {
