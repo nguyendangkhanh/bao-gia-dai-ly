@@ -51,9 +51,7 @@ export async function notifyRawTelegram(text: string) {
 
 export interface CustomerAlertNotificationParams {
   showroomTitle: string;
-  showroomAddress?: string;
   productName: string;
-  quotedPrice: string;
   customerName?: string;
   customerPhone?: string;
   expectedTime?: string;
@@ -65,9 +63,7 @@ export interface CustomerAlertNotificationParams {
 export async function notifyCustomerAlert(params: CustomerAlertNotificationParams): Promise<boolean> {
   const {
     showroomTitle,
-    showroomAddress,
     productName,
-    quotedPrice,
     customerName,
     customerPhone,
     expectedTime,
@@ -80,32 +76,17 @@ export async function notifyCustomerAlert(params: CustomerAlertNotificationParam
   const timeStr = now.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" });
   const dateStr = now.toLocaleDateString("vi-VN", { day: "2-digit", month: "2-digit", year: "numeric" });
 
-  const customerInfo = [customerName?.trim(), customerPhone?.trim()].filter(Boolean).join(" - ") || "Chưa cung cấp";
-  const showroomInfo = showroomAddress ? `${showroomTitle} (${showroomAddress})` : showroomTitle;
   const dealerInfo = dealerGroup ? `${dealerName} (${dealerGroup})` : dealerName;
 
   const lines = [
-    "🚨 CÓ KHÁCH TỚI SHOWROOM 🚨",
-    `Có khách tới showroom, tới xem sản phẩm: ${productName.trim()}, báo giá: ${quotedPrice.trim()} tại chi nhánh: ${showroomTitle}`,
-    "━━━━━━━━━━━━━━━━━━━━",
-    `🏢 Chi nhánh: ${showroomInfo}`,
-    `🛋 Sản phẩm: ${productName.trim()}`,
-    `💵 Báo giá: ${quotedPrice.trim()}`,
-    `👤 Khách hàng: ${customerInfo}`,
+    `🚨 CÓ KHÁCH TỚI ${showroomTitle} 🚨`,
+    `- Xem sản phẩm: ${productName.trim()}`,
+    `- Tên: ${customerName?.trim() || ""}`,
+    `- Số điện thoại: ${customerPhone?.trim() || ""}`,
+    `- Thời gian dự kiến: ${expectedTime?.trim() || ""}`,
+    `- Ghi chú: ${note?.trim() || ""}`,
+    `- Đại lý: ${dealerInfo} ${timeStr} - ${dateStr}`,
   ];
-
-  if (expectedTime?.trim()) {
-    lines.push(`⏰ Thời gian dự kiến: ${expectedTime.trim()}`);
-  }
-  if (note?.trim()) {
-    lines.push(`📝 Ghi chú: ${note.trim()}`);
-  }
-
-  lines.push(
-    "━━━━━━━━━━━━━━━━━━━━",
-    `🤝 Đại lý báo: ${dealerInfo}`,
-    `⏱ Thời gian gửi: ${timeStr} - ${dateStr}`
-  );
 
   const message = lines.join("\n");
   return sendTelegramMessage(message, TELEGRAM_CUSTOMER_ALERT_CHAT_ID);

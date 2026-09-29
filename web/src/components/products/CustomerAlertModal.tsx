@@ -7,24 +7,21 @@ interface CustomerAlertModalProps {
   isOpen: boolean;
   onClose: () => void;
   defaultProductName?: string;
-  defaultPrice?: string;
 }
 
 const QUICK_TIME_PRESETS = ["Hôm nay", "Sáng mai", "Chiều mai", "Đang tới ngay"];
+const QUICK_PRODUCT_TAGS = ["E3 Lite", "Foris", "Atum", "Bàn 1 động cơ", "Bàn 2 động cơ", "Không biết"];
 
 export default function CustomerAlertModal({
   isOpen,
   onClose,
   defaultProductName = "",
-  defaultPrice = "",
 }: CustomerAlertModalProps) {
   const [selectedBranch, setSelectedBranch] = useState<ShowroomBranch | null>(null);
   const [productName, setProductName] = useState(defaultProductName);
-  const [quotedPrice, setQuotedPrice] = useState(defaultPrice);
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
   const [expectedTime, setExpectedTime] = useState("");
-  const [note, setNote] = useState("");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -35,14 +32,12 @@ export default function CustomerAlertModal({
   const resetForm = useCallback(() => {
     setSelectedBranch(null);
     setProductName(defaultProductName);
-    setQuotedPrice(defaultPrice);
     setCustomerName("");
     setCustomerPhone("");
     setExpectedTime("");
-    setNote("");
     setErrorMsg("");
     setIsSuccess(false);
-  }, [defaultProductName, defaultPrice]);
+  }, [defaultProductName]);
 
   const handleClose = useCallback(() => {
     if (timerRef.current) {
@@ -84,6 +79,26 @@ export default function CustomerAlertModal({
 
   if (!isOpen) return null;
 
+  const isProductTagActive = (tag: string) =>
+    productName
+      .split(",")
+      .map((p) => p.trim().toLowerCase())
+      .includes(tag.toLowerCase());
+
+  const toggleProductTag = (tag: string) => {
+    setProductName((prev) => {
+      const parts = prev
+        .split(",")
+        .map((p) => p.trim())
+        .filter(Boolean);
+      const isActive = parts.some((p) => p.toLowerCase() === tag.toLowerCase());
+      const next = isActive
+        ? parts.filter((p) => p.toLowerCase() !== tag.toLowerCase())
+        : [...parts, tag];
+      return next.join(", ");
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg("");
@@ -93,11 +108,7 @@ export default function CustomerAlertModal({
       return;
     }
     if (!productName.trim() || productName.trim().length < 2) {
-      setErrorMsg("Vui lòng nhập tên sản phẩm khách muốn tới xem.");
-      return;
-    }
-    if (!quotedPrice.trim()) {
-      setErrorMsg("Vui lòng nhập giá đã báo cho khách.");
+      setErrorMsg("Vui lòng nhập sản phẩm khách xem.");
       return;
     }
 
@@ -110,11 +121,9 @@ export default function CustomerAlertModal({
           showroomTitle: selectedBranch.title,
           showroomAddress: selectedBranch.description,
           productName: productName.trim(),
-          quotedPrice: quotedPrice.trim(),
           customerName: customerName.trim() || undefined,
           customerPhone: customerPhone.trim() || undefined,
           expectedTime: expectedTime.trim() || undefined,
-          note: note.trim() || undefined,
         }),
       });
 
@@ -205,8 +214,7 @@ export default function CustomerAlertModal({
               </p>
               <div className="rounded-xl border border-emerald-200 bg-emerald-50/60 p-4 text-left text-xs sm:text-sm space-y-1.5 text-zinc-700 max-w-sm mx-auto">
                 <p><span className="font-semibold text-zinc-900">Chi nhánh:</span> {selectedBranch?.title}</p>
-                <p><span className="font-semibold text-zinc-900">Sản phẩm:</span> {productName}</p>
-                <p><span className="font-semibold text-zinc-900">Báo giá:</span> {quotedPrice}</p>
+                <p><span className="font-semibold text-zinc-900">Khách xem sản phẩm:</span> {productName}</p>
                 {customerName && <p><span className="font-semibold text-zinc-900">Khách hàng:</span> {customerName} {customerPhone ? `(${customerPhone})` : ""}</p>}
                 {expectedTime && <p><span className="font-semibold text-zinc-900">Dự kiến:</span> {expectedTime}</p>}
               </div>
@@ -284,43 +292,46 @@ export default function CustomerAlertModal({
                 </div>
               </div>
 
-              {/* Product and Quoted Price */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label htmlFor="product-name" className="block text-xs sm:text-sm font-semibold text-zinc-800 mb-1">
-                    2. Tới Xem Sản Phẩm <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    id="product-name"
-                    type="text"
-                    value={productName}
-                    onChange={(e) => setProductName(e.target.value)}
-                    placeholder="VD: Ghế Manson Vera, Iris..."
-                    className="w-full rounded-xl border border-zinc-300 bg-white px-3.5 py-2.5 text-base text-zinc-900 placeholder:text-zinc-400 focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
-                    required
-                  />
+              {/* Product */}
+              <div>
+                <label htmlFor="product-name" className="block text-xs sm:text-sm font-semibold text-zinc-800 mb-1">
+                  2. Khách Xem Sản Phẩm <span className="text-red-500">*</span>
+                </label>
+                <div className="flex flex-wrap gap-1.5 mb-2">
+                  {QUICK_PRODUCT_TAGS.map((tag) => {
+                    const isActive = isProductTagActive(tag);
+                    return (
+                      <button
+                        key={tag}
+                        type="button"
+                        onClick={() => toggleProductTag(tag)}
+                        className={`flex items-center gap-1 px-2.5 py-1 text-xs rounded-lg border transition ${
+                          isActive
+                            ? "bg-orange-50 border-orange-400 text-orange-700 font-medium"
+                            : "bg-zinc-100 border-zinc-200 text-zinc-600 hover:bg-zinc-200"
+                        }`}
+                      >
+                        {tag}
+                        {isActive && <span className="text-orange-500 font-bold leading-none">×</span>}
+                      </button>
+                    );
+                  })}
                 </div>
-
-                <div>
-                  <label htmlFor="quoted-price" className="block text-xs sm:text-sm font-semibold text-zinc-800 mb-1">
-                    3. Báo Giá Đã Báo Cho Khách <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    id="quoted-price"
-                    type="text"
-                    value={quotedPrice}
-                    onChange={(e) => setQuotedPrice(e.target.value)}
-                    placeholder="VD: 4.850.000đ hoặc 4.5tr"
-                    className="w-full rounded-xl border border-zinc-300 bg-white px-3.5 py-2.5 text-base text-zinc-900 placeholder:text-zinc-400 focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
-                    required
-                  />
-                </div>
+                <input
+                  id="product-name"
+                  type="text"
+                  value={productName}
+                  onChange={(e) => setProductName(e.target.value)}
+                  placeholder="VD: Ghế Manson Vera, Iris..."
+                  className="w-full rounded-xl border border-zinc-300 bg-white px-3.5 py-2.5 text-base text-zinc-900 placeholder:text-zinc-400 focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                  required
+                />
               </div>
 
               {/* Customer info (Optional) */}
               <div>
                 <label className="block text-xs sm:text-sm font-semibold text-zinc-800 mb-1">
-                  4. Thông Tin Khách Hàng <span className="text-xs font-normal text-zinc-500">(Không bắt buộc)</span>
+                  3. Thông Tin Khách Hàng <span className="text-xs font-normal text-zinc-500">(Nên có)</span>
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <input
@@ -345,7 +356,7 @@ export default function CustomerAlertModal({
               <div>
                 <div className="flex items-center justify-between mb-1">
                   <label htmlFor="expected-time" className="block text-xs sm:text-sm font-semibold text-zinc-800">
-                    5. Thời Gian Dự Kiến Khách Tới <span className="text-xs font-normal text-zinc-500">(Tùy chọn)</span>
+                    4. Thời Gian Dự Kiến Khách Tới <span className="text-xs font-normal text-zinc-500">(Tùy chọn)</span>
                   </label>
                 </div>
                 <div className="flex flex-wrap gap-1.5 mb-2">
@@ -371,21 +382,6 @@ export default function CustomerAlertModal({
                   onChange={(e) => setExpectedTime(e.target.value)}
                   placeholder="VD: 15h chiều nay, ngày mai..."
                   className="w-full rounded-xl border border-zinc-300 bg-white px-3.5 py-2 text-base text-zinc-900 placeholder:text-zinc-400 focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
-                />
-              </div>
-
-              {/* Note (Optional) */}
-              <div>
-                <label htmlFor="customer-note" className="block text-xs sm:text-sm font-semibold text-zinc-800 mb-1">
-                  6. Ghi Chú Thêm Cho Showroom <span className="text-xs font-normal text-zinc-500">(Tùy chọn)</span>
-                </label>
-                <textarea
-                  id="customer-note"
-                  rows={2}
-                  value={note}
-                  onChange={(e) => setNote(e.target.value)}
-                  placeholder="VD: Khách muốn xem thử màu xám, đại lý đã chốt giá..."
-                  className="w-full rounded-xl border border-zinc-300 bg-white px-3.5 py-2 text-base text-zinc-900 placeholder:text-zinc-400 focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20 resize-none"
                 />
               </div>
 

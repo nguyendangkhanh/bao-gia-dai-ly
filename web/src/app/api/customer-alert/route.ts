@@ -33,7 +33,6 @@ export async function POST(req: Request) {
 
   const showroomTitle = String(body.showroomTitle || "").trim();
   const productName = String(body.productName || "").trim();
-  const quotedPrice = String(body.quotedPrice || "").trim();
   const customerName = String(body.customerName || "").trim();
   const customerPhone = String(body.customerPhone || "").trim();
   const expectedTime = String(body.expectedTime || "").trim();
@@ -60,26 +59,16 @@ export async function POST(req: Request) {
 
   if (!productName || productName.length < 2) {
     return NextResponse.json(
-      { ok: false, error: "Vui lòng nhập tên sản phẩm khách tới xem." },
+      { ok: false, error: "Vui lòng nhập sản phẩm khách xem." },
       { status: 400 }
     );
   }
 
-  if (!quotedPrice) {
-    return NextResponse.json(
-      { ok: false, error: "Vui lòng nhập giá đã báo cho khách." },
-      { status: 400 }
-    );
-  }
-
-  const showroomAddress = matchedShowroom.description;
   const finalShowroomTitle = matchedShowroom.title;
 
   const success = await notifyCustomerAlert({
     showroomTitle: finalShowroomTitle,
-    showroomAddress,
     productName,
-    quotedPrice,
     customerName: customerName || undefined,
     customerPhone: customerPhone || undefined,
     expectedTime: expectedTime || undefined,

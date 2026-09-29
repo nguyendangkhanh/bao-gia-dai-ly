@@ -10,7 +10,6 @@ export interface CustomerAlertPayload {
   showroomTitle: string;
   showroomAddress?: string;
   productName: string;
-  quotedPrice: string;
   customerName?: string;
   customerPhone?: string;
   expectedTime?: string;
