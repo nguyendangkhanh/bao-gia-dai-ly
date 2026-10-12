@@ -16,12 +16,20 @@ export type PublicProductVariant = {
   imageId: number | null;
 };
 
+export type PublicImage = {
+  id: number;
+  url: string;
+  alt: string | null;
+  position: number | null;
+  variantIds: number[];
+};
+
 export type PublicProduct = {
   id: number;
   name: string;
   vendor: string;
   description: string | null;
-  images: Product["images"];
+  images: PublicImage[];
   variants: PublicProductVariant[];
 };
 
@@ -30,30 +38,16 @@ export type PublicProduct = {
  * khác với lib/api.ts (dùng cho trang web nội bộ, nơi server tự chọn giá theo session).
  */
 export function sanitizeProductForDealer(product: Product, priceTier: PublicDealerInfo["priceTier"]): PublicProduct {
-  const images = (product.images || []).map((img) => {
-    const resolvedUrl = resolveImageUrl(img.url);
-    const formats = img.formats
-      ? Object.fromEntries(
-          Object.entries(img.formats).map(([k, fmt]) => [
-            k,
-            fmt && typeof fmt === "object" && "url" in fmt
-              ? { ...fmt, url: resolveImageUrl(String((fmt as { url: unknown }).url || "")) }
-              : fmt,
-          ]),
-        )
-      : undefined;
-
-    // Explicitly select public image fields — NEVER spread ...img
-    // to prevent leaking CRM's internal variants array (which contains all tier prices!)
-    return {
-      id: img.id,
-      url: resolvedUrl,
-      alt: img.alt ?? null,
-      position: img.position ?? null,
-      variantIds: img.variantIds ?? [],
-      ...(formats ? { formats } : {}),
-    };
-  });
+  // Chỉ chọn các trường ảnh cần thiết, loại bỏ formats đồ sộ của CRM (large, small...)
+  // giúp giảm 90% kích thước payload, tránh tràn buffer proxy (Nginx 128KB buffer overflow)
+  // và tuyệt đối không làm lộ mảng variants nội bộ của CRM.
+  const images: PublicImage[] = (product.images || []).map((img) => ({
+    id: img.id,
+    url: resolveImageUrl(img.url),
+    alt: img.alt ?? null,
+    position: img.position ?? null,
+    variantIds: img.variantIds ?? [],
+  }));
 
   return {
     id: product.id,
