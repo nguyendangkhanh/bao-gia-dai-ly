@@ -14,6 +14,12 @@ export type PublicProductVariant = {
   dealerPrice: number | null;
   active: boolean;
   imageId: number | null;
+  imageDecorIds?: number[];
+  link?: string | null;
+  weight?: number | null;
+  packageLength?: number | null;
+  packageWidth?: number | null;
+  packageHeight?: number | null;
 };
 
 export type PublicImage = {
@@ -29,6 +35,11 @@ export type PublicProduct = {
   name: string;
   vendor: string;
   description: string | null;
+  cover?: string | null;
+  retailMin?: number | null;
+  retailMax?: number | null;
+  dealerPriceMin?: number | null;
+  dealerPriceMax?: number | null;
   images: PublicImage[];
   variants: PublicProductVariant[];
 };
@@ -49,11 +60,19 @@ export function sanitizeProductForDealer(product: Product, priceTier: PublicDeal
     variantIds: img.variantIds ?? [],
   }));
 
+  const retailPrices = (product.variants || []).map((v) => v.price || 0).filter((p) => p > 0);
+  const retailMin = retailPrices.length ? Math.min(...retailPrices) : null;
+  const retailMax = retailPrices.length ? Math.max(...retailPrices) : null;
+  const cover = images[0]?.url || null;
+
   return {
     id: product.id,
     name: product.name,
     vendor: product.vendor,
     description: product.description,
+    cover,
+    retailMin,
+    retailMax,
     images,
     variants: (product.variants || []).map((v) => ({
       id: v.id,
@@ -64,6 +83,12 @@ export function sanitizeProductForDealer(product: Product, priceTier: PublicDeal
       dealerPrice: priceTier === "agent2" ? v.agentPrice2 : v.agentPrice1,
       active: v.active,
       imageId: v.imageId,
+      imageDecorIds: Array.isArray(v.imageDecorIds) ? v.imageDecorIds : [],
+      link: v.link ? String(v.link).trim() : null,
+      weight: typeof v.weight === "number" ? v.weight : null,
+      packageLength: typeof v.packageLength === "number" ? v.packageLength : null,
+      packageWidth: typeof v.packageWidth === "number" ? v.packageWidth : null,
+      packageHeight: typeof v.packageHeight === "number" ? v.packageHeight : null,
     })),
   };
 }
