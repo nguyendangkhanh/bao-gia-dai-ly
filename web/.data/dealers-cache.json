@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-29T07:07:00.455Z",
+  "updatedAt": "2026-10-12T05:43:44.399Z",
   "dealers": [
     {
       "name": "Đại lý Hoàn - The Manson (HUY)",
@@ -104,6 +104,13 @@
       "shortName": "Đại lý Mộc Phương",
       "groupName": "Đại lý Mộc Phương - The Manson (HUY)",
       "pass": "mocphuong2026",
+      "priceTier": "agent1"
+    },
+    {
+      "name": "Alex VGS",
+      "shortName": "Alex VGS",
+      "groupName": "Alex VGS",
+      "pass": "alexvgs",
       "priceTier": "agent1"
     },
     {
