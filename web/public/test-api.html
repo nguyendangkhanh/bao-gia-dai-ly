@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manson Dealer API Inspector & Test Suite</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    code, pre, .font-mono { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="bg-zinc-50 text-zinc-900 min-h-screen">
+  <!-- Header -->
+  <header class="border-b border-zinc-200 bg-white sticky top-0 z-30 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="h-9 w-9 rounded-xl bg-orange-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+          M
+        </div>
+        <div>
+          <h1 class="font-bold text-zinc-900 leading-tight">Manson Dealer API Inspector</h1>
+          <p class="text-xs text-zinc-500">Kiểm thử tính năng, kiểm tra bảo mật & bắt lỗi dữ liệu đại lý</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <span id="connectionBadge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-zinc-100 text-zinc-600 border border-zinc-200">
+          <span class="h-2 w-2 rounded-full bg-zinc-400"></span> Chưa kiểm tra
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+    <!-- Config & Request Form -->
+    <section class="bg-white rounded-2xl border border-zinc-200 shadow-xs p-5 md:p-6 space-y-5">
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-100 pb-4">
+        <div>
+          <h2 class="text-base font-bold text-zinc-900">1. Cấu hình Endpoint & Xác thực</h2>
+          <p class="text-xs text-zinc-500">Thiết lập URL nguồn và API Key đại lý để gọi thử nghiệm</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="setPreset('prod')" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-orange-50 text-orange-700 hover:bg-orange-100 transition border border-orange-200">
+            🌐 Production (daily.themanson.vn)
+          </button>
+          <button type="button" onclick="setPreset('local')" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-zinc-100 text-zinc-700 hover:bg-zinc-200 transition border border-zinc-200">
+            💻 Localhost (3009)
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+        <div class="md:col-span-6 space-y-1.5">
+          <label class="block text-xs font-semibold text-zinc-700">API Base URL</label>
+          <input id="baseUrl" type="text" class="w-full px-3 py-2 text-sm rounded-xl border border-zinc-300 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 font-mono" value="https://daily.themanson.vn" />
+        </div>
+        <div class="md:col-span-6 space-y-1.5">
+          <label class="block text-xs font-semibold text-zinc-700">API Key (Bearer Token)</label>
+          <input id="apiKey" type="text" class="w-full px-3 py-2 text-sm rounded-xl border border-zinc-300 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 font-mono" value="dlk_5cbf0ef657cd51820d56e429f61786c8dd1790d759322c24" />
+        </div>
+      </div>
+
+      <!-- Query params -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2">
+        <div class="space-y-1">
+          <label class="block text-xs font-semibold text-zinc-600">Sắp xếp (sort)</label>
+          <select id="sort" class="w-full px-3 py-2 text-sm rounded-xl border border-zinc-300 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500">
+            <option value="group_asc" selected>group_asc (Nhóm A → Z)</option>
+            <option value="group_desc">group_desc (Nhóm Z → A)</option>
+            <option value="price_asc">price_asc (Giá thấp → cao)</option>
+            <option value="price_desc">price_desc (Giá cao → thấp)</option>
+            <option value="">(Mặc định không sort)</option>
+          </select>
+        </div>
+        <div class="space-y-1">
+          <label class="block text-xs font-semibold text-zinc-600">Số lượng / trang (limit)</label>
+          <select id="limit" class="w-full px-3 py-2 text-sm rounded-xl border border-zinc-300 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500">
+            <option value="20" selected>20 (Mặc định)</option>
+            <option value="1">1 (Tối thiểu)</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="50">50 (Toàn bộ catalog)</option>
+          </select>
+        </div>
+        <div class="space-y-1">
+          <label class="block text-xs font-semibold text-zinc-600">Trang (page)</label>
+          <input id="page" type="number" min="1" value="1" class="w-full px-3 py-2 text-sm rounded-xl border border-zinc-300 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500" />
+        </div>
+        <div class="space-y-1">
+          <label class="block text-xs font-semibold text-zinc-600">Tìm kiếm (search)</label>
+          <input id="search" type="text" placeholder="Tên sản phẩm..." class="w-full px-3 py-2 text-sm rounded-xl border border-zinc-300 focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500" />
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-zinc-100">
+        <div class="flex items-center gap-2 text-xs text-zinc-500 font-mono" id="requestPreviewUrl">
+          GET /api/public/products?sort=group_asc&limit=20&page=1
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="btnFetchCatalog" onclick="fetchCatalog()" class="px-5 py-2.5 bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm rounded-xl shadow-xs transition flex items-center gap-2">
+            <svg id="loadingSpinner" class="hidden animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+            </svg>
+            <span>🚀 Chạy Kiểm Tra API</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Metrics Strip -->
+    <div id="metricsRow" class="hidden grid grid-cols-2 sm:grid-cols-4 gap-3">
+      <div class="bg-white p-4 rounded-xl border border-zinc-200">
+        <p class="text-xs text-zinc-500">Mã HTTP</p>
+        <p id="mStatus" class="text-xl font-bold font-mono text-zinc-800">-</p>
+      </div>
+      <div class="bg-white p-4 rounded-xl border border-zinc-200">
+        <p class="text-xs text-zinc-500">Thời gian phản hồi</p>
+        <p id="mLatency" class="text-xl font-bold font-mono text-zinc-800">-</p>
+      </div>
+      <div class="bg-white p-4 rounded-xl border border-zinc-200">
+        <p class="text-xs text-zinc-500">Kích thước Payload</p>
+        <p id="mSize" class="text-xl font-bold font-mono text-zinc-800">-</p>
+      </div>
+      <div class="bg-white p-4 rounded-xl border border-zinc-200">
+        <p class="text-xs text-zinc-500">Tổng sản phẩm tìm thấy</p>
+        <p id="mTotal" class="text-xl font-bold font-mono text-zinc-800">-</p>
+      </div>
+    </div>
+
+    <!-- Audit Results Panel -->
+    <section id="auditPanel" class="hidden bg-white rounded-2xl border border-zinc-200 shadow-xs p-5 md:p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-zinc-100 pb-3">
+        <div class="flex items-center gap-2">
+          <div id="auditStatusIcon" class="h-6 w-6 rounded-full flex items-center justify-center text-xs font-bold bg-emerald-100 text-emerald-700">✓</div>
+          <h2 class="text-base font-bold text-zinc-900">Bảng Kiểm Định Chất Lượng & Bắt Lỗi Dữ Liệu</h2>
+        </div>
+        <span id="auditScoreBadge" class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+          0/0 Đạt chuẩn
+        </span>
+      </div>
+
+      <div id="auditItems" class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <div id="tabsSection" class="hidden border-b border-zinc-200">
+      <nav class="flex space-x-4">
+        <button onclick="switchTab('catalog')" id="tabBtnCatalog" class="px-4 py-3 text-sm font-semibold border-b-2 border-orange-600 text-orange-600 flex items-center gap-2">
+          📦 Danh Sách Sản Phẩm (<span id="tabCount">0</span>)
+        </button>
+        <button onclick="switchTab('raw')" id="tabBtnRaw" class="px-4 py-3 text-sm font-semibold border-b-2 border-transparent text-zinc-500 hover:text-zinc-800 flex items-center gap-2">
+          🔍 JSON Trả Về Gốc
+        </button>
+        <button onclick="switchTab('detailTester')" id="tabBtnDetail" class="px-4 py-3 text-sm font-semibold border-b-2 border-transparent text-zinc-500 hover:text-zinc-800 flex items-center gap-2">
+          🔎 Test Chi Tiết 1 Sản Phẩm
+        </button>
+      </nav>
+    </div>
+
+    <!-- Tab 1: Catalog Visual Grid -->
+    <section id="tabContentCatalog" class="hidden space-y-4">
+      <div id="catalogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- Tab 2: Raw JSON -->
+    <section id="tabContentRaw" class="hidden space-y-3">
+      <div class="flex items-center justify-between bg-zinc-900 text-zinc-300 px-4 py-2.5 rounded-t-xl text-xs font-mono">
+        <span>Raw Response Preview</span>
+        <button onclick="copyRawJson()" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-white font-medium transition flex items-center gap-1.5">
+          📋 Sao chép JSON
+        </button>
+      </div>
+      <pre id="rawJsonPre" class="p-4 bg-zinc-950 text-zinc-200 rounded-b-xl overflow-x-auto text-xs font-mono max-h-[600px] leading-relaxed border border-zinc-800"></pre>
+    </section>
+
+    <!-- Tab 3: Detail Product Tester -->
+    <section id="tabContentDetailTester" class="hidden bg-white rounded-2xl border border-zinc-200 shadow-xs p-5 md:p-6 space-y-5">
+      <div>
+        <h3 class="text-base font-bold text-zinc-900">Kiểm tra Endpoint GET /api/public/products/:id</h3>
+        <p class="text-xs text-zinc-500">Nhập ID sản phẩm bất kỳ để kiểm tra chi tiết và các biến thể</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <input id="detailProductId" type="number" placeholder="Nhập ID (VD: 3, 14, 6...)" class="w-64 px-3 py-2 text-sm rounded-xl border border-zinc-300 focus:outline-none focus:ring-2 focus:ring-orange-500/20 font-mono" />
+        <button onclick="fetchProductDetail()" class="px-4 py-2 bg-zinc-900 hover:bg-zinc-800 text-white text-sm font-semibold rounded-xl transition">
+          Kiểm tra ID này
+        </button>
+      </div>
+      <div id="detailResult" class="hidden pt-4 border-t border-zinc-100">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+  </main>
+
+  <script>
+    let currentData = null;
+
+    function setPreset(env) {
+      if (env === 'prod') {
+        document.getElementById('baseUrl').value = 'https://daily.themanson.vn';
+      } else {
+        document.getElementById('baseUrl').value = 'http://localhost:3009';
+      }
+      updatePreviewUrl();
+    }
+
+    function updatePreviewUrl() {
+      const baseUrl = document.getElementById('baseUrl').value.trim().replace(/\/+$/, '');
+      const sort = document.getElementById('sort').value;
+      const limit = document.getElementById('limit').value;
+      const page = document.getElementById('page').value;
+      const search = document.getElementById('search').value.trim();
+
+      const params = new URLSearchParams();
+      if (sort) params.set('sort', sort);
+      if (limit) params.set('limit', limit);
+      if (page) params.set('page', page);
+      if (search) params.set('search', search);
+
+      const qs = params.toString();
+      const url = `${baseUrl}/api/public/products${qs ? '?' + qs : ''}`;
+      document.getElementById('requestPreviewUrl').innerText = `GET ${url}`;
+      return url;
+    }
+
+    ['baseUrl', 'sort', 'limit', 'page', 'search'].forEach(id => {
+      document.getElementById(id).addEventListener('input', updatePreviewUrl);
+      document.getElementById(id).addEventListener('change', updatePreviewUrl);
+    });
+
+    function switchTab(tab) {
+      const tabs = ['catalog', 'raw', 'detailTester'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('tabBtn' + t.charAt(0).toUpperCase() + t.slice(1));
+        const content = document.getElementById('tabContent' + t.charAt(0).toUpperCase() + t.slice(1));
+        if (t === tab) {
+          btn.className = 'px-4 py-3 text-sm font-semibold border-b-2 border-orange-600 text-orange-600 flex items-center gap-2';
+          content.classList.remove('hidden');
+        } else {
+          btn.className = 'px-4 py-3 text-sm font-semibold border-b-2 border-transparent text-zinc-500 hover:text-zinc-800 flex items-center gap-2';
+          content.classList.add('hidden');
+        }
+      });
+    }
+
+    function formatVnd(val) {
+      if (typeof val !== 'number') return '0đ';
+      return val.toLocaleString('vi-VN') + 'đ';
+    }
+
+    async function fetchCatalog() {
+      const url = updatePreviewUrl();
+      const apiKey = document.getElementById('apiKey').value.trim();
+      const btn = document.getElementById('btnFetchCatalog');
+      const spinner = document.getElementById('loadingSpinner');
+      const badge = document.getElementById('connectionBadge');
+
+      btn.disabled = true;
+      spinner.classList.remove('hidden');
+      badge.innerHTML = '<span class="h-2 w-2 rounded-full bg-amber-400 animate-pulse"></span> Đang tải...';
+      badge.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200';
+
+      const startTime = performance.now();
+      try {
+        const response = await fetch(url, {
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Accept': 'application/json'
+          }
+        });
+
+        const latency = Math.round(performance.now() - startTime);
+        const text = await response.text();
+        const byteSize = new Blob([text]).size;
+
+        document.getElementById('metricsRow').classList.remove('hidden');
+        document.getElementById('mStatus').innerText = `${response.status} ${response.statusText || ''}`;
+        document.getElementById('mStatus').className = response.ok ? 'text-xl font-bold font-mono text-emerald-600' : 'text-xl font-bold font-mono text-rose-600';
+        document.getElementById('mLatency').innerText = `${latency} ms`;
+        document.getElementById('mSize').innerText = `${(byteSize / 1024).toFixed(1)} KB (${byteSize.toLocaleString()} B)`;
+
+        if (response.ok) {
+          badge.innerHTML = '<span class="h-2 w-2 rounded-full bg-emerald-500"></span> 200 OK';
+          badge.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200';
+        } else {
+          badge.innerHTML = `<span class="h-2 w-2 rounded-full bg-rose-500"></span> Lỗi ${response.status}`;
+          badge.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-rose-50 text-rose-700 border border-rose-200';
+        }
+
+        let json = null;
+        try {
+          json = JSON.parse(text);
+        } catch (e) {
+          showAuditError(`Không thể parse JSON (Lỗi cú pháp hoặc phản hồi bị ngắt đứt): ${e.message}`, text);
+          return;
+        }
+
+        currentData = json;
+        document.getElementById('rawJsonPre').innerText = JSON.stringify(json, null, 2);
+        document.getElementById('mTotal').innerText = json?.meta?.totalItems ?? (json?.data?.length ?? 0);
+        document.getElementById('tabCount').innerText = json?.data?.length ?? 0;
+
+        // Run full audit
+        runQualityAudit(json, byteSize, latency, text);
+
+        // Render catalog cards
+        renderCatalog(json?.data || []);
+
+        // Show tabs
+        document.getElementById('tabsSection').classList.remove('hidden');
+        document.getElementById('tabContentCatalog').classList.remove('hidden');
+        switchTab('catalog');
+
+      } catch (err) {
+        const latency = Math.round(performance.now() - startTime);
+        badge.innerHTML = '<span class="h-2 w-2 rounded-full bg-rose-500"></span> Lỗi mạng / CORS';
+        badge.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-rose-50 text-rose-700 border border-rose-200';
+        showAuditError(`Lỗi kết nối mạng: ${err.message}. Nếu mở file HTML cục bộ, có thể máy chủ chưa cấu hình CORS hoặc chưa phản hồi.`, '');
+      } finally {
+        btn.disabled = false;
+        spinner.classList.add('hidden');
+      }
+    }
+
+    function showAuditError(msg, raw) {
+      document.getElementById('auditPanel').classList.remove('hidden');
+      document.getElementById('auditScoreBadge').innerText = 'Thất bại';
+      document.getElementById('auditScoreBadge').className = 'text-xs font-bold px-2.5 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200';
+      document.getElementById('auditItems').innerHTML = `
+        <div class="col-span-2 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800">
+          <p class="font-bold">❌ ${msg}</p>
+          ${raw ? `<pre class="mt-2 text-xs bg-rose-100 p-2 rounded max-h-40 overflow-auto font-mono">${raw.slice(0, 500)}</pre>` : ''}
+        </div>
+      `;
+    }
+
+    function runQualityAudit(json, byteSize, latency, rawText) {
+      const panel = document.getElementById('auditPanel');
+      panel.classList.remove('hidden');
+
+      const items = [];
+      let passCount = 0;
+      let totalTests = 0;
+
+      function test(name, status, message, details = '') {
+        totalTests++;
+        if (status === 'pass') passCount++;
+        items.push({ name, status, message, details });
+      }
+
+      // Test 1: Data shape
+      const data = json?.data;
+      if (Array.isArray(data) && data.length > 0) {
+        test('Cấu trúc mảng sản phẩm (data)', 'pass', `Trả về ${data.length} sản phẩm thành công.`);
+      } else if (Array.isArray(data) && data.length === 0) {
+        test('Cấu trúc mảng sản phẩm (data)', 'warn', 'Mảng data rỗng (0 sản phẩm). Có thể do từ khoá tìm kiếm không khớp.');
+      } else {
+        test('Cấu trúc mảng sản phẩm (data)', 'fail', 'Thuộc tính data không phải là mảng hợp lệ!');
+      }
+
+      // Test 2: Meta pagination
+      const meta = json?.meta;
+      if (meta && typeof meta.totalItems === 'number' && typeof meta.totalPages === 'number') {
+        const expectedPages = Math.max(Math.ceil(meta.totalItems / meta.itemsPerPage), 1);
+        if (expectedPages === meta.totalPages) {
+          test('Phân trang chuẩn xác (meta)', 'pass', `Trang ${meta.currentPage}/${meta.totalPages} (${meta.totalItems} sản phẩm, ${meta.itemsPerPage}/trang).`);
+        } else {
+          test('Phân trang chuẩn xác (meta)', 'warn', `Toán tử trang chưa khớp: totalPages=${meta.totalPages}, tính toán=${expectedPages}.`);
+        }
+      } else {
+        test('Phân trang chuẩn xác (meta)', 'fail', 'Thiếu object meta phân trang.');
+      }
+
+      // Test 3: Payload size (Anti-Buffer-Overflow check)
+      if (byteSize <= 130 * 1024) {
+        test('Dung lượng Payload (Buffer Safe)', 'pass', `Kích thước ${((byteSize / 1024)).toFixed(1)} KB (an toàn tuyệt đối dưới ngưỡng 128KB Nginx).`);
+      } else if (byteSize <= 250 * 1024) {
+        test('Dung lượng Payload (Buffer Safe)', 'warn', `Kích thước ${((byteSize / 1024)).toFixed(1)} KB (hơi lớn, cần kiểm tra nếu reverse proxy cấu hình buffer hẹp).`);
+      } else {
+        test('Dung lượng Payload (Buffer Safe)', 'fail', `Kích thước quá lớn: ${((byteSize / 1024)).toFixed(1)} KB (dễ gây đứt kết nối stream trên Nginx!).`);
+      }
+
+      // Test 4: Security Leak Check (Ensure other tier prices never leak)
+      const leakedAgent1 = rawText.includes('"agentPrice1"');
+      const leakedAgent2 = rawText.includes('"agentPrice2"');
+      const leakedCost = rawText.includes('"costPrice"');
+      if (!leakedAgent1 && !leakedAgent2 && !leakedCost) {
+        test('Bảo mật giá đại lý (No Leaks)', 'pass', 'Không bị lộ các trường nhạy cảm: agentPrice1, agentPrice2, costPrice.');
+      } else {
+        const leaked = [leakedAgent1 && 'agentPrice1', leakedAgent2 && 'agentPrice2', leakedCost && 'costPrice'].filter(Boolean).join(', ');
+        test('Bảo mật giá đại lý (No Leaks)', 'fail', `PHÁT HIỆN LỘ GIÁ NỘI BỘ: JSON chứa [${leaked}]. Cần sửa ngay!`);
+      }
+
+      // Test 5: Image Formats Bloat
+      let hasFormatBloat = false;
+      let totalImages = 0;
+      let invalidImageUrls = 0;
+      if (Array.isArray(data)) {
+        for (const p of data) {
+          for (const img of (p.images || [])) {
+            totalImages++;
+            if (img.formats && Object.keys(img.formats).length > 0) hasFormatBloat = true;
+            if (!img.url || !img.url.startsWith('https://crm.themanson.vn/api/public/')) {
+              invalidImageUrls++;
+            }
+          }
+        }
+      }
+
+      if (!hasFormatBloat) {
+        test('Tối ưu hoá ảnh (Format Bloat)', 'pass', 'Đã loại bỏ các object formats cồng kềnh, chỉ giữ thông tin ảnh cần thiết.');
+      } else {
+        test('Tối ưu hoá ảnh (Format Bloat)', 'warn', 'Ảnh vẫn còn chứa formats (large, small...) làm phình to dung lượng.');
+      }
+
+      if (invalidImageUrls === 0 && totalImages > 0) {
+        test('Tiền tố Domain Ảnh (Manson CRM)', 'pass', `Tất cả ${totalImages} ảnh đều có tiền tố https://crm.themanson.vn/api/public/ chuẩn xác.`);
+      } else if (totalImages === 0) {
+        test('Tiền tố Domain Ảnh (Manson CRM)', 'warn', 'Không có ảnh nào trong dữ liệu.');
+      } else {
+        test('Tiền tố Domain Ảnh (Manson CRM)', 'fail', `Có ${invalidImageUrls}/${totalImages} ảnh thiếu tiền tố domain chuẩn.`);
+      }
+
+      // Test 6: Variant price validity
+      let invalidPriceCount = 0;
+      let variantsTotal = 0;
+      let minMaxErrors = 0;
+
+      if (Array.isArray(data)) {
+        for (const p of data) {
+          const variants = p.variants || [];
+          variantsTotal += variants.length;
+          const prices = [];
+          for (const v of variants) {
+            if (typeof v.dealerPrice !== 'number' || v.dealerPrice <= 0) {
+              invalidPriceCount++;
+            } else {
+              prices.push(v.dealerPrice);
+            }
+          }
+          if (prices.length > 0) {
+            const min = Math.min(...prices);
+            const max = Math.max(...prices);
+            if (p.dealerPriceMin !== min || p.dealerPriceMax !== max) {
+              minMaxErrors++;
+            }
+          }
+        }
+      }
+
+      if (invalidPriceCount === 0 && variantsTotal > 0) {
+        test('Tính toàn vẹn giá đại lý (dealerPrice)', 'pass', `Tất cả ${variantsTotal} biến thể đều có giá đại lý hợp lệ > 0.`);
+      } else if (variantsTotal === 0) {
+        test('Tính toàn vẹn giá đại lý (dealerPrice)', 'warn', 'Không có biến thể nào được trả về.');
+      } else {
+        test('Tính toàn vẹn giá đại lý (dealerPrice)', 'fail', `Có ${invalidPriceCount}/${variantsTotal} biến thể bị thiếu giá hoặc giá <= 0.`);
+      }
+
+      if (minMaxErrors === 0) {
+        test('Khoảng giá min/max (dealerPriceMin/Max)', 'pass', 'Giá thấp nhất và cao nhất của từng sản phẩm khớp 100% với danh sách biến thể.');
+      } else {
+        test('Khoảng giá min/max (dealerPriceMin/Max)', 'fail', `Có ${minMaxErrors} sản phẩm có dealerPriceMin/Max không khớp với biến thể.`);
+      }
+
+      // Render items
+      const auditContainer = document.getElementById('auditItems');
+      auditContainer.innerHTML = items.map(it => {
+        let icon = '✓';
+        let badgeClass = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+        let cardBorder = 'border-zinc-200';
+        if (it.status === 'warn') {
+          icon = '⚠️';
+          badgeClass = 'bg-amber-50 text-amber-700 border-amber-200';
+          cardBorder = 'border-amber-200 bg-amber-50/30';
+        } else if (it.status === 'fail') {
+          icon = '❌';
+          badgeClass = 'bg-rose-50 text-rose-700 border-rose-200';
+          cardBorder = 'border-rose-200 bg-rose-50/30';
+        }
+        return `
+          <div class="p-3.5 rounded-xl border ${cardBorder} flex items-start gap-3">
+            <span class="inline-flex items-center justify-center h-6 w-6 rounded-lg text-xs font-bold shrink-0 border ${badgeClass}">
+              ${icon}
+            </span>
+            <div class="space-y-0.5 min-w-0">
+              <h4 class="font-bold text-xs text-zinc-900">${it.name}</h4>
+              <p class="text-xs text-zinc-600">${it.message}</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const badge = document.getElementById('auditScoreBadge');
+      badge.innerText = `${passCount}/${totalTests} Tiêu chí Đạt`;
+      if (passCount === totalTests) {
+        badge.className = 'text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200';
+      } else if (items.some(i => i.status === 'fail')) {
+        badge.className = 'text-xs font-bold px-2.5 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200';
+      } else {
+        badge.className = 'text-xs font-bold px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200';
+      }
+    }
+
+    function renderCatalog(products) {
+      const container = document.getElementById('catalogGrid');
+      if (!products.length) {
+        container.innerHTML = '<div class="col-span-full py-12 text-center text-zinc-400">Không có sản phẩm nào để hiển thị</div>';
+        return;
+      }
+
+      container.innerHTML = products.map((p, idx) => {
+        const coverImg = (p.images && p.images[0]?.url) || '';
+        const variants = p.variants || [];
+        const minP = p.dealerPriceMin ? formatVnd(p.dealerPriceMin) : 'Chưa có giá';
+        const maxP = p.dealerPriceMax ? formatVnd(p.dealerPriceMax) : 'Chưa có giá';
+        const priceStr = minP === maxP ? minP : `${minP} – ${maxP}`;
+
+        return `
+          <div class="bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-xs hover:shadow-md transition flex flex-col">
+            <!-- Cover image -->
+            <div class="relative aspect-4/3 bg-zinc-100 overflow-hidden border-b border-zinc-100">
+              ${coverImg ? `
+                <img src="${coverImg}" alt="${p.name}" class="w-full h-full object-contain p-2" onerror="this.onerror=null; this.src=''; this.parentElement.innerHTML='<div class=\\'flex items-center justify-center h-full text-xs text-rose-500 font-semibold\\'>⚠️ Lỗi tải ảnh</div>';" />
+              ` : `
+                <div class="flex items-center justify-center h-full text-xs text-zinc-400">Không có ảnh</div>
+              `}
+              <div class="absolute top-2 left-2 flex items-center gap-1.5">
+                <span class="px-2 py-0.5 rounded-md bg-zinc-900/80 text-white text-[10px] font-mono font-medium backdrop-blur-xs">ID: ${p.id}</span>
+                ${p.vendor ? `<span class="px-2 py-0.5 rounded-md bg-orange-600/90 text-white text-[10px] font-semibold backdrop-blur-xs">${p.vendor}</span>` : ''}
+              </div>
+            </div>
+
+            <!-- Body -->
+            <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+              <div>
+                <h3 class="font-bold text-sm text-zinc-900 line-clamp-2 leading-snug">${p.name}</h3>
+                <div class="mt-2 flex items-baseline justify-between">
+                  <span class="text-xs text-zinc-500">Giá đại lý:</span>
+                  <span class="text-sm font-bold text-orange-600 font-mono">${priceStr}</span>
+                </div>
+              </div>
+
+              <!-- Variants mini table -->
+              <div class="border-t border-zinc-100 pt-3">
+                <div class="flex items-center justify-between text-xs font-semibold text-zinc-600 mb-2">
+                  <span>Biến thể (${variants.length})</span>
+                  <button onclick="testSpecificProduct(${p.id})" class="text-orange-600 hover:text-orange-700 text-[11px] underline">
+                    Xem chi tiết →
+                  </button>
+                </div>
+                <div class="space-y-1.5 max-h-36 overflow-y-auto pr-1">
+                  ${variants.map(v => {
+                    const discount = (v.price && v.dealerPrice && v.price > v.dealerPrice)
+                      ? Math.round(((v.price - v.dealerPrice) / v.price) * 100)
+                      : 0;
+                    return `
+                      <div class="flex items-center justify-between text-[11px] py-1 px-2 rounded-lg bg-zinc-50 border border-zinc-100 font-mono">
+                        <div class="truncate max-w-[150px]">
+                          <span class="font-semibold text-zinc-800">${v.displayName || v.sku || 'Mặc định'}</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 shrink-0">
+                          <span class="font-bold text-orange-700">${formatVnd(v.dealerPrice)}</span>
+                          ${discount > 0 ? `<span class="text-[9px] px-1 py-0.2 rounded bg-emerald-100 text-emerald-800 font-bold">-${discount}%</span>` : ''}
+                        </div>
+                      </div>
+                    `;
+                  }).join('')}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function testSpecificProduct(id) {
+      document.getElementById('detailProductId').value = id;
+      switchTab('detailTester');
+      fetchProductDetail();
+    }
+
+    async function fetchProductDetail() {
+      const id = document.getElementById('detailProductId').value.trim();
+      if (!id) return;
+      const baseUrl = document.getElementById('baseUrl').value.trim().replace(/\/+$/, '');
+      const apiKey = document.getElementById('apiKey').value.trim();
+      const resContainer = document.getElementById('detailResult');
+
+      resContainer.classList.remove('hidden');
+      resContainer.innerHTML = '<div class="text-sm text-zinc-500 font-mono animate-pulse">Đang gọi GET /api/public/products/' + id + '...</div>';
+
+      try {
+        const res = await fetch(`${baseUrl}/api/public/products/${id}`, {
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Accept': 'application/json'
+          }
+        });
+        const json = await res.json();
+        const p = json?.data;
+
+        if (!res.ok || !p) {
+          resContainer.innerHTML = `
+            <div class="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-sm">
+              <p class="font-bold">Lỗi ${res.status}: ${json?.error || 'Không tìm thấy sản phẩm'}</p>
+            </div>
+          `;
+          return;
+        }
+
+        resContainer.innerHTML = `
+          <div class="space-y-4">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="text-xs font-bold text-orange-600 uppercase tracking-wider">${p.vendor || 'Thương hiệu'}</span>
+                <h2 class="text-lg font-bold text-zinc-900 mt-0.5">${p.name} (ID: ${p.id})</h2>
+                ${p.description ? `<p class="text-xs text-zinc-500 mt-1 max-w-xl">${p.description}</p>` : ''}
+              </div>
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                ${(p.variants || []).length} biến thể
+              </span>
+            </div>
+
+            <!-- Images Gallery -->
+            <div class="space-y-1.5">
+              <h4 class="text-xs font-semibold text-zinc-700">Thư viện ảnh (${(p.images || []).length} ảnh):</h4>
+              <div class="flex items-center gap-2 overflow-x-auto py-2">
+                ${(p.images || []).map(img => `
+                  <div class="h-20 w-20 rounded-xl border border-zinc-200 bg-white p-1 shrink-0 overflow-hidden relative">
+                    <img src="${img.url}" class="h-full w-full object-contain" alt="" onerror="this.src=''; this.parentElement.classList.add('bg-rose-50','border-rose-300');" />
+                    <span class="absolute bottom-1 right-1 text-[9px] bg-zinc-900/70 text-white px-1 rounded font-mono">#${img.id}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Variants Table -->
+            <div class="overflow-x-auto rounded-xl border border-zinc-200">
+              <table class="w-full text-left text-xs font-mono">
+                <thead class="bg-zinc-100 text-zinc-700 font-semibold border-b border-zinc-200">
+                  <tr>
+                    <th class="p-2.5">ID</th>
+                    <th class="p-2.5">Tên / Phân Loại</th>
+                    <th class="p-2.5">SKU</th>
+                    <th class="p-2.5">Mã Vạch</th>
+                    <th class="p-2.5 text-right">Giá Lẻ Niêm Yết</th>
+                    <th class="p-2.5 text-right">Giá Đại Lý</th>
+                    <th class="p-2.5 text-right">Chiết Khấu</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-zinc-200 bg-white">
+                  ${(p.variants || []).map(v => {
+                    const discount = (v.price && v.dealerPrice && v.price > v.dealerPrice)
+                      ? Math.round(((v.price - v.dealerPrice) / v.price) * 100)
+                      : 0;
+                    return `
+                      <tr class="hover:bg-zinc-50 transition">
+                        <td class="p-2.5 text-zinc-500">${v.id}</td>
+                        <td class="p-2.5 font-bold text-zinc-900">${v.displayName || '-'}</td>
+                        <td class="p-2.5 text-zinc-600">${v.sku || '-'}</td>
+                        <td class="p-2.5 text-zinc-500">${v.barcode || '-'}</td>
+                        <td class="p-2.5 text-right text-zinc-500 line-through">${v.price ? formatVnd(v.price) : '-'}</td>
+                        <td class="p-2.5 text-right font-bold text-orange-600">${v.dealerPrice ? formatVnd(v.dealerPrice) : '-'}</td>
+                        <td class="p-2.5 text-right">
+                          <span class="px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-[10px]">-${discount}%</span>
+                        </td>
+                      </tr>
+                    `;
+                  }).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+      } catch (e) {
+        resContainer.innerHTML = `<div class="p-4 rounded-xl bg-rose-50 text-rose-800 text-sm font-semibold">Lỗi: ${e.message}</div>`;
+      }
+    }
+
+    function copyRawJson() {
+      if (!currentData) return;
+      navigator.clipboard.writeText(JSON.stringify(currentData, null, 2)).then(() => {
+        alert('Đã sao chép toàn bộ JSON vào clipboard!');
+      });
+    }
+
+    // Auto-update URL preview on load
+    updatePreviewUrl();
+  </script>
+</body>
+</html>

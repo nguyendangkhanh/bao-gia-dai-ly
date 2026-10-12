@@ -1,6 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import { authenticatePublicApiRequest } from "@/lib/public-api";
+import { authenticatePublicApiRequest, PUBLIC_API_CORS_HEADERS } from "@/lib/public-api";
 import { getDealerCatalog, parseDealerSort, sortDealerCatalog } from "@/lib/dealer-catalog";
+
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 204,
+    headers: PUBLIC_API_CORS_HEADERS,
+  });
+}
 
 export async function GET(req: NextRequest) {
   const auth = await authenticatePublicApiRequest(req);
@@ -28,6 +35,7 @@ export async function GET(req: NextRequest) {
       },
       {
         headers: {
+          ...PUBLIC_API_CORS_HEADERS,
           "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
           "X-Accel-Buffering": "no",
         },
@@ -35,6 +43,6 @@ export async function GET(req: NextRequest) {
     );
   } catch (error) {
     console.error("[public-api] Lỗi getDealerCatalog:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json({ error: "Internal server error" }, { status: 500, headers: PUBLIC_API_CORS_HEADERS });
   }
 }

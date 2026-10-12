@@ -83,6 +83,13 @@ export type PublicApiAuthResult =
   | { ok: true; dealer: PublicDealerInfo }
   | { ok: false; response: NextResponse };
 
+export const PUBLIC_API_CORS_HEADERS: Record<string, string> = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Headers": "Authorization, Content-Type",
+  "Access-Control-Max-Age": "86400",
+};
+
 /**
  * Xác thực API key + rate limit cho public API đại lý. Dùng ở đầu mỗi route handler:
  *   const auth = await authenticatePublicApiRequest(req);
@@ -100,6 +107,7 @@ export async function authenticatePublicApiRequest(req: NextRequest): Promise<Pu
         {
           status: 429,
           headers: {
+            ...PUBLIC_API_CORS_HEADERS,
             "Retry-After": String(Math.ceil((ipRl.resetAt - Date.now()) / 1000)),
             "X-RateLimit-Limit": "120",
             "X-RateLimit-Remaining": "0",
@@ -113,13 +121,25 @@ export async function authenticatePublicApiRequest(req: NextRequest): Promise<Pu
   // 2. Kiểm tra header Authorization
   const apiKey = extractApiKey(req);
   if (!apiKey) {
-    return { ok: false, response: NextResponse.json({ error: "Thiếu Authorization: Bearer <api_key>" }, { status: 401 }) };
+    return {
+      ok: false,
+      response: NextResponse.json(
+        { error: "Thiếu Authorization: Bearer <api_key>" },
+        { status: 401, headers: PUBLIC_API_CORS_HEADERS },
+      ),
+    };
   }
 
   // 3. Tra cứu và xác thực API Key
   const dealer = await getDealerByApiKey(apiKey);
   if (!dealer) {
-    return { ok: false, response: NextResponse.json({ error: "API key không hợp lệ hoặc đã bị thu hồi" }, { status: 401 }) };
+    return {
+      ok: false,
+      response: NextResponse.json(
+        { error: "API key không hợp lệ hoặc đã bị thu hồi" },
+        { status: 401, headers: PUBLIC_API_CORS_HEADERS },
+      ),
+    };
   }
 
   // 4. Rate-limit theo đại lý đã xác thực
@@ -132,6 +152,7 @@ export async function authenticatePublicApiRequest(req: NextRequest): Promise<Pu
         {
           status: 429,
           headers: {
+            ...PUBLIC_API_CORS_HEADERS,
             "Retry-After": String(Math.ceil((rl.resetAt - Date.now()) / 1000)),
             "X-RateLimit-Remaining": "0",
             "X-RateLimit-Reset": String(Math.ceil(rl.resetAt / 1000)),
