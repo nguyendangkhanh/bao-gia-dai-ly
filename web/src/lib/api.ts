@@ -15,12 +15,44 @@ function normalizeAuthHeader(token: string) {
   return token.trim().startsWith("Bearer ") ? token.trim() : `Bearer ${token.trim()}`;
 }
 
+const DEFAULT_TIMEOUT_MS = 10_000;
+const MAX_RESPONSE_BYTES = 20 * 1024 * 1024; // 20 MB
+
 function isLocalSelfSigned(url: string) {
   return url.startsWith("https://localhost") || url.startsWith("https://127.0.0.1");
 }
 
-function fetchWithLocalHttpsBypass(url: string, authorization: string): Promise<Response> {
+function fetchWithLocalHttpsBypass(
+  url: string,
+  authorization: string,
+  timeoutMs = DEFAULT_TIMEOUT_MS,
+): Promise<Response> {
   return new Promise((resolve, reject) => {
+    let timer: NodeJS.Timeout | null = null;
+    let settled = false;
+
+    const cleanup = () => {
+      if (timer) {
+        clearTimeout(timer);
+        timer = null;
+      }
+    };
+
+    const doneError = (err: Error) => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      req.destroy();
+      reject(err);
+    };
+
+    const doneSuccess = (res: Response) => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      resolve(res);
+    };
+
     const req = https.request(
       url,
       {
@@ -33,10 +65,22 @@ function fetchWithLocalHttpsBypass(url: string, authorization: string): Promise<
       },
       (res) => {
         const chunks: Buffer[] = [];
-        res.on("data", (chunk) => chunks.push(Buffer.from(chunk)));
+        let totalBytes = 0;
+
+        res.on("data", (chunk: Buffer | Uint8Array) => {
+          const buf = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
+          totalBytes += buf.length;
+          if (totalBytes > MAX_RESPONSE_BYTES) {
+            doneError(new Error(`Response exceeded maximum size of ${MAX_RESPONSE_BYTES} bytes`));
+            return;
+          }
+          chunks.push(buf);
+        });
+
         res.on("end", () => {
           const body = Buffer.concat(chunks).toString("utf-8");
-          resolve(
+          chunks.length = 0; // free buffer array immediately
+          doneSuccess(
             new Response(body, {
               status: res.statusCode || 500,
               headers: {
@@ -45,10 +89,21 @@ function fetchWithLocalHttpsBypass(url: string, authorization: string): Promise<
             }),
           );
         });
+
+        res.on("error", (err) => {
+          doneError(err);
+        });
       },
     );
 
-    req.on("error", reject);
+    timer = setTimeout(() => {
+      doneError(new Error(`Backend request timeout after ${timeoutMs}ms: ${url}`));
+    }, timeoutMs);
+
+    req.on("error", (err) => {
+      doneError(err);
+    });
+
     req.end();
   });
 }
@@ -63,13 +118,14 @@ async function request<T>(path: string): Promise<T> {
   const url = `${baseUrl}${path}`;
 
   const res = isLocalSelfSigned(baseUrl)
-    ? await fetchWithLocalHttpsBypass(url, authorization)
+    ? await fetchWithLocalHttpsBypass(url, authorization, DEFAULT_TIMEOUT_MS)
     : await fetch(url, {
         headers: {
           Authorization: authorization,
           Accept: "application/json",
         },
         cache: "no-store",
+        signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
       });
 
   if (!res.ok) {
@@ -119,7 +175,10 @@ export async function getSkuOrder() {
 
   const baseUrl = rawUrl.endsWith("/sku-order") ? rawUrl : `${rawUrl.replace(/\/+$/, "")}/sku-order`;
   const url = baseUrl;
-  const res = await fetch(url, { next: { revalidate: 300 } });
+  const res = await fetch(url, {
+    next: { revalidate: 300 },
+    signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
+  });
   if (!res.ok) {
     throw new Error(`SKU order API error ${res.status}`);
   }
@@ -127,3 +186,30 @@ export async function getSkuOrder() {
   const data = (await res.json()) as { items?: SkuOrderItem[] };
   return Array.isArray(data.items) ? data.items : [];
 }
+
+/**
+ * Execute an async mapping function with a concurrency limit.
+ * Preserves the order of output results according to input items.
+ */
+export async function mapConcurrent<T, R>(
+  items: T[],
+  fn: (item: T, index: number) => Promise<R>,
+  concurrency = 6,
+): Promise<R[]> {
+  if (items.length === 0) return [];
+  const results = new Array<R>(items.length);
+  let currentIndex = 0;
+
+  async function worker() {
+    while (currentIndex < items.length) {
+      const idx = currentIndex++;
+      results[idx] = await fn(items[idx], idx);
+    }
+  }
+
+  const workerCount = Math.min(Math.max(1, concurrency), items.length);
+  const workers = Array.from({ length: workerCount }, () => worker());
+  await Promise.all(workers);
+  return results;
+}
+

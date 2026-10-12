@@ -1,5 +1,5 @@
 import "server-only";
-import { google } from "googleapis";
+import { sheets as googleSheets, auth as googleAuth } from "googleapis/build/src/apis/sheets";
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -22,7 +22,7 @@ async function getAuthClient() {
     throw new Error("CREDENTIAL_NOT_SERVICE_ACCOUNT");
   }
 
-  return new google.auth.GoogleAuth({
+  return new googleAuth.GoogleAuth({
     credentials: parsed,
     scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
   });
@@ -30,7 +30,7 @@ async function getAuthClient() {
 
 async function readSheet(sheetId: string, tier: "agent1" | "agent2"): Promise<DealerRecord[]> {
   const auth = await getAuthClient();
-  const sheets = google.sheets({ version: "v4", auth });
+  const sheets = googleSheets({ version: "v4", auth });
   const res = await sheets.spreadsheets.values.get({ spreadsheetId: sheetId, range: "A:D" });
   const rows = res.data.values || [];
   if (rows.length <= 1) return [];

@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import ProductVariantsCardList from "@/components/products/ProductVariantsCardList";
 import type { PriceAcknowledgementVariantChange } from "@/lib/price-notifications";
+import { resolveImageUrl } from "@/lib/image-url";
 
 type Product = {
   id: number;
@@ -27,20 +28,7 @@ type Product = {
   images?: { id: number; url: string }[];
 };
 
-function imageUrl(url?: string | null) {
-  if (!url) return "";
-
-  let resolved = url;
-  if (!resolved.startsWith("http://") && !resolved.startsWith("https://")) {
-    const base = (process.env.NEXT_PUBLIC_STATIC_FILE_BASE_URL || process.env.UMI_APP_STATIC_FILE_BASE_URL || "https://crm.themanson.vn/api/public/").replace(/\/+$/, "");
-    const filePath = resolved.replace(/^\/+/, "");
-    resolved = `${base}/${filePath}`;
-  }
-
-  if (resolved.startsWith("https://localhost")) return resolved.replace("https://localhost", "http://localhost");
-  if (resolved.startsWith("https://127.0.0.1")) return resolved.replace("https://127.0.0.1", "http://127.0.0.1");
-  return resolved;
-}
+const imageUrl = resolveImageUrl;
 
 function formatVnd(value: number | null | undefined) {
   if (value === null || value === undefined) return "0đ";

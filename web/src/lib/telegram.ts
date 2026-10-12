@@ -19,6 +19,7 @@ async function sendTelegramMessage(text: string, chatId: string = TELEGRAM_CHAT_
         text,
       }),
       cache: "no-store",
+      signal: AbortSignal.timeout(5000),
     });
 
     const data = (await res.json().catch(() => null)) as { ok?: boolean; description?: string } | null;
