@@ -21,10 +21,18 @@ export async function GET(req: NextRequest) {
     const start = (page - 1) * limit;
     const data = sorted.slice(start, start + limit);
 
-    return NextResponse.json({
-      data,
-      meta: { itemsPerPage: limit, totalItems, currentPage: page, totalPages },
-    });
+    return NextResponse.json(
+      {
+        data,
+        meta: { itemsPerPage: limit, totalItems, currentPage: page, totalPages },
+      },
+      {
+        headers: {
+          "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+          "X-Accel-Buffering": "no",
+        },
+      }
+    );
   } catch (error) {
     console.error("[public-api] Lỗi getDealerCatalog:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
