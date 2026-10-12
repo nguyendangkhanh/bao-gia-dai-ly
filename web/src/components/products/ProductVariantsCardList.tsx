@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import type { PriceAcknowledgementVariantChange } from "@/lib/price-notifications";
+import { resolveImageUrl } from "@/lib/image-url";
 
 type Variant = {
   id: number;
@@ -32,19 +33,7 @@ type Props = {
   recentlyChangedPriceDeltas?: PriceAcknowledgementVariantChange[];
 };
 
-function imageUrl(url?: string | null) {
-  if (!url) return "";
-  let resolved = url;
-  if (!resolved.startsWith("http://") && !resolved.startsWith("https://")) {
-    const base = (process.env.NEXT_PUBLIC_STATIC_FILE_BASE_URL || process.env.UMI_APP_STATIC_FILE_BASE_URL || "https://crm.themanson.vn/api/public/").replace(/\/+$/, "");
-    const filePath = resolved.replace(/^\/+/, "");
-    resolved = `${base}/${filePath}`;
-  }
-
-  if (resolved.startsWith("https://localhost")) return resolved.replace("https://localhost", "http://localhost");
-  if (resolved.startsWith("https://127.0.0.1")) return resolved.replace("https://127.0.0.1", "http://127.0.0.1");
-  return resolved;
-}
+const imageUrl = resolveImageUrl;
 
 function getVariantImage(images: ProductImage[], imageId?: number | null) {
   if (!imageId) return "";
@@ -403,7 +392,7 @@ export default function ProductVariantsCardList({ productName: _productName, var
           {activeVariantChange && (
             <div className="rounded-xl bg-amber-50 border border-amber-200 p-3 text-xs text-amber-900 mb-3">
               <div className="font-bold flex items-center gap-1.5 text-amber-800">
-                <span>🔔 Xác nhận đổi giá của "{_productName} - {selectedVariant?.displayName || selectedVariant?.barcode || `Variant ${selectedVariant?.id}`}" vào lúc: {activeVariantChange.acknowledgedAt ? formatDate(activeVariantChange.acknowledgedAt) : "Tuần này"}</span>
+                <span>🔔 Xác nhận đổi giá của &quot;{_productName} - {selectedVariant?.displayName || selectedVariant?.barcode || `Variant ${selectedVariant?.id}`}&quot; vào lúc: {activeVariantChange.acknowledgedAt ? formatDate(activeVariantChange.acknowledgedAt) : "Tuần này"}</span>
               </div>
               {activeVariantChange.dealerChange || activeVariantChange.retailChange ? (
                 <div className="mt-1.5 grid gap-2 sm:grid-cols-2">

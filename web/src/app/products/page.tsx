@@ -1,4 +1,5 @@
-import { getProductById, getProducts, getSkuOrder } from "@/lib/api";
+import Link from "next/link";
+import { getProductById, getProducts, getSkuOrder, mapConcurrent } from "@/lib/api";
 import { clearSession, getSession } from "@/lib/auth";
 import ProductsCatalog from "@/components/products/ProductsCatalog";
 import HotQuickTags from "@/components/products/HotQuickTags";
@@ -6,6 +7,8 @@ import DealerPolicyTabs from "@/components/products/DealerPolicyTabs";
 import PriceChangeNotificationPopup from "@/components/products/PriceChangeNotificationPopup";
 import { getPendingPriceNotificationForDealer, getRecentlyAcknowledgedChanges } from "@/lib/price-notifications";
 import { Product, ProductVariant } from "@/types/product";
+import { filterIgnoredProducts } from "@/lib/product-filters";
+import { resolveImageUrl } from "@/lib/image-url";
 
 type ProductListItem = Product & {
   cover?: string;
@@ -15,26 +18,6 @@ type ProductListItem = Product & {
   variants: ProductVariant[];
 };
 import { redirect } from "next/navigation";
-
-const ignoreByNameInclude = [
-  "sihoo",
-  "gtchair",
-  "T21",
-  "Vera Wintex",
-  "Iris Wintex",
-];
-const ignoreBySku = ["XMS.T21D", "XMS.T21X"];
-
-function shouldIgnoreProduct(product: { name?: string; variants?: { sku?: string | null }[] }) {
-  const name = String(product.name || "").trim().toLowerCase();
-  if (ignoreByNameInclude.some((keyword) => name.includes(String(keyword).trim().toLowerCase()))) return true;
-  const skus = (product.variants || []).map((v) => String(v.sku || "").trim().toUpperCase());
-  return skus.some((sku) => ignoreBySku.includes(sku));
-}
-
-function filterIgnoredProducts<T extends { name?: string; variants?: { sku?: string | null }[] }>(products: T[]) {
-  return products.filter((p) => !shouldIgnoreProduct(p));
-}
 
 function normalizeSku(sku?: string | null) {
   return String(sku || "")
@@ -92,7 +75,7 @@ function filterAndSortProducts(products: Product[], tierKey: "agentPrice1" | "ag
       const retailPrices = variants.map((v) => v.price || 0).filter((price) => price > 0);
       const retailMin = retailPrices.length ? Math.min(...retailPrices) : 0;
       const retailMax = retailPrices.length ? Math.max(...retailPrices) : 0;
-      const cover = p.images?.[0]?.url || "";
+      const cover = resolveImageUrl(p.images?.[0]?.url || "");
       const skuOrder = getProductOrderByVariants(variants, skuOrderMap);
       return { ...p, variants, retailMin, retailMax, cover, skuOrder };
     })
@@ -124,7 +107,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
   ]);
   const needsDetailFetch = !res.data[0] || !Array.isArray(res.data[0]?.variants);
   const productsBase = needsDetailFetch
-    ? await Promise.all(res.data.map((p) => getProductById(String(p.id))))
+    ? await mapConcurrent(res.data, (p) => getProductById(String(p.id)), 6)
     : res.data;
 
   const skuOrderMap = new Map(
@@ -136,6 +119,10 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
 
   const enrichedProducts = productsBase.map((product) => ({
     ...product,
+    images: (product.images || []).map((img) => ({
+      ...img,
+      url: resolveImageUrl(img.url),
+    })),
     variants: (product.variants || []).map((variant) => {
       const skuKey = normalizeKey(String(variant.sku || ""));
       const barcodeKey = normalizeKey(String(variant.barcode || ""));
@@ -166,9 +153,14 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
               <h1 className="text-2xl font-bold">Bảng giá đại lý The Manson</h1>
               <p className="mt-1 text-sm text-white/90">Danh sách sản phẩm hiển thị theo nhóm giá: {session.priceTier === "agent1" ? "Đại lý 1" : "Đại lý 2"}</p>
             </div>
-            <form action={logoutAction}>
-              <button type="submit" className="rounded-lg border border-white/60 bg-white/10 px-3 py-1.5 text-sm font-semibold text-white">Logout</button>
-            </form>
+            <div className="flex items-center gap-2">
+              <Link href="/api-key" className="rounded-lg border border-white/60 bg-white/10 px-3 py-1.5 text-sm font-semibold text-white hover:bg-white/20">
+                🔑 API cho đại lý
+              </Link>
+              <form action={logoutAction}>
+                <button type="submit" className="rounded-lg border border-white/60 bg-white/10 px-3 py-1.5 text-sm font-semibold text-white">Logout</button>
+              </form>
+            </div>
           </div>
         </section>
 

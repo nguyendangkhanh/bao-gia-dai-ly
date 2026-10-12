@@ -228,7 +228,7 @@ export default function DealerPolicyTabs() {
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-zinc-400 mt-0.5">▪</span>
-                        <span><span className="font-semibold text-zinc-800">Quy định bán hàng:</span> Đại lý cam kết không tự ý bán phá giá sản phẩm. Ưu tiên miễn phí vận chuyển/lắp đặt hoặc tặng kèm "Kê chân Manson FR08 / FR09" khi bán ghế cho khách lẻ.</span>
+                        <span><span className="font-semibold text-zinc-800">Quy định bán hàng:</span> Đại lý cam kết không tự ý bán phá giá sản phẩm. Ưu tiên miễn phí vận chuyển/lắp đặt hoặc tặng kèm &quot;Kê chân Manson FR08 / FR09&quot; khi bán ghế cho khách lẻ.</span>
                       </li>
                     </ul>
                   </div>

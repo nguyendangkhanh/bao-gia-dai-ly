@@ -44,3 +44,7 @@ client_secret.json
 # Google service account key
 web/du-lieu-sapo-fa545e25eaf0.json
 web/client_secret.json
+
+# API key đại lý — là bearer token thật, không được commit (khác dealers-cache.json
+# chỉ là cache đọc từ Sheet)
+.data/dealer-api-keys.json

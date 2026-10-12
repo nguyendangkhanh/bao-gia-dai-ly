@@ -4,6 +4,7 @@ export interface ProductImage {
   alt: string | null;
   position: number | null;
   variantIds?: number[];
+  formats?: Record<string, unknown>;
 }
 
 export interface ProductVariant {
