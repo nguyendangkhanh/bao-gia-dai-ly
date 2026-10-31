@@ -106,7 +106,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
     getProducts(1, 500, ""),
     getSkuOrder(),
   ]);
-  const needsDetailFetch = !res.data[0] || !Array.isArray(res.data[0]?.variants) || !Array.isArray(res.data[0]?.images);
+  const needsDetailFetch = !res.data[0] || !Array.isArray(res.data[0]?.variants);
   const productsBase = needsDetailFetch
     ? await mapConcurrent(res.data, (p) => getProductById(String(p.id)), 6)
     : res.data;
