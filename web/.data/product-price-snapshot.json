@@ -1,6 +1,6 @@
 {
-  "version": "2026-09-29T08:03:47.950Z",
-  "createdAt": "2026-09-29T08:03:47.950Z",
+  "version": "2026-10-31T03:19:05.664Z",
+  "createdAt": "2026-10-31T03:19:05.664Z",
   "products": [
     {
       "productId": 2,
@@ -124,22 +124,13 @@
       "productName": "Mặt Bàn Dùng Cho SmartDesk Và Space Desk",
       "variants": [
         {
-          "variantId": 808,
-          "sku": "1206-MB-DEN",
-          "barcode": "Mặt Bàn 1.2m Đen",
-          "displayName": "mặt bàn 1.2m x 0.6m / Đen",
-          "price": 500000,
-          "agentPrice1": 375000,
-          "agentPrice2": 375000
-        },
-        {
-          "variantId": 809,
-          "sku": "1206-MB-TRANG",
-          "barcode": "Mặt Bàn 1.2m Trắng",
-          "displayName": "mặt bàn 1.2m x 0.6m / Trắng",
-          "price": 500000,
-          "agentPrice1": 375000,
-          "agentPrice2": 375000
+          "variantId": 811,
+          "sku": "1406-MB-DEN",
+          "barcode": "Mặt Bàn 1.4m Đen",
+          "displayName": "mặt bàn 1.4m x 0.6m / Đen",
+          "price": 650000,
+          "agentPrice1": 475000,
+          "agentPrice2": 475000
         },
         {
           "variantId": 810,
@@ -151,31 +142,13 @@
           "agentPrice2": 375000
         },
         {
-          "variantId": 811,
-          "sku": "1406-MB-DEN",
-          "barcode": "Mặt Bàn 1.4m Đen",
-          "displayName": "mặt bàn 1.4m x 0.6m / Đen",
-          "price": 650000,
-          "agentPrice1": 475000,
-          "agentPrice2": 475000
-        },
-        {
-          "variantId": 812,
-          "sku": "1406-MB-TRANG",
-          "barcode": "Mặt Bàn 1.4m Trắng",
-          "displayName": "mặt bàn 1.4m x 0.6m / Trắng",
-          "price": 650000,
-          "agentPrice1": 475000,
-          "agentPrice2": 475000
-        },
-        {
-          "variantId": 813,
-          "sku": "1406-MB-VANGO",
-          "barcode": "Mặt Bàn 1.4m Vân Gỗ",
-          "displayName": "mặt bàn 1.4m x 0.6m / Vân Gỗ",
-          "price": 650000,
-          "agentPrice1": 475000,
-          "agentPrice2": 475000
+          "variantId": 816,
+          "sku": "1606-MB-VANGO",
+          "barcode": "Mặt Bàn 1.6m Vân Gỗ",
+          "displayName": "mặt bàn 1.6m x 0.6m / Vân Gỗ",
+          "price": 700000,
+          "agentPrice1": 525000,
+          "agentPrice2": 525000
         },
         {
           "variantId": 814,
@@ -187,6 +160,15 @@
           "agentPrice2": 525000
         },
         {
+          "variantId": 813,
+          "sku": "1406-MB-VANGO",
+          "barcode": "Mặt Bàn 1.4m Vân Gỗ",
+          "displayName": "mặt bàn 1.4m x 0.6m / Vân Gỗ",
+          "price": 650000,
+          "agentPrice1": 475000,
+          "agentPrice2": 475000
+        },
+        {
           "variantId": 815,
           "sku": "1606-MB-TRANG",
           "barcode": "Mặt Bàn 1.6m Trắng",
@@ -196,13 +178,31 @@
           "agentPrice2": 525000
         },
         {
-          "variantId": 816,
-          "sku": "1606-MB-VANGO",
-          "barcode": "Mặt Bàn 1.6m Vân Gỗ",
-          "displayName": "mặt bàn 1.6m x 0.6m / Vân Gỗ",
-          "price": 700000,
-          "agentPrice1": 525000,
-          "agentPrice2": 525000
+          "variantId": 809,
+          "sku": "1206-MB-TRANG",
+          "barcode": "Mặt Bàn 1.2m Trắng",
+          "displayName": "mặt bàn 1.2m x 0.6m / Trắng",
+          "price": 500000,
+          "agentPrice1": 375000,
+          "agentPrice2": 375000
+        },
+        {
+          "variantId": 812,
+          "sku": "1406-MB-TRANG",
+          "barcode": "Mặt Bàn 1.4m Trắng",
+          "displayName": "mặt bàn 1.4m x 0.6m / Trắng",
+          "price": 650000,
+          "agentPrice1": 475000,
+          "agentPrice2": 475000
+        },
+        {
+          "variantId": 808,
+          "sku": "1206-MB-DEN",
+          "barcode": "Mặt Bàn 1.2m Đen",
+          "displayName": "mặt bàn 1.2m x 0.6m / Đen",
+          "price": 500000,
+          "agentPrice1": 375000,
+          "agentPrice2": 375000
         },
         {
           "variantId": 1365,
@@ -484,67 +484,67 @@
       "productName": "Herman Miller Aeron Size B",
       "variants": [
         {
-          "variantId": 48,
-          "sku": "HMCOC",
-          "barcode": "Herman Aluminium Carbon",
-          "displayName": "Chân Nhôm, Khung Nhôm, Màu Carbon",
-          "price": 31000000,
-          "agentPrice1": 28500000,
-          "agentPrice2": 27500000
-        },
-        {
-          "variantId": 47,
-          "sku": "HMCOGRP",
-          "barcode": "Herman Aluminium Graphite xám chì",
-          "displayName": "Chân Nhôm, Khung Nhôm, Màu Graphite (Xám Chì)",
-          "price": 31000000,
-          "agentPrice1": 28000000,
-          "agentPrice2": 27000000
-        },
-        {
-          "variantId": 49,
-          "sku": "HMCOBL",
-          "barcode": "Herman Aluminium Onyx",
-          "displayName": "Chân Nhôm, Khung Nhôm, Màu Onyx (Đen)",
-          "price": 31000000,
-          "agentPrice1": 28000000,
-          "agentPrice2": 27000000
-        },
-        {
-          "variantId": 46,
-          "sku": "HMHKGRC",
-          "barcode": "Herman Metal Carbon",
-          "displayName": "Chân Hợp Kim, Khung Hợp Kim, Màu CarBon",
-          "price": 27000000,
-          "agentPrice1": 24500000,
-          "agentPrice2": 23500000
-        },
-        {
-          "variantId": 45,
-          "sku": "HMCNMW",
-          "barcode": "Herman Nylon Mineral White",
-          "displayName": "Chân Nhựa, Khung Hợp Kim, Màu Mineral White (Trắng)",
-          "price": 27000000,
-          "agentPrice1": 26000000,
-          "agentPrice2": 25000000
-        },
-        {
-          "variantId": 50,
-          "sku": "HMCOMW",
-          "barcode": "Herman Aluminium Mineral White",
-          "displayName": "Chân Nhôm, Khung Nhôm, Màu Mineral White (Trắng)",
-          "price": 33000000,
-          "agentPrice1": 30000000,
-          "agentPrice2": 29000000
-        },
-        {
-          "variantId": 44,
+          "variantId": 1892,
           "sku": "HMCNGRP",
-          "barcode": "Herman Nylon Graphite Xám Chì",
-          "displayName": "Chân Nhựa, Khung Hợp Kim, Màu Graphite (Xám Chì)",
+          "barcode": "HMCNGRP",
+          "displayName": "Nylon - Graphite xám chì",
           "price": 22500000,
-          "agentPrice1": 22000000,
-          "agentPrice2": 21700000
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1893,
+          "sku": "HMCNMW",
+          "barcode": "HMCNMW",
+          "displayName": "Nylon - Mineral White",
+          "price": 27000000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1894,
+          "sku": "HMHKGRC",
+          "barcode": "HMHKGRC",
+          "displayName": "Metal - Carbon",
+          "price": 27000000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1895,
+          "sku": "HMCOGRP",
+          "barcode": "HMCOGRP",
+          "displayName": "Aluminium - Graphite xám chì",
+          "price": 31000000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1896,
+          "sku": "HMCOC",
+          "barcode": "HMCOC",
+          "displayName": "Aluminium  - Carbon",
+          "price": 31000000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1897,
+          "sku": "HMCOBL",
+          "barcode": "HMCOBL",
+          "displayName": "Aluminium  - Onyx",
+          "price": 31000000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1898,
+          "sku": "HMCOMW",
+          "barcode": "HMCOMW",
+          "displayName": "Aluminium  - Mineral White",
+          "price": 33000000,
+          "agentPrice1": null,
+          "agentPrice2": null
         }
       ]
     },
@@ -1075,6 +1075,15 @@
           "agentPrice2": 7000000
         },
         {
+          "variantId": 1572,
+          "sku": "E3-ULTRA-AI-DEN-GC",
+          "barcode": "Hbada E3 Ultra AI  + Gác Chân Màu Graphite",
+          "displayName": null,
+          "price": 12900000,
+          "agentPrice1": 12900000,
+          "agentPrice2": 12900000
+        },
+        {
           "variantId": 98,
           "sku": "X7SmartElectric",
           "barcode": "Manson X7 Smart Electric Xám",
@@ -1091,15 +1100,6 @@
           "price": 13500000,
           "agentPrice1": 13500000,
           "agentPrice2": 13500000
-        },
-        {
-          "variantId": 1572,
-          "sku": "E3-ULTRA-AI-DEN-GC",
-          "barcode": "Hbada E3 Ultra AI  + Gác Chân Màu Graphite",
-          "displayName": null,
-          "price": 13500000,
-          "agentPrice1": 13500000,
-          "agentPrice2": 13500000
         }
       ]
     },
@@ -1107,6 +1107,15 @@
       "productId": 31,
       "productName": "Manson Atum",
       "variants": [
+        {
+          "variantId": 106,
+          "sku": "ATUMPROGREYGC",
+          "barcode": "Atum Pro 4.0 Xám Gác Chân",
+          "displayName": "Pro 4.0 Xám Gác Chân",
+          "price": 6890000,
+          "agentPrice1": 5600000,
+          "agentPrice2": 5550000
+        },
         {
           "variantId": 99,
           "sku": "ATUMBLACK",
@@ -1135,24 +1144,6 @@
           "agentPrice2": 4650000
         },
         {
-          "variantId": 102,
-          "sku": "ATUMGREYGC",
-          "barcode": "Atum Xám Gác Chân",
-          "displayName": "Xám Gác Chân",
-          "price": 5890000,
-          "agentPrice1": 5000000,
-          "agentPrice2": 4950000
-        },
-        {
-          "variantId": 103,
-          "sku": "ATUMPROBLACK",
-          "barcode": "Atum Pro 4.0 Đen",
-          "displayName": "Pro 4.0 Đen",
-          "price": 6090000,
-          "agentPrice1": 5000000,
-          "agentPrice2": 4950000
-        },
-        {
           "variantId": 104,
           "sku": "ATUMPROGREY",
           "barcode": "Atum Pro 4.0 Xám",
@@ -1171,13 +1162,22 @@
           "agentPrice2": 5250000
         },
         {
-          "variantId": 106,
-          "sku": "ATUMPROGREYGC",
-          "barcode": "Atum Pro 4.0 Xám Gác Chân",
-          "displayName": "Pro 4.0 Xám Gác Chân",
-          "price": 6890000,
-          "agentPrice1": 5600000,
-          "agentPrice2": 5550000
+          "variantId": 108,
+          "sku": "PKGCATUMGREY",
+          "barcode": "Gác Chân Atum Xám",
+          "displayName": "Gác Chân Atum Xám",
+          "price": 600000,
+          "agentPrice1": 350000,
+          "agentPrice2": 350000
+        },
+        {
+          "variantId": 103,
+          "sku": "ATUMPROBLACK",
+          "barcode": "Atum Pro 4.0 Đen",
+          "displayName": "Pro 4.0 Đen",
+          "price": 6090000,
+          "agentPrice1": 5000000,
+          "agentPrice2": 4950000
         },
         {
           "variantId": 107,
@@ -1189,13 +1189,13 @@
           "agentPrice2": 350000
         },
         {
-          "variantId": 108,
-          "sku": "PKGCATUMGREY",
-          "barcode": "Gác Chân Atum Xám",
-          "displayName": "Gác Chân Atum Xám",
-          "price": 600000,
-          "agentPrice1": 350000,
-          "agentPrice2": 350000
+          "variantId": 102,
+          "sku": "ATUMGREYGC",
+          "barcode": "Atum Xám Gác Chân",
+          "displayName": "Xám Gác Chân",
+          "price": 5890000,
+          "agentPrice1": 5000000,
+          "agentPrice2": 4950000
         }
       ]
     },
@@ -1327,19 +1327,19 @@
           "agentPrice2": 3550000
         },
         {
-          "variantId": 791,
-          "sku": "Verawb1",
-          "barcode": "Vera Wintex Đen",
-          "displayName": "Wintex Đen",
+          "variantId": 796,
+          "sku": "PVN146",
+          "barcode": "Vera CloudMesh Xám",
+          "displayName": "CloudMesh Xám",
           "price": 4400000,
           "agentPrice1": 3700000,
           "agentPrice2": 3650000
         },
         {
-          "variantId": 792,
-          "sku": "PVN1461",
-          "barcode": "Vera Wintex Xám",
-          "displayName": "Wintex Xám",
+          "variantId": 795,
+          "sku": "Verawb",
+          "barcode": "Vera CloudMesh Đen",
+          "displayName": "CloudMesh Đen",
           "price": 4400000,
           "agentPrice1": 3700000,
           "agentPrice2": 3650000
@@ -1363,19 +1363,19 @@
           "agentPrice2": 3950000
         },
         {
-          "variantId": 795,
-          "sku": "Verawb",
-          "barcode": "Vera CloudMesh Đen",
-          "displayName": "CloudMesh Đen",
+          "variantId": 792,
+          "sku": "PVN1461",
+          "barcode": "Vera Wintex Xám",
+          "displayName": "Wintex Xám",
           "price": 4400000,
           "agentPrice1": 3700000,
           "agentPrice2": 3650000
         },
         {
-          "variantId": 796,
-          "sku": "PVN146",
-          "barcode": "Vera CloudMesh Xám",
-          "displayName": "CloudMesh Xám",
+          "variantId": 791,
+          "sku": "Verawb1",
+          "barcode": "Vera Wintex Đen",
+          "displayName": "Wintex Đen",
           "price": 4400000,
           "agentPrice1": 3700000,
           "agentPrice2": 3650000
@@ -1801,22 +1801,22 @@
       "productName": "Tựa lưng công thái học Manson FlexBack",
       "variants": [
         {
-          "variantId": 930,
+          "variantId": 1921,
           "sku": "FLEXBACK-GREY",
           "barcode": "Flexback Xám",
           "displayName": "Flexback Xám",
           "price": 399000,
-          "agentPrice1": 250000,
-          "agentPrice2": 250000
+          "agentPrice1": null,
+          "agentPrice2": null
         },
         {
-          "variantId": 958,
+          "variantId": 1922,
           "sku": "FLEXBACK-BLACK",
           "barcode": "Flexback Đen",
-          "displayName": null,
+          "displayName": "Flexback Đen",
           "price": 399000,
-          "agentPrice1": 250000,
-          "agentPrice2": 250000
+          "agentPrice1": null,
+          "agentPrice2": null
         }
       ]
     },
@@ -1896,22 +1896,22 @@
       "productName": "Khung Bàn Nâng Hạ 2 Động Cơ",
       "variants": [
         {
-          "variantId": 1336,
-          "sku": "NH-2DC-TRANG",
-          "barcode": "Khung Nâng Hạ 2 Động Cơ Trắng",
-          "displayName": "Trắng",
-          "price": 5490000,
-          "agentPrice1": 3990000,
-          "agentPrice2": 3990000
-        },
-        {
           "variantId": 1335,
           "sku": "NH-2DC-DEN",
           "barcode": "Khung Nâng Hạ 2 Động Cơ Đen",
           "displayName": "Đen",
           "price": 5490000,
-          "agentPrice1": 3990000,
-          "agentPrice2": 3990000
+          "agentPrice1": 2900000,
+          "agentPrice2": 2900000
+        },
+        {
+          "variantId": 1336,
+          "sku": "NH-2DC-TRANG",
+          "barcode": "Khung Nâng Hạ 2 Động Cơ Trắng",
+          "displayName": "Trắng",
+          "price": 5490000,
+          "agentPrice1": 2900000,
+          "agentPrice2": 2900000
         }
       ]
     },
@@ -1959,34 +1959,34 @@
     },
     {
       "productId": 54,
-      "productName": "Bộ Bánh Xe DeskCasters",
+      "productName": "Bánh Xe DeskCasters",
       "variants": [
         {
-          "variantId": 1359,
+          "variantId": 1914,
           "sku": "DeskCasters-Black",
-          "barcode": "Bộ Bánh Xe DeskCasters Black",
+          "barcode": null,
           "displayName": "Đen",
           "price": 250000,
-          "agentPrice1": 140000,
-          "agentPrice2": 140000
+          "agentPrice1": null,
+          "agentPrice2": null
         },
         {
-          "variantId": 1360,
+          "variantId": 1915,
           "sku": "DeskCasters-White",
-          "barcode": "Bộ Bánh Xe DeskCasters White",
+          "barcode": null,
           "displayName": "Trắng",
           "price": 250000,
-          "agentPrice1": 140000,
-          "agentPrice2": 140000
+          "agentPrice1": null,
+          "agentPrice2": null
         },
         {
-          "variantId": 1590,
+          "variantId": 1916,
           "sku": "DeskCasters-Pro-Black",
-          "barcode": "DeskCasters Pro",
-          "displayName": null,
+          "barcode": null,
+          "displayName": "DeskCasters Pro",
           "price": 390000,
-          "agentPrice1": 390000,
-          "agentPrice2": 390000
+          "agentPrice1": null,
+          "agentPrice2": null
         }
       ]
     },
@@ -1995,136 +1995,406 @@
       "productName": "Bàn Nâng Hạ Di Động Manson StandGo",
       "variants": [
         {
-          "variantId": 1575,
-          "sku": "StandGo-NH-Black&MB-STANDGO-TRANG",
-          "barcode": "Standgo Khung Đen Mặt Trắng",
-          "displayName": null,
-          "price": null,
-          "agentPrice1": null,
-          "agentPrice2": null
+          "variantId": 1722,
+          "sku": "StandGo-NH-Black&MB-STANDGO-TRANG-4070",
+          "barcode": null,
+          "displayName": "Chân Bàn Đen / Trắng 0.4m x 0.7m",
+          "price": 1250000,
+          "agentPrice1": 850000,
+          "agentPrice2": 850000
         },
         {
-          "variantId": 1576,
-          "sku": "StandGo-NH-Black&MB-STANDGO-DEN",
-          "barcode": "Standgo Khung Đen Mặt Đen",
-          "displayName": null,
-          "price": null,
-          "agentPrice1": null,
-          "agentPrice2": null
+          "variantId": 1723,
+          "sku": "StandGo-NH-Black&MB-STANDGO-DEN-4070",
+          "barcode": null,
+          "displayName": "Chân Bàn Đen / Đen 0.4m x 0.7m",
+          "price": 1250000,
+          "agentPrice1": 850000,
+          "agentPrice2": 850000
         },
         {
-          "variantId": 1577,
-          "sku": "StandGo-NH-Black&MB-STANDGO-VANGO",
-          "barcode": "Standgo Khung Đen Mặt Vân Gỗ",
-          "displayName": null,
-          "price": null,
-          "agentPrice1": null,
-          "agentPrice2": null
+          "variantId": 1724,
+          "sku": "StandGo-NH-Black&MB-STANDGO-VANGO-4070",
+          "barcode": null,
+          "displayName": "Chân Bàn Đen / Vân Gỗ 0.4m x 0.7m",
+          "price": 1250000,
+          "agentPrice1": 850000,
+          "agentPrice2": 850000
         },
         {
-          "variantId": 1578,
-          "sku": "StandGo-NH-Black&MB-STANDGO-SOI-OAK",
-          "barcode": "Standgo Khung Đen Mặt Sồi Oak",
-          "displayName": null,
-          "price": null,
-          "agentPrice1": null,
-          "agentPrice2": null
+          "variantId": 1725,
+          "sku": "StandGo-NH-Black&MB-STANDGO-SOI-OAK-4070",
+          "barcode": null,
+          "displayName": "Chân Bàn Đen / Sồi Oak 0.4m x 0.7m",
+          "price": 1250000,
+          "agentPrice1": 850000,
+          "agentPrice2": 850000
         },
         {
-          "variantId": 1579,
-          "sku": "StandGo-NH-White&MB-STANDGO-TRANG",
-          "barcode": "Standgo Khung Trắng Mặt Trắng",
-          "displayName": null,
-          "price": null,
-          "agentPrice1": null,
-          "agentPrice2": null
-        },
-        {
-          "variantId": 1580,
-          "sku": "StandGo-NH-White&MB-STANDGO-DEN",
-          "barcode": "Standgo Khung Trắng Mặt Đen",
-          "displayName": null,
-          "price": null,
-          "agentPrice1": null,
-          "agentPrice2": null
-        },
-        {
-          "variantId": 1581,
-          "sku": "StandGo-NH-White&MB-STANDGO-VANGO",
-          "barcode": "Standgo Khung Trắng Mặt Vân Gỗ",
-          "displayName": null,
-          "price": null,
-          "agentPrice1": null,
-          "agentPrice2": null
-        },
-        {
-          "variantId": 1582,
-          "sku": "StandGo-NH-White&MB-STANDGO-SOI-OAK",
-          "barcode": "Standgo Khung Trắng Mặt Sồi Oak",
-          "displayName": null,
-          "price": null,
-          "agentPrice1": null,
-          "agentPrice2": null
-        },
-        {
-          "variantId": 1583,
-          "sku": "StandGo-NH-Black",
-          "barcode": "Khung Standgo Đen",
-          "displayName": null,
-          "price": null,
-          "agentPrice1": null,
-          "agentPrice2": null
-        },
-        {
-          "variantId": 1584,
-          "sku": "StandGo-NH-White",
-          "barcode": "Khung Standgo Trắng",
-          "displayName": null,
-          "price": null,
-          "agentPrice1": null,
-          "agentPrice2": null
-        },
-        {
-          "variantId": 1585,
-          "sku": "MB-STANDGO-TRANG",
-          "barcode": "Mặt Bàn Standgo Trắng",
-          "displayName": null,
-          "price": null,
-          "agentPrice1": null,
-          "agentPrice2": null
-        },
-        {
-          "variantId": 1586,
-          "sku": "MB-STANDGO-DEN",
-          "barcode": "Mặt Bàn Standgo Đen",
-          "displayName": null,
-          "price": null,
-          "agentPrice1": null,
-          "agentPrice2": null
-        },
-        {
-          "variantId": 1587,
-          "sku": "MB-STANDGO-VANGO",
-          "barcode": "Mặt Bàn Standgo Vân Gỗ",
-          "displayName": null,
-          "price": null,
-          "agentPrice1": null,
-          "agentPrice2": null
-        },
-        {
-          "variantId": 1588,
-          "sku": "MB-STANDGO-SOI-OAK",
-          "barcode": "Mặt Bàn Standgo Sồi Oak",
-          "displayName": null,
-          "price": null,
-          "agentPrice1": null,
-          "agentPrice2": null
-        },
-        {
-          "variantId": 1589,
+          "variantId": 1726,
           "sku": null,
           "barcode": null,
-          "displayName": null,
+          "displayName": "Chân Bàn Đen / Duo Trắng 0.45m x 0.8m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1727,
+          "sku": null,
+          "barcode": null,
+          "displayName": "Chân Bàn Đen / Duo Đen 0.45m x 0.8m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1728,
+          "sku": null,
+          "barcode": null,
+          "displayName": "Chân Bàn Đen / Duo Vân Gỗ 0.45m x 0.8m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1729,
+          "sku": null,
+          "barcode": null,
+          "displayName": "Chân Bàn Đen / Duo Sồi Oak 0.45m x 0.8m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1730,
+          "sku": "StandGo-NH-White&MB-STANDGO-TRANG-4070",
+          "barcode": null,
+          "displayName": "Chân Bàn Trắng / Trắng 0.4m x 0.7m",
+          "price": 1250000,
+          "agentPrice1": 850000,
+          "agentPrice2": 850000
+        },
+        {
+          "variantId": 1731,
+          "sku": "StandGo-NH-White&MB-STANDGO-DEN-4070",
+          "barcode": null,
+          "displayName": "Chân Bàn Trắng / Đen 0.4m x 0.7m",
+          "price": 1250000,
+          "agentPrice1": 850000,
+          "agentPrice2": 850000
+        },
+        {
+          "variantId": 1732,
+          "sku": "StandGo-NH-White&MB-STANDGO-VANGO-4070",
+          "barcode": null,
+          "displayName": "Chân Bàn Trắng / Vân Gỗ 0.4m x 0.7m",
+          "price": 1250000,
+          "agentPrice1": 850000,
+          "agentPrice2": 850000
+        },
+        {
+          "variantId": 1733,
+          "sku": "StandGo-NH-White&MB-STANDGO-SOI-OAK-4070",
+          "barcode": null,
+          "displayName": "Chân Bàn Trắng / Sồi Oak 0.4m x 0.7m",
+          "price": 1250000,
+          "agentPrice1": 850000,
+          "agentPrice2": 850000
+        },
+        {
+          "variantId": 1734,
+          "sku": null,
+          "barcode": null,
+          "displayName": "Chân Bàn Trắng / Duo Trắng 0.45m x 0.8m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1735,
+          "sku": null,
+          "barcode": null,
+          "displayName": "Chân Bàn Trắng / Duo Đen 0.45m x 0.8m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1736,
+          "sku": null,
+          "barcode": null,
+          "displayName": "Chân Bàn Trắng / Duo Vân Gỗ 0.45m x 0.8m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1737,
+          "sku": null,
+          "barcode": null,
+          "displayName": "Chân Bàn Trắng / Duo Sồi Oak 0.45m x 0.8m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1738,
+          "sku": null,
+          "barcode": null,
+          "displayName": "Chân Bàn Duo Gập Đen / Trắng 0.4m x 0.7m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1739,
+          "sku": null,
+          "barcode": null,
+          "displayName": "Chân Bàn Duo Gập Đen / Đen 0.4m x 0.7m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1740,
+          "sku": null,
+          "barcode": null,
+          "displayName": "Chân Bàn Duo Gập Đen / Vân Gỗ 0.4m x 0.7m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1741,
+          "sku": null,
+          "barcode": null,
+          "displayName": "Chân Bàn Duo Gập Đen / Sồi Oak 0.4m x 0.7m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1742,
+          "sku": "StandGo-DO-NH-Black&MB-STANDGO-TRANG-4580",
+          "barcode": null,
+          "displayName": "Chân Bàn Duo Gập Đen / Duo Trắng 0.45m x 0.8m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1743,
+          "sku": "StandGo-DO-NH-Black&MB-STANDGO-DEN-4580",
+          "barcode": null,
+          "displayName": "Chân Bàn Duo Gập Đen / Duo Đen 0.45m x 0.8m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1744,
+          "sku": "StandGo-DO-NH-Black&MB-STANDGO-VANGO-4580",
+          "barcode": null,
+          "displayName": "Chân Bàn Duo Gập Đen / Duo Vân Gỗ 0.45m x 0.8m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1745,
+          "sku": "StandGo-DO-NH-Black&MB-STANDGO-SOI-OAK-4580",
+          "barcode": null,
+          "displayName": "Chân Bàn Duo Gập Đen / Duo Sồi Oak 0.45m x 0.8m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1746,
+          "sku": null,
+          "barcode": null,
+          "displayName": "Chân Bàn Duo Gập Trắng / Trắng 0.4m x 0.7m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1747,
+          "sku": null,
+          "barcode": null,
+          "displayName": "Chân Bàn Duo Gập Trắng / Đen 0.4m x 0.7m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1748,
+          "sku": null,
+          "barcode": null,
+          "displayName": "Chân Bàn Duo Gập Trắng / Vân Gỗ 0.4m x 0.7m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1749,
+          "sku": null,
+          "barcode": null,
+          "displayName": "Chân Bàn Duo Gập Trắng / Sồi Oak 0.4m x 0.7m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1750,
+          "sku": "StandGo-DO-NH-White&MB-STANDGO-TRANG-4580",
+          "barcode": null,
+          "displayName": "Chân Bàn Duo Gập Trắng / Duo Trắng 0.45m x 0.8m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1751,
+          "sku": "StandGo-DO-NH-White&MB-STANDGO-DEN-4580",
+          "barcode": null,
+          "displayName": "Chân Bàn Duo Gập Trắng / Duo Đen 0.45m x 0.8m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1752,
+          "sku": "StandGo-DO-NH-White&MB-STANDGO-VANGO-4580",
+          "barcode": null,
+          "displayName": "Chân Bàn Duo Gập Trắng / Duo Vân Gỗ 0.45m x 0.8m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1753,
+          "sku": "StandGo-DO-NH-White&MB-STANDGO-SOI-OAK-4580",
+          "barcode": null,
+          "displayName": "Chân Bàn Duo Gập Trắng / Duo Sồi Oak 0.45m x 0.8m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1754,
+          "sku": "StandGo-NH-Black",
+          "barcode": null,
+          "displayName": "Chân Bàn Đen / Không Mua Mặt",
+          "price": 1250000,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1755,
+          "sku": "StandGo-NH-White",
+          "barcode": null,
+          "displayName": "Chân Bàn Trắng / Không Mua Mặt",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1756,
+          "sku": "StandGo-DO-NH-Black",
+          "barcode": null,
+          "displayName": "Chân Bàn Duo Gập Đen / Không Mua Mặt",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1757,
+          "sku": "StandGo-DO-NH-White",
+          "barcode": null,
+          "displayName": "Chân Bàn Duo Gập Trắng / Không Mua Mặt",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1758,
+          "sku": "MB-STANDGO-TRANG-4070",
+          "barcode": null,
+          "displayName": "Không Mua Chân / Trắng 0.4m x 0.7m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1759,
+          "sku": "MB-STANDGO-DEN-4070",
+          "barcode": null,
+          "displayName": "Không Mua Chân / Đen 0.4m x 0.7m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1760,
+          "sku": "MB-STANDGO-VANGO-4070",
+          "barcode": null,
+          "displayName": "Không Mua Chân / Vân Gỗ 0.4m x 0.7m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1761,
+          "sku": "MB-STANDGO-SOI-OAK-4070",
+          "barcode": null,
+          "displayName": "Không Mua Chân / Sồi Oak 0.4m x 0.7m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1762,
+          "sku": "MB-STANDGO-TRANG-4580",
+          "barcode": null,
+          "displayName": "Không Mua Chân / Duo Trắng 0.45m x 0.8m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1763,
+          "sku": "MB-STANDGO-DEN-4580",
+          "barcode": null,
+          "displayName": "Không Mua Chân / Duo Đen 0.45m x 0.8m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1764,
+          "sku": "MB-STANDGO-VANGO-4580",
+          "barcode": null,
+          "displayName": "Không Mua Chân / Duo Vân Gỗ 0.45m x 0.8m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1765,
+          "sku": "MB-STANDGO-SOI-OAK-4580",
+          "barcode": null,
+          "displayName": "Không Mua Chân / Duo Sồi Oak 0.45m x 0.8m",
+          "price": null,
+          "agentPrice1": null,
+          "agentPrice2": null
+        },
+        {
+          "variantId": 1766,
+          "sku": null,
+          "barcode": null,
+          "displayName": "Không Mua Chân / Không Mua Mặt",
           "price": null,
           "agentPrice1": null,
           "agentPrice2": null
@@ -2387,388 +2657,220 @@
       ]
     },
     {
-      "productId": 62,
-      "productName": "[DELETE Không dùng nha anh em] Mặt Bàn 25mm Dùng Cho Omni và Standing Desk",
-      "variants": [
-        {
-          "variantId": 1510,
-          "sku": "DELETE-25MM-1407-MB-DEN",
-          "barcode": "mặt bàn 1.4m x 0.7m đen (25mm)",
-          "displayName": "mặt bàn 1.4m x 0.7m / Đen",
-          "price": 1600000,
-          "agentPrice1": 1250000,
-          "agentPrice2": 1250000
-        },
-        {
-          "variantId": 1511,
-          "sku": "DELETE-25MM-1407-MB-TRANG",
-          "barcode": "mặt bàn 1.4m x 0.7m trắng (25mm)",
-          "displayName": "mặt bàn 1.4m x 0.7m / Trắng",
-          "price": 1600000,
-          "agentPrice1": 1250000,
-          "agentPrice2": 1250000
-        },
-        {
-          "variantId": 1512,
-          "sku": "DELETE-25MM-1407-MB-VANGO",
-          "barcode": "mặt bàn 1.4m x 0.7m vân gỗ (25mm)",
-          "displayName": "mặt bàn 1.4m x 0.7m / Vân Gỗ",
-          "price": 1600000,
-          "agentPrice1": 1250000,
-          "agentPrice2": 1250000
-        },
-        {
-          "variantId": 1513,
-          "sku": "DELETE-25MM-1407-MB-SOI-OAK",
-          "barcode": "mặt bàn 1.4m x 0.7m sồi oak (25mm)",
-          "displayName": "mặt bàn 1.4m x 0.7m / Sồi (Oak)",
-          "price": 1600000,
-          "agentPrice1": 1250000,
-          "agentPrice2": 1250000
-        },
-        {
-          "variantId": 1514,
-          "sku": "DELETE-25MM-16075-MB-DEN",
-          "barcode": "mặt bàn 1.6m x 0.75m đen (25mm)",
-          "displayName": "mặt bàn 1.6m x 0.75m / Đen",
-          "price": 1700000,
-          "agentPrice1": 1350000,
-          "agentPrice2": 1350000
-        },
-        {
-          "variantId": 1515,
-          "sku": "DELETE-25MM-16075-MB-TRANG",
-          "barcode": "mặt bàn 1.6m x 0.75m trắng (25mm)",
-          "displayName": "mặt bàn 1.6m x 0.75m / Trắng",
-          "price": 1700000,
-          "agentPrice1": 1350000,
-          "agentPrice2": 1350000
-        },
-        {
-          "variantId": 1516,
-          "sku": "DELETE-25MM-16075-MB-VANGO",
-          "barcode": "mặt bàn 1.6m x 0.75m vân gỗ (25mm)",
-          "displayName": "mặt bàn 1.6m x 0.75m / Vân Gỗ",
-          "price": 1700000,
-          "agentPrice1": 1350000,
-          "agentPrice2": 1350000
-        },
-        {
-          "variantId": 1517,
-          "sku": "DELETE-25MM-16075-MB-SOI-OAK",
-          "barcode": "mặt bàn 1.6m x 0.75m sồi oak (25mm)",
-          "displayName": "mặt bàn 1.6m x 0.75m / Sồi (Oak)",
-          "price": 1700000,
-          "agentPrice1": 1350000,
-          "agentPrice2": 1350000
-        },
-        {
-          "variantId": 1518,
-          "sku": "DELETE-25MM-1808-MB-DEN",
-          "barcode": "mặt bàn 1.8m x 0.8m đen (25mm)",
-          "displayName": "mặt bàn 1.8m x 0.8m / Đen",
-          "price": 1950000,
-          "agentPrice1": 1500000,
-          "agentPrice2": 1500000
-        },
-        {
-          "variantId": 1519,
-          "sku": "DELETE-25MM-1808-MB-TRANG",
-          "barcode": "mặt bàn 1.8m x 0.8m trắng (25mm)",
-          "displayName": "mặt bàn 1.8m x 0.8m / Trắng",
-          "price": 1950000,
-          "agentPrice1": 1500000,
-          "agentPrice2": 1500000
-        },
-        {
-          "variantId": 1520,
-          "sku": "DELETE-25MM-1808-MB-VANGO",
-          "barcode": "mặt bàn 1.8m x 0.8m vân gỗ (25mm)",
-          "displayName": "mặt bàn 1.8m x 0.8m / Vân Gỗ",
-          "price": 1950000,
-          "agentPrice1": 1500000,
-          "agentPrice2": 1500000
-        },
-        {
-          "variantId": 1521,
-          "sku": "DELETE-25MM-1808-MB-SOI-OAK",
-          "barcode": "mặt bàn 1.8m x 0.8m sồi oak (25mm)",
-          "displayName": "mặt bàn 1.8m x 0.8m / Sồi (Oak)",
-          "price": 1950000,
-          "agentPrice1": 1500000,
-          "agentPrice2": 1500000
-        },
-        {
-          "variantId": 1591,
-          "sku": "DELETE-25MM-1407-MB-TRANG-VIEN-NAU",
-          "barcode": "mặt bàn 1.4m x 0.7m trắng viền nâu (25mm)",
-          "displayName": "mặt bàn 1.4m x 0.7m trắng viền nâu (25mm)",
-          "price": 1600000,
-          "agentPrice1": 1250000,
-          "agentPrice2": 1250000
-        },
-        {
-          "variantId": 1592,
-          "sku": "DELETE-25MM-1407-MB-DEN-VIEN-NAU",
-          "barcode": "mặt bàn 1.4m x 0.7m đen viền nâu (25mm)",
-          "displayName": "mặt bàn 1.4m x 0.7m đen viền nâu (25mm)",
-          "price": 1600000,
-          "agentPrice1": 1250000,
-          "agentPrice2": 1250000
-        },
-        {
-          "variantId": 1593,
-          "sku": "DELETE-25MM-16075-MB-TRANG-VIEN-NAU",
-          "barcode": "mặt bàn 1.6m x 0.75m trắng viền nâu (25mm)",
-          "displayName": "mặt bàn 1.6m x 0.75m trắng viền nâu (25mm)",
-          "price": 1700000,
-          "agentPrice1": 1350000,
-          "agentPrice2": 1350000
-        },
-        {
-          "variantId": 1594,
-          "sku": "DELETE-25MM-16075-MB-DEN-VIEN-NAU",
-          "barcode": "mặt bàn 1.6m x 0.75m đen viền nâu (25mm)",
-          "displayName": "mặt bàn 1.6m x 0.75m đen viền nâu (25mm)",
-          "price": 1700000,
-          "agentPrice1": 1350000,
-          "agentPrice2": 1350000
-        },
-        {
-          "variantId": 1595,
-          "sku": "DELETE-25MM-1808-MB-TRANG-VIEN-NAU",
-          "barcode": "mặt bàn 1.8m x 0.8m trắng viền nâu (25mm)",
-          "displayName": "mặt bàn 1.8m x 0.8m trắng viền nâu (25mm)",
-          "price": 1950000,
-          "agentPrice1": 1500000,
-          "agentPrice2": 1500000
-        },
-        {
-          "variantId": 1596,
-          "sku": "DELETE-25MM-1808-MB-DEN-VIEN-NAU",
-          "barcode": "mặt bàn 1.8m x 0.8m đen viền nâu (25mm)",
-          "displayName": "mặt bàn 1.8m x 0.8m đen viền nâu (25mm)",
-          "price": 1950000,
-          "agentPrice1": 1500000,
-          "agentPrice2": 1500000
-        }
-      ]
-    },
-    {
       "productId": 63,
       "productName": "Combo Bàn Nâng Hạ 2 Động Cơ Omni Desk",
       "variants": [
         {
-          "variantId": 1546,
+          "variantId": 1809,
           "sku": "NH-2DC-OMNI-TRANG&25MM-1407-MB-TRANG",
-          "barcode": "combo bàn omni - khung trắng mặt trắng 1.4m (25mm)",
+          "barcode": "khung 2 động cơ omni trắng / mặt bàn 1.4m x 0.7m trắng",
           "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.4m x 0.7m trắng",
           "price": 8800000,
           "agentPrice1": 7250000,
           "agentPrice2": 7250000
         },
         {
-          "variantId": 1547,
+          "variantId": 1810,
           "sku": "NH-2DC-OMNI-TRANG&25MM-16075-MB-TRANG",
-          "barcode": "combo bàn omni - khung trắng mặt trắng 1.6m (25mm)",
+          "barcode": "khung 2 động cơ omni trắng / mặt bàn 1.6m x 0.75m trắng",
           "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.6m x 0.75m trắng",
           "price": 8900000,
           "agentPrice1": 7350000,
           "agentPrice2": 7350000
         },
         {
-          "variantId": 1548,
+          "variantId": 1811,
           "sku": "NH-2DC-OMNI-TRANG&25MM-1808-MB-TRANG",
-          "barcode": "combo bàn omni - khung trắng mặt trắng 1.8m (25mm)",
+          "barcode": "khung 2 động cơ omni trắng / mặt bàn 1.8m x 0.8m trắng",
           "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.8m x 0.8m trắng",
           "price": 9150000,
           "agentPrice1": 7500000,
           "agentPrice2": 7500000
         },
         {
-          "variantId": 1549,
+          "variantId": 1812,
           "sku": "NH-2DC-OMNI-TRANG&25MM-1407-MB-DEN",
-          "barcode": "combo bàn omni - khung trắng mặt đen 1.4m (25mm)",
+          "barcode": "khung 2 động cơ omni trắng / mặt bàn 1.4m x 0.7m đen",
           "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.4m x 0.7m đen",
           "price": 8800000,
           "agentPrice1": 7250000,
           "agentPrice2": 7250000
         },
         {
-          "variantId": 1550,
+          "variantId": 1813,
           "sku": "NH-2DC-OMNI-TRANG&25MM-16075-MB-DEN",
-          "barcode": "combo bàn omni - khung trắng mặt đen 1.6m (25mm)",
+          "barcode": "khung 2 động cơ omni trắng / mặt bàn 1.6m x 0.75m đen",
           "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.6m x 0.75m đen",
           "price": 8900000,
           "agentPrice1": 7350000,
           "agentPrice2": 7350000
         },
         {
-          "variantId": 1551,
+          "variantId": 1814,
           "sku": "NH-2DC-OMNI-TRANG&25MM-1808-MB-DEN",
-          "barcode": "combo bàn omni - khung trắng mặt đen 1.8m (25mm)",
+          "barcode": "khung 2 động cơ omni trắng / mặt bàn 1.8m x 0.8m đen",
           "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.8m x 0.8m đen",
           "price": 9150000,
           "agentPrice1": 7500000,
           "agentPrice2": 7500000
         },
         {
-          "variantId": 1552,
+          "variantId": 1815,
           "sku": "NH-2DC-OMNI-TRANG&25MM-1407-MB-VANGO",
-          "barcode": "combo bàn omni - khung trắng mặt vân gỗ 1.4m (25mm)",
+          "barcode": "khung 2 động cơ omni trắng / mặt bàn 1.4m x 0.7m vân gỗ",
           "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.4m x 0.7m vân gỗ",
           "price": 8800000,
           "agentPrice1": 7250000,
           "agentPrice2": 7250000
         },
         {
-          "variantId": 1553,
+          "variantId": 1816,
           "sku": "NH-2DC-OMNI-TRANG&25MM-16075-MB-VANGO",
-          "barcode": "combo bàn omni - khung trắng mặt vân gỗ 1.6m (25mm)",
+          "barcode": "khung 2 động cơ omni trắng / mặt bàn 1.6m x 0.75m vân gỗ",
           "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.6m x 0.75m vân gỗ",
           "price": 8900000,
           "agentPrice1": 7350000,
           "agentPrice2": 7350000
         },
         {
-          "variantId": 1554,
+          "variantId": 1817,
           "sku": "NH-2DC-OMNI-TRANG&25MM-1808-MB-VANGO",
-          "barcode": "combo bàn omni - khung trắng mặt vân gỗ 1.8m (25mm)",
+          "barcode": "khung 2 động cơ omni trắng / mặt bàn 1.8m x 0.8m vân gỗ",
           "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.8m x 0.8m vân gỗ",
           "price": 9150000,
           "agentPrice1": 7500000,
           "agentPrice2": 7500000
         },
         {
-          "variantId": 1555,
+          "variantId": 1818,
           "sku": "NH-2DC-OMNI-TRANG&25MM-1407-MB-SOI-OAK",
-          "barcode": "combo bàn omni - khung trắng mặt sồi oak 1.4m (25mm)",
+          "barcode": "khung 2 động cơ omni trắng / mặt bàn 1.4m x 0.7m sồi oak",
           "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.4m x 0.7m sồi oak",
           "price": 8800000,
           "agentPrice1": 7250000,
           "agentPrice2": 7250000
         },
         {
-          "variantId": 1556,
+          "variantId": 1819,
           "sku": "NH-2DC-OMNI-TRANG&25MM-16075-MB-SOI-OAK",
-          "barcode": "combo bàn omni - khung trắng mặt sồi oak 1.6m (25mm)",
+          "barcode": "khung 2 động cơ omni trắng / mặt bàn 1.6m x 0.75m sồi oak",
           "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.6m x 0.75m sồi oak",
           "price": 8900000,
           "agentPrice1": 7350000,
           "agentPrice2": 7350000
         },
         {
-          "variantId": 1557,
+          "variantId": 1820,
           "sku": "NH-2DC-OMNI-TRANG&25MM-1808-MB-SOI-OAK",
-          "barcode": "combo bàn omni - khung trắng mặt sồi oak 1.8m (25mm)",
+          "barcode": "khung 2 động cơ omni trắng / mặt bàn 1.8m x 0.8m sồi oak",
           "displayName": "khung 2 động cơ omni trắng / mặt bàn 1.8m x 0.8m sồi oak",
           "price": 9150000,
           "agentPrice1": 7500000,
           "agentPrice2": 7500000
         },
         {
-          "variantId": 1558,
+          "variantId": 1821,
           "sku": "NH-2DC-OMNI-DEN&25MM-1407-MB-TRANG",
-          "barcode": "combo bàn omni - khung đen mặt trắng 1.4m (25mm)",
+          "barcode": "khung 2 động cơ omni đen / mặt bàn 1.4m x 0.7m trắng",
           "displayName": "khung 2 động cơ omni đen / mặt bàn 1.4m x 0.7m trắng",
           "price": 8800000,
           "agentPrice1": 7250000,
           "agentPrice2": 7250000
         },
         {
-          "variantId": 1559,
+          "variantId": 1822,
           "sku": "NH-2DC-OMNI-DEN&25MM-16075-MB-TRANG",
-          "barcode": "combo bàn omni - khung đen mặt trắng 1.6m (25mm)",
+          "barcode": "khung 2 động cơ omni đen / mặt bàn 1.6m x 0.75m trắng",
           "displayName": "khung 2 động cơ omni đen / mặt bàn 1.6m x 0.75m trắng",
           "price": 8900000,
           "agentPrice1": 7350000,
           "agentPrice2": 7350000
         },
         {
-          "variantId": 1560,
+          "variantId": 1823,
           "sku": "NH-2DC-OMNI-DEN&25MM-1808-MB-TRANG",
-          "barcode": "combo bàn omni - khung đen mặt trắng 1.8m (25mm)",
+          "barcode": "khung 2 động cơ omni đen / mặt bàn 1.8m x 0.8m trắng",
           "displayName": "khung 2 động cơ omni đen / mặt bàn 1.8m x 0.8m trắng",
           "price": 9150000,
           "agentPrice1": 7500000,
           "agentPrice2": 7500000
         },
         {
-          "variantId": 1561,
+          "variantId": 1824,
           "sku": "NH-2DC-OMNI-DEN&25MM-1407-MB-DEN",
-          "barcode": "combo bàn omni - khung đen mặt đen 1.4m (25mm)",
+          "barcode": "khung 2 động cơ omni đen / mặt bàn 1.4m x 0.7m đen",
           "displayName": "khung 2 động cơ omni đen / mặt bàn 1.4m x 0.7m đen",
           "price": 8800000,
           "agentPrice1": 7250000,
           "agentPrice2": 7250000
         },
         {
-          "variantId": 1562,
+          "variantId": 1825,
           "sku": "NH-2DC-OMNI-DEN&25MM-16075-MB-DEN",
-          "barcode": "combo bàn omni - khung đen mặt đen 1.6m (25mm)",
+          "barcode": "khung 2 động cơ omni đen / mặt bàn 1.6m x 0.75m đen",
           "displayName": "khung 2 động cơ omni đen / mặt bàn 1.6m x 0.75m đen",
           "price": 8900000,
           "agentPrice1": 7350000,
           "agentPrice2": 7350000
         },
         {
-          "variantId": 1563,
+          "variantId": 1826,
           "sku": "NH-2DC-OMNI-DEN&25MM-1808-MB-DEN",
-          "barcode": "combo bàn omni - khung đen mặt đen 1.8m (25mm)",
+          "barcode": "khung 2 động cơ omni đen / mặt bàn 1.8m x 0.8m đen",
           "displayName": "khung 2 động cơ omni đen / mặt bàn 1.8m x 0.8m đen",
           "price": 9150000,
           "agentPrice1": 7500000,
           "agentPrice2": 7500000
         },
         {
-          "variantId": 1564,
+          "variantId": 1827,
           "sku": "NH-2DC-OMNI-DEN&25MM-1407-MB-VANGO",
-          "barcode": "combo bàn omni - khung đen mặt vân gỗ 1.4m (25mm)",
+          "barcode": "khung 2 động cơ omni đen / mặt bàn 1.4m x 0.7m vân gỗ",
           "displayName": "khung 2 động cơ omni đen / mặt bàn 1.4m x 0.7m vân gỗ",
           "price": 8800000,
           "agentPrice1": 7250000,
           "agentPrice2": 7250000
         },
         {
-          "variantId": 1565,
+          "variantId": 1828,
           "sku": "NH-2DC-OMNI-DEN&25MM-16075-MB-VANGO",
-          "barcode": "combo bàn omni - khung đen mặt vân gỗ 1.6m (25mm)",
+          "barcode": "khung 2 động cơ omni đen / mặt bàn 1.6m x 0.75m vân gỗ",
           "displayName": "khung 2 động cơ omni đen / mặt bàn 1.6m x 0.75m vân gỗ",
           "price": 8900000,
           "agentPrice1": 7350000,
           "agentPrice2": 7350000
         },
         {
-          "variantId": 1566,
+          "variantId": 1829,
           "sku": "NH-2DC-OMNI-DEN&25MM-1808-MB-VANGO",
-          "barcode": "combo bàn omni - khung đen mặt vân gỗ 1.8m (25mm)",
+          "barcode": "khung 2 động cơ omni đen / mặt bàn 1.8m x 0.8m vân gỗ",
           "displayName": "khung 2 động cơ omni đen / mặt bàn 1.8m x 0.8m vân gỗ",
           "price": 9150000,
           "agentPrice1": 7500000,
           "agentPrice2": 7500000
         },
         {
-          "variantId": 1567,
+          "variantId": 1830,
           "sku": "NH-2DC-OMNI-DEN&25MM-1407-MB-SOI-OAK",
-          "barcode": "combo bàn omni - khung đen mặt sồi oak 1.4m (25mm)",
+          "barcode": "khung 2 động cơ omni đen / mặt bàn 1.4m x 0.7m sồi oak",
           "displayName": "khung 2 động cơ omni đen / mặt bàn 1.4m x 0.7m sồi oak",
           "price": 8800000,
           "agentPrice1": 7250000,
           "agentPrice2": 7250000
         },
         {
-          "variantId": 1568,
+          "variantId": 1831,
           "sku": "NH-2DC-OMNI-DEN&25MM-16075-MB-SOI-OAK",
-          "barcode": "combo bàn omni - khung đen mặt sồi oak 1.6m (25mm)",
+          "barcode": "khung 2 động cơ omni đen / mặt bàn 1.6m x 0.75m sồi oak",
           "displayName": "khung 2 động cơ omni đen / mặt bàn 1.6m x 0.75m sồi oak",
           "price": 8900000,
           "agentPrice1": 7350000,
           "agentPrice2": 7350000
         },
         {
-          "variantId": 1569,
+          "variantId": 1832,
           "sku": "NH-2DC-OMNI-DEN&25MM-1808-MB-SOI-OAK",
-          "barcode": "combo bàn omni - khung đen mặt sồi oak 1.8m (25mm)",
+          "barcode": "khung 2 động cơ omni đen / mặt bàn 1.8m x 0.8m sồi oak",
           "displayName": "khung 2 động cơ omni đen / mặt bàn 1.8m x 0.8m sồi oak",
           "price": 9150000,
           "agentPrice1": 7500000,
@@ -2948,8 +3050,8 @@
           "barcode": "Laminate 1.4m x 0.7m Đen",
           "displayName": "Laminate 1.4m x 0.7m Đen",
           "price": 1950000,
-          "agentPrice1": 1600000,
-          "agentPrice2": 1600000
+          "agentPrice1": null,
+          "agentPrice2": null
         },
         {
           "variantId": 1617,
@@ -2957,8 +3059,8 @@
           "barcode": "Laminate 1.4m x 0.7m Gỗ Walnut",
           "displayName": "Laminate 1.4m x 0.7m Gỗ Walnut",
           "price": 1950000,
-          "agentPrice1": 1600000,
-          "agentPrice2": 1600000
+          "agentPrice1": null,
+          "agentPrice2": null
         },
         {
           "variantId": 1618,
@@ -2966,8 +3068,8 @@
           "barcode": "Laminate 1.4m x 0.7m Sồi",
           "displayName": "Laminate 1.4m x 0.7m Sồi",
           "price": 1950000,
-          "agentPrice1": 1600000,
-          "agentPrice2": 1600000
+          "agentPrice1": null,
+          "agentPrice2": null
         },
         {
           "variantId": 1619,
@@ -2975,8 +3077,8 @@
           "barcode": "Laminate 1.4m x 0.7m Trắng Viền Nâu",
           "displayName": "Laminate 1.4m x 0.7m Trắng Viền Nâu",
           "price": 1950000,
-          "agentPrice1": 1600000,
-          "agentPrice2": 1600000
+          "agentPrice1": null,
+          "agentPrice2": null
         },
         {
           "variantId": 1620,
@@ -2984,8 +3086,8 @@
           "barcode": "Laminate 1.4m x 0.7m Đen Viền Nâu",
           "displayName": "Laminate 1.4m x 0.7m Đen Viền Nâu",
           "price": 1950000,
-          "agentPrice1": 1600000,
-          "agentPrice2": 1600000
+          "agentPrice1": null,
+          "agentPrice2": null
         },
         {
           "variantId": 1621,
@@ -2993,8 +3095,8 @@
           "barcode": "Laminate 1.4m x 0.7m Trắng Viền Trắng",
           "displayName": "Laminate 1.4m x 0.7m Trắng Viền Trắng",
           "price": 1950000,
-          "agentPrice1": 1600000,
-          "agentPrice2": 1600000
+          "agentPrice1": null,
+          "agentPrice2": null
         },
         {
           "variantId": 1622,
@@ -3002,8 +3104,8 @@
           "barcode": "Laminate 1.6m x 0.75m Đen",
           "displayName": "Laminate 1.6m x 0.75m Đen",
           "price": 2050000,
-          "agentPrice1": 1700000,
-          "agentPrice2": 1700000
+          "agentPrice1": null,
+          "agentPrice2": null
         },
         {
           "variantId": 1623,
@@ -3011,8 +3113,8 @@
           "barcode": "Laminate 1.6m x 0.75m Gỗ Walnut",
           "displayName": "Laminate 1.6m x 0.75m Gỗ Walnut",
           "price": 2050000,
-          "agentPrice1": 1700000,
-          "agentPrice2": 1700000
+          "agentPrice1": null,
+          "agentPrice2": null
         },
         {
           "variantId": 1624,
@@ -3020,8 +3122,8 @@
           "barcode": "Laminate 1.6m x 0.75m Sồi",
           "displayName": "Laminate 1.6m x 0.75m Sồi",
           "price": 2050000,
-          "agentPrice1": 1700000,
-          "agentPrice2": 1700000
+          "agentPrice1": null,
+          "agentPrice2": null
         },
         {
           "variantId": 1625,
@@ -3029,8 +3131,8 @@
           "barcode": "Laminate 1.6m x 0.75m Trắng Viền Nâu",
           "displayName": "Laminate 1.6m x 0.75m Trắng Viền Nâu",
           "price": 2050000,
-          "agentPrice1": 1700000,
-          "agentPrice2": 1700000
+          "agentPrice1": null,
+          "agentPrice2": null
         },
         {
           "variantId": 1626,
@@ -3038,8 +3140,8 @@
           "barcode": "Laminate 1.6m x 0.75m Trắng Viền Trắng",
           "displayName": "Laminate 1.6m x 0.75m Trắng Viền Trắng",
           "price": 2050000,
-          "agentPrice1": 1700000,
-          "agentPrice2": 1700000
+          "agentPrice1": null,
+          "agentPrice2": null
         },
         {
           "variantId": 1627,
@@ -3047,8 +3149,8 @@
           "barcode": "Laminate 1.6m x 0.75m Đen Viền Nâu",
           "displayName": "Laminate 1.6m x 0.75m Đen Viền Nâu",
           "price": 2050000,
-          "agentPrice1": 1700000,
-          "agentPrice2": 1700000
+          "agentPrice1": null,
+          "agentPrice2": null
         },
         {
           "variantId": 1628,
@@ -3056,8 +3158,8 @@
           "barcode": "Laminate 1.8m x 0.8m Đen",
           "displayName": "Laminate 1.8m x 0.8m Đen",
           "price": 2300000,
-          "agentPrice1": 1850000,
-          "agentPrice2": 1850000
+          "agentPrice1": null,
+          "agentPrice2": null
         },
         {
           "variantId": 1629,
@@ -3065,8 +3167,8 @@
           "barcode": "Laminate 1.8m x 0.8m Gỗ Walnut",
           "displayName": "Laminate 1.8m x 0.8m Gỗ Walnut",
           "price": 2300000,
-          "agentPrice1": 1850000,
-          "agentPrice2": 1850000
+          "agentPrice1": null,
+          "agentPrice2": null
         },
         {
           "variantId": 1630,
@@ -3074,8 +3176,8 @@
           "barcode": "Laminate 1.8m x 0.8m Sồi",
           "displayName": "Laminate 1.8m x 0.8m Sồi",
           "price": 2300000,
-          "agentPrice1": 1850000,
-          "agentPrice2": 1850000
+          "agentPrice1": null,
+          "agentPrice2": null
         },
         {
           "variantId": 1631,
@@ -3083,8 +3185,8 @@
           "barcode": "Laminate 1.8m x 0.8m Trắng Viền Nâu",
           "displayName": "Laminate 1.8m x 0.8m Trắng Viền Nâu",
           "price": 2300000,
-          "agentPrice1": 1850000,
-          "agentPrice2": 1850000
+          "agentPrice1": null,
+          "agentPrice2": null
         },
         {
           "variantId": 1632,
@@ -3092,8 +3194,8 @@
           "barcode": "Laminate 1.8m x 0.8m Trắng Viền Trắng",
           "displayName": "Laminate 1.8m x 0.8m Trắng Viền Trắng",
           "price": 2300000,
-          "agentPrice1": 1850000,
-          "agentPrice2": 1850000
+          "agentPrice1": null,
+          "agentPrice2": null
         },
         {
           "variantId": 1633,
@@ -3101,8 +3203,8 @@
           "barcode": "Laminate 1.8m x 0.8m Đen Viền Nâu",
           "displayName": "Laminate 1.8m x 0.8m Đen Viền Nâu",
           "price": 2300000,
-          "agentPrice1": 1850000,
-          "agentPrice2": 1850000
+          "agentPrice1": null,
+          "agentPrice2": null
         }
       ]
     }
