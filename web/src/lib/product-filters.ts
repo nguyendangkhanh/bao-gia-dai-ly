@@ -9,6 +9,7 @@ const ignoreByNameInclude = [
   "T21",
   "Vera Wintex",
   "Iris Wintex",
+  "[DELETE Không dùng nha anh em]", // product #62 - Mặt Bàn 25mm Omni/Standing Desk
 ];
 const ignoreBySku = ["XMS.T21D", "XMS.T21X"];
 

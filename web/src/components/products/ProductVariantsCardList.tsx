@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import type { PriceAcknowledgementVariantChange } from "@/lib/price-notifications";
 import { resolveImageUrl } from "@/lib/image-url";
+import { useCart } from "@/components/cart/CartProvider";
 
 type Variant = {
   id: number;
@@ -31,6 +32,7 @@ type Props = {
   priceTier: "agent1" | "agent2";
   isExpanded: boolean;
   recentlyChangedPriceDeltas?: PriceAcknowledgementVariantChange[];
+  initialSelectedVariantId?: number | null;
 };
 
 const imageUrl = resolveImageUrl;
@@ -88,9 +90,11 @@ function parseCurrencyInput(value: string) {
   return digits ? Number(digits) : 0;
 }
 
-export default function ProductVariantsCardList({ productName: _productName, variants, images, priceTier, isExpanded, recentlyChangedPriceDeltas = [] }: Props) {
+export default function ProductVariantsCardList({ productName: _productName, variants, images, priceTier, isExpanded, recentlyChangedPriceDeltas = [], initialSelectedVariantId = null }: Props) {
+  const { addItem } = useCart();
+  const [addedVariantId, setAddedVariantId] = useState<number | null>(null);
   const [vatsMap, setVatsMap] = useState<Record<number, boolean>>({});
-  const [selectedVariantId, setSelectedVariantId] = useState<number | null>(null);
+  const [selectedVariantId, setSelectedVariantId] = useState<number | null>(initialSelectedVariantId);
   const [isVariantPickerOpen, setIsVariantPickerOpen] = useState(false);
   const [sellingPriceInput, setSellingPriceInput] = useState("");
   const [sellingPriceBlurred, setSellingPriceBlurred] = useState(false);
@@ -103,6 +107,7 @@ export default function ProductVariantsCardList({ productName: _productName, var
   const [groupSamePrices, setGroupSamePrices] = useState(true);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [activeVariantIds, setActiveVariantIds] = useState<Record<string, number>>({});
+  const [isPriceChangeExpanded, setIsPriceChangeExpanded] = useState(false);
 
   const closeLightbox = () => setLightbox(null);
 
@@ -135,6 +140,7 @@ export default function ProductVariantsCardList({ productName: _productName, var
 
   useEffect(() => {
     hasScrolledToQuickProfitRef.current = false;
+    setIsPriceChangeExpanded(false);
   }, [selectedVariantId]);
 
   useEffect(() => {
@@ -391,38 +397,49 @@ export default function ProductVariantsCardList({ productName: _productName, var
         <div className="mt-3 rounded-lg border border-orange-100 bg-white p-3">
           {activeVariantChange && (
             <div className="rounded-xl bg-amber-50 border border-amber-200 p-3 text-xs text-amber-900 mb-3">
-              <div className="font-bold flex items-center gap-1.5 text-amber-800">
-                <span>🔔 Xác nhận đổi giá của &quot;{_productName} - {selectedVariant?.displayName || selectedVariant?.barcode || `Variant ${selectedVariant?.id}`}&quot; vào lúc: {activeVariantChange.acknowledgedAt ? formatDate(activeVariantChange.acknowledgedAt) : "Tuần này"}</span>
-              </div>
-              {activeVariantChange.dealerChange || activeVariantChange.retailChange ? (
-                <div className="mt-1.5 grid gap-2 sm:grid-cols-2">
-                  {activeVariantChange.dealerChange && (
-                    <div className="flex items-center justify-between rounded-lg bg-white/60 px-3 py-1.5">
-                      <span>Giá đại lý:</span>
-                      <span className="font-bold flex items-center gap-1">
-                        <span className="text-zinc-500 line-through font-normal">{formatVnd(activeVariantChange.dealerChange.oldValue || 0)}</span>
-                        <span className="text-zinc-400">→</span>
-                        <span className={activeVariantChange.dealerChange.direction === "increased" ? "text-red-700" : "text-emerald-700"}>
-                          {formatVnd(activeVariantChange.dealerChange.newValue || 0)}
-                        </span>
-                      </span>
+              <button
+                type="button"
+                className="w-full flex items-start justify-between gap-1.5 text-amber-800 text-left"
+                onClick={() => setIsPriceChangeExpanded((prev) => !prev)}
+              >
+                <span className={`font-bold flex-1 min-w-0 break-words [overflow-wrap:anywhere] ${isPriceChangeExpanded ? "" : "line-clamp-2"}`}>
+                  🔔 Xác nhận đổi giá của &quot;{_productName} - {selectedVariant?.displayName || selectedVariant?.barcode || `Variant ${selectedVariant?.id}`}&quot; vào lúc: {activeVariantChange.acknowledgedAt ? formatDate(activeVariantChange.acknowledgedAt) : "Tuần này"}
+                </span>
+                <span className="shrink-0 text-[10px] text-amber-600 mt-0.5">{isPriceChangeExpanded ? "▲" : "▼"}</span>
+              </button>
+              {isPriceChangeExpanded && (
+                <>
+                  {activeVariantChange.dealerChange || activeVariantChange.retailChange ? (
+                    <div className="mt-1.5 grid gap-2 sm:grid-cols-2">
+                      {activeVariantChange.dealerChange && (
+                        <div className="flex items-center justify-between rounded-lg bg-white/60 px-3 py-1.5">
+                          <span>Giá đại lý:</span>
+                          <span className="font-bold flex items-center gap-1">
+                            <span className="text-zinc-500 line-through font-normal">{formatVnd(activeVariantChange.dealerChange.oldValue || 0)}</span>
+                            <span className="text-zinc-400">→</span>
+                            <span className={activeVariantChange.dealerChange.direction === "increased" ? "text-red-700" : "text-emerald-700"}>
+                              {formatVnd(activeVariantChange.dealerChange.newValue || 0)}
+                            </span>
+                          </span>
+                        </div>
+                      )}
+                      {activeVariantChange.retailChange && (
+                        <div className="flex items-center justify-between rounded-lg bg-white/60 px-3 py-1.5">
+                          <span>Giá bán lẻ:</span>
+                          <span className="font-bold flex items-center gap-1">
+                            <span className="text-zinc-500 line-through font-normal">{formatVnd(activeVariantChange.retailChange.oldValue || 0)}</span>
+                            <span className="text-zinc-400">→</span>
+                            <span className={activeVariantChange.retailChange.direction === "increased" ? "text-red-700" : "text-emerald-700"}>
+                              {formatVnd(activeVariantChange.retailChange.newValue || 0)}
+                            </span>
+                          </span>
+                        </div>
+                      )}
                     </div>
+                  ) : (
+                    <div className="mt-1 text-[11px] text-amber-800 italic">Vừa cập nhật giá</div>
                   )}
-                  {activeVariantChange.retailChange && (
-                    <div className="flex items-center justify-between rounded-lg bg-white/60 px-3 py-1.5">
-                      <span>Giá bán lẻ:</span>
-                      <span className="font-bold flex items-center gap-1">
-                        <span className="text-zinc-500 line-through font-normal">{formatVnd(activeVariantChange.retailChange.oldValue || 0)}</span>
-                        <span className="text-zinc-400">→</span>
-                        <span className={activeVariantChange.retailChange.direction === "increased" ? "text-red-700" : "text-emerald-700"}>
-                          {formatVnd(activeVariantChange.retailChange.newValue || 0)}
-                        </span>
-                      </span>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <div className="mt-1 text-[11px] text-amber-800 italic">Vừa cập nhật giá</div>
+                </>
               )}
             </div>
           )}
@@ -433,8 +450,8 @@ export default function ProductVariantsCardList({ productName: _productName, var
               <div className="text-xs text-zinc-500">Chọn sản phẩm và nhập giá bán thực tế để cập nhật trực tiếp ô lợi nhuận bên dưới.</div>
             </div>
 
-            <div className="grid grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-4 xl:items-start">
-              <div className="flex h-full flex-col gap-1 text-sm text-zinc-700">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4 xl:items-start">
+              <div className="flex h-full flex-col gap-1 text-sm text-zinc-700 sm:col-span-2 xl:col-span-2">
                 <span className="font-medium">Sản phẩm</span>
                 <div
                   className="relative flex-1"
@@ -447,22 +464,20 @@ export default function ProductVariantsCardList({ productName: _productName, var
                   <button
                     type="button"
                     onClick={() => setIsVariantPickerOpen((open) => !open)}
-                    className="flex min-h-14 w-full items-start justify-between gap-3 rounded-xl border border-orange-200 bg-white px-3 py-2 text-left shadow-sm outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100 xl:min-h-[56px]"
+                    className="flex w-full items-start justify-between gap-3 rounded-xl border border-orange-200 bg-white px-3 py-2.5 text-left shadow-sm outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-100"
                   >
                     <span className="min-w-0 flex-1">
-                      <span className="block break-words text-sm font-medium leading-5 text-zinc-800 [overflow-wrap:anywhere]">
+                      <span className="block break-words text-sm font-semibold leading-snug text-zinc-900 [overflow-wrap:anywhere]">
                         {selectedVariant?.barcode || selectedVariant?.displayName || (selectedVariant ? `Variant ${selectedVariant.id}` : "Chọn sản phẩm")}
                       </span>
-                      <span className="mt-0.5 block truncate text-xs text-zinc-500">
-                        Giá bán lẻ: {formatVnd(selectedVariant?.price || 0)}
+                      <span className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5">
+                        <span className="text-xs text-zinc-500">Lẻ: <span className="font-medium text-zinc-700">{formatVnd(selectedVariant?.price || 0)}</span></span>
+                        {selectedVariant && (
+                          <span className="text-xs text-zinc-500">Đại lý: <span className="font-medium text-orange-600">{formatVnd(selectedDealer)}</span></span>
+                        )}
                       </span>
-                      {selectedVariant && (
-                        <span className="mt-0.5 block truncate text-xs text-zinc-500">
-                          Giá đại lý: {formatVnd(selectedDealer)}
-                        </span>
-                      )}
                     </span>
-                    <span className={`shrink-0 text-xs text-zinc-400 transition ${isVariantPickerOpen ? "rotate-180" : ""}`}>▾</span>
+                    <span className={`shrink-0 text-xs text-zinc-400 transition mt-0.5 ${isVariantPickerOpen ? "rotate-180" : ""}`}>▾</span>
                   </button>
 
                   {isVariantPickerOpen && (
@@ -519,7 +534,7 @@ export default function ProductVariantsCardList({ productName: _productName, var
                 />
               </label> */}
 
-              <label className="flex h-full flex-col gap-1 text-sm text-zinc-700 xl:justify-start">
+              <label className="flex flex-col gap-1 text-sm text-zinc-700">
                 <span className="font-medium">Giá khách chốt</span>
                 <input
                   inputMode="numeric"
@@ -530,23 +545,22 @@ export default function ProductVariantsCardList({ productName: _productName, var
                   }}
                   onBlur={() => setSellingPriceBlurred(true)}
                   placeholder={sellingPriceHint}
-                  className={`${sellingPriceInputClassName} xl:h-[56px]`}
+                  className={`${sellingPriceInputClassName}`}
                 />
-                <span className={`${sellingPriceHelpClassName} xl:min-h-[20px]`}>
+                <span className={sellingPriceHelpClassName}>
                   {quickCalcShouldShowHelp ? sellingPriceHelpText : ""}
                 </span>
               </label>
 
-              <label className="flex h-full flex-col gap-1 text-sm text-zinc-700 xl:justify-start">
+              <label className="flex flex-col gap-1 text-sm text-zinc-700">
                 <span className="font-medium">Phí ship/lắp</span>
                 <input
                   inputMode="numeric"
                   value={formatCurrencyField(shippingFeeInput)}
                   onChange={(e) => setShippingFeeInput(e.target.value)}
                   placeholder="Nhập phí ship/lắp"
-                  className="rounded-lg border border-orange-200 px-3 py-2 outline-none focus:border-orange-400 xl:h-[56px]"
+                  className="rounded-lg border border-orange-200 px-3 py-2 outline-none focus:border-orange-400"
                 />
-                <span className="text-xs xl:min-h-[20px]" />
               </label>
             </div>
 
@@ -591,7 +605,7 @@ export default function ProductVariantsCardList({ productName: _productName, var
             const variantTakeVat = !!vatsMap[activeVariant.id];
 
             const activeVariantGallery = getVariantDecorImages(images || [], activeVariant);
-            const variantImage = getVariantImage(images || [], activeVariant.imageId) || activeVariantGallery[0]?.url || "";
+            const variantImage = getVariantImage(images || [], activeVariant.imageId) || activeVariantGallery[0]?.url || images[0]?.url || "";
 
             const activeLink = activeVariant.link || null;
 
@@ -747,6 +761,33 @@ export default function ProductVariantsCardList({ productName: _productName, var
                             <span>Link</span>
                           </a>
                         )}
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const variantImage = getVariantImage(images || [], activeVariant.imageId);
+                            addItem({
+                              variantId: activeVariant.id,
+                              productId: 0,
+                              productName: _productName,
+                              variantName: activeVariant.barcode || activeVariant.displayName || "",
+                              sku: activeVariant.sku || "",
+                              retailPrice: activeVariant.price || 0,
+                              dealerPrice: (priceTier === "agent1" ? activeVariant.agentPrice1 : activeVariant.agentPrice2) || 0,
+                              quantity: 1,
+                              imageUrl: variantImage || null,
+                            });
+                            setAddedVariantId(activeVariant.id);
+                            setTimeout(() => setAddedVariantId((prev) => (prev === activeVariant.id ? null : prev)), 1200);
+                          }}
+                          className={`inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 lg:px-2.5 lg:py-1 text-[11px] lg:text-xs font-semibold transition ${
+                            addedVariantId === activeVariant.id
+                              ? "border-green-300 bg-green-50 text-green-700"
+                              : "border-orange-300 bg-orange-100 text-orange-800 hover:bg-orange-200"
+                          }`}
+                        >
+                          <span>{addedVariantId === activeVariant.id ? "✓ Đã thêm" : "🛒 Thêm vào giỏ"}</span>
+                        </button>
                       </div>
                     </div>
                   </div>

@@ -63,9 +63,9 @@ export async function getDealerCatalog(search: string, priceTier: PriceTier): Pr
     skuOrderItems.map((item) => [normalizeKey(String(item.sku || "")), String(item.link || "").trim()]),
   );
 
-  // Endpoint list không trả variants -> phải fetch detail từng sản phẩm (giống
+  // Endpoint list không trả variants hoặc images -> phải fetch detail từng sản phẩm (giống
   // logic "needsDetailFetch" ở app/products/page.tsx)
-  const needsDetailFetch = !res.data[0] || !Array.isArray(res.data[0]?.variants);
+  const needsDetailFetch = !res.data[0] || !Array.isArray(res.data[0]?.variants) || !Array.isArray(res.data[0]?.images);
   const productsBase: Product[] = needsDetailFetch
     ? await mapConcurrent(res.data, (p) => getProductById(String(p.id)), 6)
     : res.data;

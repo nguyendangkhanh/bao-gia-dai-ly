@@ -55,13 +55,16 @@ export default function ProductsSectionList({
   products,
   priceTier,
   recentlyChangedPriceDeltas = [],
+  matchedVariantIds = {},
 }: {
   products: Product[];
   priceTier: "agent1" | "agent2";
   recentlyChangedPriceDeltas?: PriceAcknowledgementVariantChange[];
+  matchedVariantIds?: Record<number, number>;
 }) {
   const [expandedProductId, setExpandedProductId] = useState<number | null>(null);
   const [popupProductId, setPopupProductId] = useState<number | null>(null);
+  const [expandedChangesIds, setExpandedChangesIds] = useState<Set<number>>(new Set());
   const touchStartYRef = useRef<number | null>(null);
   const mobileTapThreshold = 10;
 
@@ -143,6 +146,15 @@ export default function ProductsSectionList({
           return new Date(c.acknowledgedAt) > new Date(latest) ? c.acknowledgedAt : latest;
         }, undefined as string | undefined);
 
+        const matchedVariantId = matchedVariantIds[p.id] ?? null;
+        const matchedVariant = matchedVariantId ? p.variants.find((v) => v.id === matchedVariantId) ?? null : null;
+        const cardCover = (() => {
+          if (!matchedVariant) return p.cover || null;
+          const img = matchedVariant.imageId ? p.images?.find((i) => i.id === matchedVariant.imageId) : null;
+          return img?.url || p.images?.[0]?.url || p.cover || null;
+        })();
+        const matchedLabel = matchedVariant ? (matchedVariant.barcode || matchedVariant.displayName || null) : null;
+
         return (
           <section
             key={p.id}
@@ -167,14 +179,17 @@ export default function ProductsSectionList({
             )}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="h-20 w-20 sm:h-24 sm:w-24 shrink-0 overflow-hidden rounded-xl border border-orange-100 bg-orange-50">
-                {p.cover ? (
-                  <img src={imageUrl(p.cover)} alt={p.name} className="h-full w-full object-cover" />
+                {cardCover ? (
+                  <img src={imageUrl(cardCover)} alt={matchedLabel || p.name} className="h-full w-full object-cover" />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center text-xs text-zinc-400">No image</div>
                 )}
               </div>
               <div className="min-w-0 flex-1 overflow-hidden">
                 <h2 className="text-base sm:text-lg font-semibold text-[#1a1a1a] break-words [overflow-wrap:anywhere] leading-snug">{p.name}</h2>
+                {matchedLabel && (
+                  <p className="mt-0.5 text-xs font-medium text-orange-700 truncate" title={matchedLabel}>{matchedLabel}</p>
+                )}
                 <div className="mt-1 flex">
                   <span className="inline-flex items-center rounded-full bg-orange-50 px-2 py-0.5 text-xs font-semibold text-orange-700">
                     Giá lẻ: {p.retailMin === p.retailMax ? `${p.retailMax.toLocaleString("vi-VN")} đ` : `${p.retailMin.toLocaleString("vi-VN")} - ${p.retailMax.toLocaleString("vi-VN")} đ`}
@@ -207,11 +222,25 @@ export default function ProductsSectionList({
 
             {hasChangedPrice && (
               <div className="mt-3 rounded-xl bg-orange-50/80 border border-orange-100 p-2.5 text-xs text-orange-900 space-y-1" onClick={(e) => e.stopPropagation()}>
-                <div className="font-bold flex items-center gap-1">
+                <div className="font-bold flex items-center justify-between gap-1">
                   <span>✨ Xác nhận đổi giá: {latestAckAt ? formatDate(latestAckAt) : "Tuần này"}</span>
+                  {productChanges.length > 2 && (
+                    <button
+                      type="button"
+                      className="shrink-0 text-[10px] font-semibold text-orange-600 hover:text-orange-800"
+                      onClick={() => setExpandedChangesIds((prev) => {
+                        const next = new Set(prev);
+                        if (next.has(p.id)) next.delete(p.id);
+                        else next.add(p.id);
+                        return next;
+                      })}
+                    >
+                      {expandedChangesIds.has(p.id) ? "Thu gọn ▲" : `+${productChanges.length - 2} ▼`}
+                    </button>
+                  )}
                 </div>
                 <div className="divide-y divide-orange-100/50">
-                  {productChanges.map((change) => {
+                  {(expandedChangesIds.has(p.id) ? productChanges : productChanges.slice(0, 2)).map((change) => {
                     const v = p.variants.find((variant) => variant.id === change.variantId);
                     if (!v) return null;
                     const label = v.displayName || v.barcode || "Sản phẩm";
@@ -258,6 +287,7 @@ export default function ProductsSectionList({
                 priceTier={priceTier}
                 isExpanded={isExpanded}
                 recentlyChangedPriceDeltas={recentlyChangedPriceDeltas}
+                initialSelectedVariantId={matchedVariantId}
               />
             )}
             </div>
@@ -302,6 +332,7 @@ export default function ProductsSectionList({
               priceTier={priceTier}
               isExpanded
               recentlyChangedPriceDeltas={recentlyChangedPriceDeltas}
+              initialSelectedVariantId={matchedVariantIds[popupProduct.id] ?? null}
             />
           </div>
         </div>

@@ -218,6 +218,38 @@
           }
         }
       ]
+    },
+    {
+      "dealerShortName": "khanh",
+      "snapshotVersion": "2026-10-31T03:45:43.144Z",
+      "priceTier": "agent1",
+      "acknowledgedAt": "2026-10-31T03:45:44.922Z",
+      "changedVariantIds": [
+        1335,
+        1336
+      ],
+      "changes": [
+        {
+          "variantId": 1335,
+          "retailChange": null,
+          "dealerChange": {
+            "oldValue": 3990000,
+            "newValue": 2900000,
+            "amount": 1090000,
+            "direction": "decreased"
+          }
+        },
+        {
+          "variantId": 1336,
+          "retailChange": null,
+          "dealerChange": {
+            "oldValue": 3990000,
+            "newValue": 2900000,
+            "amount": 1090000,
+            "direction": "decreased"
+          }
+        }
+      ]
     }
   ]
 }
