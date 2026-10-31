@@ -5,6 +5,7 @@ import ProductsCatalog from "@/components/products/ProductsCatalog";
 import HotQuickTags from "@/components/products/HotQuickTags";
 import DealerPolicyTabs from "@/components/products/DealerPolicyTabs";
 import PriceChangeNotificationPopup from "@/components/products/PriceChangeNotificationPopup";
+import CartIcon from "@/components/cart/CartIcon";
 import { getPendingPriceNotificationForDealer, getRecentlyAcknowledgedChanges } from "@/lib/price-notifications";
 import { Product, ProductVariant } from "@/types/product";
 import { filterIgnoredProducts } from "@/lib/product-filters";
@@ -105,7 +106,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
     getProducts(1, 500, ""),
     getSkuOrder(),
   ]);
-  const needsDetailFetch = !res.data[0] || !Array.isArray(res.data[0]?.variants);
+  const needsDetailFetch = !res.data[0] || !Array.isArray(res.data[0]?.variants) || !Array.isArray(res.data[0]?.images);
   const productsBase = needsDetailFetch
     ? await mapConcurrent(res.data, (p) => getProductById(String(p.id)), 6)
     : res.data;
@@ -154,6 +155,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
               <p className="mt-1 text-sm text-white/90">Danh sách sản phẩm hiển thị theo nhóm giá: {session.priceTier === "agent1" ? "Đại lý 1" : "Đại lý 2"}</p>
             </div>
             <div className="flex items-center gap-2">
+              <CartIcon />
               <Link href="/api-key" className="rounded-lg border border-white/60 bg-white/10 px-3 py-1.5 text-sm font-semibold text-white hover:bg-white/20">
                 🔑 API cho đại lý
               </Link>

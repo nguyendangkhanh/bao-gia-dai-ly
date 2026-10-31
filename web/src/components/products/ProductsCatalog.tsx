@@ -46,29 +46,52 @@ export default function ProductsCatalog({
   const [tags, setTags] = useState<string[]>(initialTags);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredProducts = useMemo(() => {
+  const { filteredProducts, matchedVariantIds } = useMemo(() => {
     const activeSearch = searchQuery.trim().toLowerCase();
+    const matchedVariantIds: Record<number, number> = {};
+
     if (!tags.length && !activeSearch) {
-      return initialProducts;
+      return { filteredProducts: initialProducts, matchedVariantIds };
     }
 
-    return initialProducts.filter((p) => {
+    const allTerms = [...tags.map((t) => t.toLowerCase()), ...(activeSearch ? [activeSearch] : [])];
+
+    const filtered = initialProducts.filter((p) => {
       const haystack = [
         String(p.name || ""),
-        ...((p.variants || []).map((v) => String(v.barcode || v.displayName || ""))),
+        ...((p.variants || []).flatMap((v) => [v.barcode, v.displayName].filter(Boolean).map(String))),
       ].join(" ").toLowerCase();
 
-      // If tags exist, product must match at least one tag (OR behavior matching the original implementation)
       const matchesTags = tags.length === 0 || tags.some((tag) => haystack.includes(tag.toLowerCase()));
-      // If text query exists, product must match it (AND behavior for typing refinement)
       const matchesSearch = !activeSearch || haystack.includes(activeSearch);
 
-      return matchesTags && matchesSearch;
+      if (matchesTags && matchesSearch) {
+        // Nếu search không khớp tên sản phẩm → tìm variant cụ thể nào khớp
+        const nameHay = String(p.name || "").toLowerCase();
+        if (!allTerms.some((term) => nameHay.includes(term))) {
+          const matched = (p.variants || []).find((v) => {
+            const labels = [v.barcode, v.displayName].filter(Boolean).map((s) => String(s).toLowerCase());
+            return allTerms.some((term) => labels.some((label) => label.includes(term)));
+          });
+          if (matched) matchedVariantIds[p.id] = matched.id;
+        }
+        return true;
+      }
+      return false;
     });
+
+    return { filteredProducts: filtered, matchedVariantIds };
   }, [tags, searchQuery, initialProducts]);
 
   const productNames = useMemo(() => {
-    return [...new Set(initialProducts.map((p) => String(p.name || "").trim()).filter(Boolean))];
+    const all: string[] = [];
+    initialProducts.forEach((p) => {
+      if (p.name) all.push(String(p.name).trim());
+      (p.variants || []).forEach((v) => {
+        if (v.barcode) all.push(String(v.barcode).trim());
+      });
+    });
+    return [...new Set(all.filter(Boolean))];
   }, [initialProducts]);
 
   const handleFilterChange = (filters: { tags: string[]; search: string }) => {
@@ -90,6 +113,7 @@ export default function ProductsCatalog({
             products={filteredProducts}
             priceTier={priceTier}
             recentlyChangedPriceDeltas={recentlyChangedPriceDeltas}
+            matchedVariantIds={matchedVariantIds}
           />
         ) : (
           <div className="rounded-2xl border border-dashed border-orange-200 bg-white p-8 text-center text-zinc-500 shadow-md">

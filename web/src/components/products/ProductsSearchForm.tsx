@@ -79,7 +79,7 @@ export default function ProductsSearchForm({
               addTag(search);
             }
           }}
-          placeholder="Tìm theo tên sản phẩm hoặc biến thể rồi nhấn Enter"
+          placeholder="Tìm theo tên sản phẩm, biến thể hoặc barcode rồi nhấn Enter"
           className="tm-input pr-9"
           onBlur={() => setTimeout(() => setOpenSuggest(false), 120)}
         />

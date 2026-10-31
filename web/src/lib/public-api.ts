@@ -14,6 +14,12 @@ export type PublicProductVariant = {
   dealerPrice: number | null;
   active: boolean;
   imageId: number | null;
+  imageDecorIds?: number[];
+  link?: string | null;
+  weight?: number | null;
+  packageLength?: number | null;
+  packageWidth?: number | null;
+  packageHeight?: number | null;
 };
 
 export type PublicImage = {
@@ -29,6 +35,11 @@ export type PublicProduct = {
   name: string;
   vendor: string;
   description: string | null;
+  cover?: string | null;
+  retailMin?: number | null;
+  retailMax?: number | null;
+  dealerPriceMin?: number | null;
+  dealerPriceMax?: number | null;
   images: PublicImage[];
   variants: PublicProductVariant[];
 };
@@ -49,11 +60,19 @@ export function sanitizeProductForDealer(product: Product, priceTier: PublicDeal
     variantIds: img.variantIds ?? [],
   }));
 
+  const retailPrices = (product.variants || []).map((v) => v.price || 0).filter((p) => p > 0);
+  const retailMin = retailPrices.length ? Math.min(...retailPrices) : null;
+  const retailMax = retailPrices.length ? Math.max(...retailPrices) : null;
+  const cover = images[0]?.url || null;
+
   return {
     id: product.id,
     name: product.name,
     vendor: product.vendor,
     description: product.description,
+    cover,
+    retailMin,
+    retailMax,
     images,
     variants: (product.variants || []).map((v) => ({
       id: v.id,
@@ -64,6 +83,12 @@ export function sanitizeProductForDealer(product: Product, priceTier: PublicDeal
       dealerPrice: priceTier === "agent2" ? v.agentPrice2 : v.agentPrice1,
       active: v.active,
       imageId: v.imageId,
+      imageDecorIds: Array.isArray(v.imageDecorIds) ? v.imageDecorIds : [],
+      link: v.link ? String(v.link).trim() : null,
+      weight: typeof v.weight === "number" ? v.weight : null,
+      packageLength: typeof v.packageLength === "number" ? v.packageLength : null,
+      packageWidth: typeof v.packageWidth === "number" ? v.packageWidth : null,
+      packageHeight: typeof v.packageHeight === "number" ? v.packageHeight : null,
     })),
   };
 }
@@ -83,6 +108,13 @@ export type PublicApiAuthResult =
   | { ok: true; dealer: PublicDealerInfo }
   | { ok: false; response: NextResponse };
 
+export const PUBLIC_API_CORS_HEADERS: Record<string, string> = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Headers": "Authorization, Content-Type",
+  "Access-Control-Max-Age": "86400",
+};
+
 /**
  * Xác thực API key + rate limit cho public API đại lý. Dùng ở đầu mỗi route handler:
  *   const auth = await authenticatePublicApiRequest(req);
@@ -100,6 +132,7 @@ export async function authenticatePublicApiRequest(req: NextRequest): Promise<Pu
         {
           status: 429,
           headers: {
+            ...PUBLIC_API_CORS_HEADERS,
             "Retry-After": String(Math.ceil((ipRl.resetAt - Date.now()) / 1000)),
             "X-RateLimit-Limit": "120",
             "X-RateLimit-Remaining": "0",
@@ -113,13 +146,25 @@ export async function authenticatePublicApiRequest(req: NextRequest): Promise<Pu
   // 2. Kiểm tra header Authorization
   const apiKey = extractApiKey(req);
   if (!apiKey) {
-    return { ok: false, response: NextResponse.json({ error: "Thiếu Authorization: Bearer <api_key>" }, { status: 401 }) };
+    return {
+      ok: false,
+      response: NextResponse.json(
+        { error: "Thiếu Authorization: Bearer <api_key>" },
+        { status: 401, headers: PUBLIC_API_CORS_HEADERS },
+      ),
+    };
   }
 
   // 3. Tra cứu và xác thực API Key
   const dealer = await getDealerByApiKey(apiKey);
   if (!dealer) {
-    return { ok: false, response: NextResponse.json({ error: "API key không hợp lệ hoặc đã bị thu hồi" }, { status: 401 }) };
+    return {
+      ok: false,
+      response: NextResponse.json(
+        { error: "API key không hợp lệ hoặc đã bị thu hồi" },
+        { status: 401, headers: PUBLIC_API_CORS_HEADERS },
+      ),
+    };
   }
 
   // 4. Rate-limit theo đại lý đã xác thực
@@ -132,6 +177,7 @@ export async function authenticatePublicApiRequest(req: NextRequest): Promise<Pu
         {
           status: 429,
           headers: {
+            ...PUBLIC_API_CORS_HEADERS,
             "Retry-After": String(Math.ceil((rl.resetAt - Date.now()) / 1000)),
             "X-RateLimit-Remaining": "0",
             "X-RateLimit-Reset": String(Math.ceil(rl.resetAt / 1000)),
